@@ -1,0 +1,160 @@
+BASE <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX cdm1: <https://w3id.org/citydata/part1/v1/>
+PREFIX cdm2: <https://w3id.org/citydata/part2/v1/>
+
+# ================================================================
+# Reusable Property Shapes
+# ================================================================
+
+:SingleMultilingualShape a sh:PropertyShape ;
+    rdfs:label "Single Multilingual Shape" ;
+    sh:datatype rdf:langString ;
+    sh:uniqueLang true ;
+    sh:message "Only one value per language is allowed for this property." .
+
+:AtMostOneShape a sh:PropertyShape ;
+    sh:maxCount 1 ;
+    sh:message "At most one value is allowed." .
+
+:ExactlyOneShape a sh:PropertyShape ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "Exactly one value is required." .
+
+:AtLeastOneShape a sh:PropertyShape ;
+    sh:minCount 1 ;
+    sh:message "At least one value is required." .
+
+:AtLeastTwoShape a sh:PropertyShape ;
+    sh:minCount 2 ;
+    sh:message "At least two values are required." .
+
+# ================================================================
+# Node Shapes
+# ================================================================
+
+:LocationShape a sh:NodeShape ;
+    sh:targetClass :Location ;
+    sh:property [
+        sh:path :coordinatesForDisplay ;
+        sh:maxCount 1 ;
+        sh:class :PointCoordinates ;
+    ] ;
+    sh:property [
+        sh:path :externalLocationReference ;
+        sh:nodeKind sh:IRI ;
+    ] .
+
+:PointCoordinatesShape a sh:NodeShape ;
+    sh:targetClass :PointCoordinates ;
+    sh:property [
+        sh:path :latitude ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:float ;
+    ] ;
+    sh:property [
+        sh:path :longitude ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:float ;
+    ] ;
+    sh:property [
+        sh:path :elevation ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:float ;
+    ] ;
+    sh:property [
+        sh:path cdm1:hasIdentifier ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
+
+:IndexedLocationShape a sh:NodeShape ;
+    sh:targetClass :IndexedLocation ;
+    sh:property [
+        sh:path :location ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class :Location ;
+    ] ;
+    sh:property [
+        sh:path :index ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+    ] .
+
+:ItineraryByIndexedLocationsShape a sh:NodeShape ;
+    sh:targetClass :ItineraryByIndexedLocations ;
+
+    sh:property [
+        sh:path :locationContainedInItinerary ;
+        sh:minCount 2 ;
+        sh:class :IndexedLocation ;
+    ] ;
+
+    # Enforces unique indices within the same itinerary
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Indices of IndexedLocations within an ItineraryByIndexedLocations must be unique." ;
+        sh:select """
+            PREFIX : <https://w3id.org/itsdata/location/v1/>
+            SELECT $this ?index ?loc1 ?loc2
+            WHERE {
+                $this a :ItineraryByIndexedLocations .
+                ?loc1 :locationContainedInItinerary $this ;
+                      :index ?index .
+                ?loc2 :locationContainedInItinerary $this ;
+                      :index ?index .
+                FILTER (?loc1 != ?loc2)
+            }
+        """ ;
+    ] .
+
+:PlaceShape a sh:NodeShape ;
+    sh:targetClass :Place ;
+    sh:property [
+        sh:path :placeType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class :PlaceTypeCode ;
+    ] ;
+    sh:property [
+        sh:path cdm1:hasName ;
+        sh:node :SingleMultilingualShape ;
+        sh:maxCount 1 ;
+    ] .
+
+:SupplementaryPositionalDescriptionShape a sh:NodeShape ;
+    sh:targetClass :SupplementaryPositionalDescription ;
+    sh:property [
+        sh:path :directionPurpose ;
+        sh:maxCount 1 ;
+        sh:class cdm2:Code ;
+    ] ;
+    sh:property [
+        sh:path :geographicDescriptor ;
+        sh:maxCount 1 ;
+        sh:class cdm2:Code ;
+    ] ;
+    sh:property [
+        sh:path :infrastructureDescriptor ;
+        sh:maxCount 1 ;
+        sh:class cdm2:Code ;
+    ] ;
+    sh:property [
+        sh:path :locationDescription ;
+        sh:maxCount 1 ;
+        sh:node :SingleMultilingualShape ;
+    ] ;
+    sh:property [
+        sh:path :sequentialRampNumber ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+    ] .

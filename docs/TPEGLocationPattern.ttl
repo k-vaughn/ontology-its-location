@@ -1,0 +1,822 @@
+BASE <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX vann: <http://purl.org/vocab/vann/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cdm1: <https://w3id.org/citydata/part1/v1/>
+PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+
+<TPEGLocationPattern/> a owl:Ontology ;
+    dcterms:title "TPEG Location concepts of the ITS Ontology" ;
+    skos:definition "This ontology defines concepts related to TPEG location within Intelligent Transportation Systems (ITS)." ;
+    vann:preferredNamespaceUri "https://w3id.org/itsdata/location/v1/" ;
+    vann:preferredNamespacePrefix "its-location" ;
+    cdm1:mainModule "false" ;
+    its-core:draft "true" ;
+    dcterms:creator "Kenneth Vaughn" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-03-06"^^xsd:date ;
+    owl:versionInfo "v0.0.2" ;
+    owl:versionIRI <TPEGLocationPattern/r0.2> ;
+    dcterms:license "http://creativecommons.org/licenses/by/4.0/" ;
+    owl:imports <Core/> .
+
+# ===================================================================
+# Data Properties
+# ===================================================================
+
+:descriptorString a owl:DatatypeProperty ;
+    rdfs:subPropertyOf its-core:LocationDataProperty ;
+    rdfs:domain :TpegDescriptor ;
+    rdfs:range rdf:langString ;
+    skos:definition "A text string which describes or elaborates the location. Here is used for values distinct to RoadNumbers or AdministrativeUnit."@en .
+
+# ===================================================================
+# Object Properties
+# ===================================================================
+
+:descriptor a owl:ObjectProperty ;
+    rdfs:domain :TpegDescriptor ;
+    rdfs:range [
+        owl:unionOf (
+            <http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti/administrativeUnit#AdministrativeUnit>
+            <http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti/roads#RoadNumber>
+        )
+    ] ;
+    skos:definition "Describes or elaborates the location. Here is used for values from RoadNumber or AdministrativeUnit." .
+
+:hasCentrePoint a owl:ObjectProperty ;
+    rdfs:domain :TpegGeometricArea ;
+    rdfs:range :PointCoordinates ;
+    skos:definition "Centre point of a circular geometric area."@en .
+
+:hasTpegAreaDescriptor a owl:ObjectProperty ;
+    rdfs:domain [
+        owl:unionOf ( :TpegGeometricArea :TpegNamedOnlyArea )
+    ] ;
+    rdfs:range :TpegAreaDescriptor ;
+    skos:definition "Name of area."@en .
+
+:hasTpegFramedPoint a owl:ObjectProperty ;
+    rdfs:domain :TpegFramedPoint ;
+    rdfs:range :TpegNonJunctionPoint ;
+    skos:definition "A single non-junction point on the road network which is framed between two other specified points on the road network."@en .
+
+:hasTpegHeight a owl:ObjectProperty ;
+    rdfs:domain :TpegAreaLocation ;
+    rdfs:range :TpegHeight ;
+    skos:definition "Height information which provides additional discrimination for the applicable area."@en .
+
+:hasTpegIlcPointDescriptor a owl:ObjectProperty ;
+    rdfs:domain :TpegJunction ;
+    rdfs:range :TpegIlcPointDescriptor ;
+    skos:definition "A descriptor for describing a junction by identifying the intersecting roads at a road junction."@en .
+
+:hasTpegJunctionPointDescriptor a owl:ObjectProperty ;
+    rdfs:domain :TpegJunction ;
+    rdfs:range :TpegJunctionPointDescriptor ;
+    skos:definition "A name which identifies a junction point on the road network"@en .
+
+:hasTpegPoint a owl:ObjectProperty ;
+    rdfs:domain :TpegSimplePoint ;
+    rdfs:range :TpegPoint ;
+    skos:definition "A single point defined by a coordinate set and TPEG descriptors."@en .
+
+:hasTpegPointFrom a owl:ObjectProperty ;
+    rdfs:domain [
+        owl:unionOf ( :TpegFramedPoint :TpegLinearLocation )
+    ] ;
+    rdfs:range :TpegPoint ;
+    skos:definition "The location at the upstream end of the linear section of road."@en .
+
+:hasTpegPointTo a owl:ObjectProperty ;
+    rdfs:domain [
+        owl:unionOf ( :TpegFramedPoint :TpegLinearLocation )
+    ] ;
+    rdfs:range :TpegPoint ;
+    skos:definition "The location at the downstream end of the linear section of road."@en .
+
+:height a owl:ObjectProperty ;
+    rdfs:domain :TpegHeight ;
+    rdfs:range :MetresAsFloatValue ;
+    skos:definition "A measurement of height in metres"@en .
+
+:radius a owl:ObjectProperty ;
+    rdfs:domain :TpegGeometricArea ;
+    rdfs:range :MetresAsNonNegativeIntegerValue ;
+    skos:definition "The radius of the corresponding circular area"@en .
+
+# ... (other properties like tpegAreaDescriptorType, tpegDirection, etc. follow the same pattern – domains/ranges kept, cardinalities removed)
+
+# ===================================================================
+# Classes (lightweight – no cardinality restrictions)
+# ===================================================================
+
+:TpegLoc a owl:Class ;
+    rdfs:subClassOf :LocationObjects ;
+    skos:definition "Tpeg location"@en .
+
+:TpegDescriptor a owl:Class ;
+    rdfs:subClassOf :TpegLoc ;
+    skos:definition "A collection of information providing descriptive references to locations using the TPEG-Loc location referencing approach."@en .
+
+:TpegAreaDescriptor a owl:Class ;
+    rdfs:subClassOf :TpegDescriptor ;
+    skos:definition "A descriptor for describing an area location."@en .
+
+:TpegAreaLocation a owl:Class ;
+    rdfs:subClassOf :TpegLoc ;
+    skos:definition "A geographic or geometric area defined by a TPEG-Loc structure which may include height information for additional geospatial discrimination"@en .
+
+:TpegGeometricArea a owl:Class ;
+    rdfs:subClassOf :TpegAreaLocation ;
+    skos:definition "A geometric area defined by a centre point and a radius."@en .
+
+:TpegHeight a owl:Class ;
+    rdfs:subClassOf :TpegLoc ;
+    skos:definition "Height information which provides additional discrimination for the applicable area."@en .
+
+:TpegLinearLocation a owl:Class ;
+    rdfs:subClassOf :TpegLoc ;
+    skos:definition "A linear section along a single road defined between two points on the same road by a TPEG-Loc structure."@en .
+
+:TpegPointLocation a owl:Class ;
+    rdfs:subClassOf :TpegLoc ;
+    skos:definition "A single point on the road network defined by a TPEG-Loc structure and which has an associated direction of traffic flow."@en .
+
+:TpegFramedPoint a owl:Class ;
+    rdfs:subClassOf :TpegPointLocation ;
+    skos:definition "A point on the road network which is framed between two other points on the same road."@en .
+
+:TpegSimplePoint a owl:Class ;
+    rdfs:subClassOf :TpegPointLocation ;
+    skos:definition "A point on the road network which is not bounded by any other points on the road network."@en .
+
+# ... (add remaining classes like TpegJunction, TpegNamedOnlyArea, TpegNonJunctionPoint, etc. similarly)
+
+# Enumerations (kept in OWL because they are useful for reasoning)
+:TpegLoc01AreaLocationSubtypeEnum a owl:Class ;
+    owl:equivalentClass [
+        owl:oneOf ( :largeArea :other )
+    ] ;
+    rdfs:subClassOf :TpegEnumerations ;
+    skos:definition "Types of area."@en .
+
+# ... (add other enumeration classes with owl:oneOf)
+
+
+
+BASE   <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX cc: <http://creativecommons.org/ns#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX vann: <http://purl.org/vocab/vann/>
+PREFIX xml: <http://www.w3.org/XML/1998/namespace>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX cdm1: <https://w3id.org/citydata/part1/v1/>
+PREFIX cdm2: <https://w3id.org/citydata/part2/v1/>
+PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+
+:hasTpegPointLocation
+        rdf:type         owl:ObjectProperty;
+        rdfs:domain      :PointLocation;
+        rdfs:range       :TpegPointLocation;
+        skos:definition  "PointLocation is associated to TpegPointLocation with cardinality 0..1"@en .
+
+:tpegAreaDescriptorType
+        rdf:type         owl:ObjectProperty;
+        rdfs:domain      :TpegAreaDescriptor;
+        rdfs:range       :TpegLoc03AreaDescriptorSubtypeEnum;
+        skos:definition  "The nature of the descriptor used to define the location under consideration (derived from the TPEG Loc table 03)."@en .
+
+:tpegAreaLocationType
+        rdf:type         owl:ObjectProperty;
+        rdfs:domain      :TpegAreaLocation;
+        rdfs:range       :TpegLoc01AreaLocationSubtypeEnum;
+        skos:definition  "The type of TPEG location."@en .
+
+:tpegDirection  rdf:type  owl:ObjectProperty;
+        rdfs:domain  _:b12 .
+
+_:b12   rdf:type     owl:Class;
+        owl:unionOf  _:b13 .
+
+_:b13   rdf:first  :TpegLinearLocation;
+        rdf:rest   _:b14 .
+
+_:b14   rdf:first  :TpegPointLocation;
+        rdf:rest   rdf:nil .
+
+:tpegDirection  rdfs:range  :DirectionEnum;
+        skos:definition  "The direction of traffic flow."@en .
+
+:tpegFramedPointLocationType
+        rdf:type         owl:ObjectProperty;
+        rdf:type         owl:FunctionalProperty;
+        rdfs:domain      :TpegFramedPoint;
+        rdfs:range       :TpegLoc01FramedPointLocationSubtypeEnum;
+        skos:definition  "The type of TPEG location."@en .
+
+:tpegHeightType  rdf:type  owl:ObjectProperty;
+        rdfs:domain      :TpegHeight;
+        rdfs:range       :TpegLoc04HeightTypeEnum;
+        skos:definition  "A descriptive identification of relative height using TPEG-Loc location referencing."@en .
+
+:tpegIlcPointDescriptorType
+        rdf:type         owl:ObjectProperty;
+        rdfs:domain      :TpegIlcPointDescriptor;
+        rdfs:range       :TpegLoc03IlcPointDescriptorSubtypeEnum;
+        skos:definition  "The nature of the descriptor used to define the location under consideration (derived from the TPEG Loc table 03)."@en .
+
+:tpegJunctionPointDescriptorType
+        rdf:type         owl:ObjectProperty;
+        rdfs:domain      :TpegJunctionPointDescriptor;
+        rdfs:range       :TpegLoc03JunctionPointDescriptorSubtypeEnum;
+        skos:definition  "The nature of the descriptor used to define the location under consideration (derived from the TPEG Loc table 03)."@en .
+
+:tpegLinearLocationType
+        rdf:type         owl:ObjectProperty;
+        rdfs:domain      :TpegLinearLocation;
+        rdfs:range       :TPEGLoc01LinearLocationSubtypeEnum;
+        skos:definition  "The type of TPEG location."@en .
+
+:tpegOtherPointDescriptorType
+        rdf:type         owl:ObjectProperty;
+        rdfs:domain      :TpegOtherPointDescriptor;
+        rdfs:range       :TpegLoc03OtherPointDescriptorSubtypeEnum;
+        skos:definition  "The nature of the descriptor used to define the location under consideration (derived from the TPEG Loc table 03)."@en .
+
+:tpegSimplePointLocationType
+        rdf:type         owl:ObjectProperty;
+        rdfs:domain      :TpegSimplePoint;
+        rdfs:range       :TpegLoc01SimplePointLocationSubtypeEnum;
+        skos:definition  "The type of TPEG location."@en .
+
+:TpegAreaDescriptor  rdf:type  owl:Class;
+        rdfs:subClassOf  :TpegDescriptor;
+        rdfs:subClassOf  _:b15 .
+
+_:b15   rdf:type                  owl:Restriction;
+        owl:onProperty            :tpegAreaDescriptorType;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegLoc03AreaDescriptorSubtypeEnum .
+
+:TpegAreaDescriptor  skos:definition  "A descriptor for describing an area location."@en .
+
+:TpegAreaLocation  rdf:type  owl:Class;
+        rdfs:subClassOf  :TpegLoc;
+        rdfs:subClassOf  _:b16 .
+
+_:b16   rdf:type                  owl:Restriction;
+        owl:onProperty            :tpegAreaLocationType;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegLoc01AreaLocationSubtypeEnum .
+
+:TpegAreaLocation  rdfs:subClassOf  _:b17 .
+
+_:b17   rdf:type                     owl:Restriction;
+        owl:onProperty               :hasTpegHeight;
+        owl:maxQualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass                  :TpegHeight .
+
+:TpegAreaLocation  skos:definition  "A geographic or geometric area defined by a TPEG-Loc structure which may include height information for additional geospatial discrimination"@en .
+
+:TpegDescriptor  rdf:type  owl:Class;
+        rdfs:subClassOf  :TpegLoc;
+        rdfs:subClassOf  _:b18 .
+
+_:b18   rdf:type                  owl:Restriction;
+        owl:onProperty            :descriptor;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               _:b19 .
+
+_:b19   rdf:type     owl:Class;
+        owl:unionOf  _:b20 .
+
+_:b20   rdf:first  <http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti/administrativeUnit#AdministrativeUnit>;
+        rdf:rest   _:b21 .
+
+_:b21   rdf:first  <http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti/roads#RoadNumber>;
+        rdf:rest   rdf:nil .
+
+:TpegDescriptor  rdfs:subClassOf  _:b22 .
+
+_:b22   rdf:type         owl:Restriction;
+        owl:onProperty   :descriptorString;
+        owl:onDataRange  rdf:langString .
+
+:TpegDescriptor  skos:definition  "A collection of information providing descriptive references to locations using the TPEG-Loc location referencing approach."@en .
+
+:TpegEnumerations  rdf:type  owl:Class;
+        rdfs:subClassOf  :Enums;
+        skos:definition  "Only for organizational purposes"@en .
+
+:TpegFramedPoint  rdf:type  owl:Class;
+        rdfs:subClassOf  :TpegPointLocation;
+        rdfs:subClassOf  _:b23 .
+
+_:b23   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasTpegFramedPoint;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegNonJunctionPoint .
+
+:TpegFramedPoint  rdfs:subClassOf  _:b24 .
+
+_:b24   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasTpegPointFrom;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegPoint .
+
+:TpegFramedPoint  rdfs:subClassOf  _:b25 .
+
+_:b25   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasTpegPointTo;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegPoint .
+
+:TpegFramedPoint  rdfs:subClassOf  _:b26 .
+
+_:b26   rdf:type                  owl:Restriction;
+        owl:onProperty            :tpegFramedPointLocationType;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegLoc01FramedPointLocationSubtypeEnum .
+
+:TpegFramedPoint  skos:definition  "A point on the road network which is framed between two other points on the same road."@en .
+
+:TpegGeometricArea  rdf:type  owl:Class;
+        rdfs:subClassOf  :TpegAreaLocation;
+        rdfs:subClassOf  _:b27 .
+
+_:b27   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasCentrePoint;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :PointCoordinates .
+
+:TpegGeometricArea  rdfs:subClassOf  _:b28 .
+
+_:b28   rdf:type                  owl:Restriction;
+        owl:onProperty            :radius;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :MetresAsNonNegativeIntegerValue .
+
+:TpegGeometricArea  rdfs:subClassOf  _:b29 .
+
+_:b29   rdf:type                     owl:Restriction;
+        owl:onProperty               :hasTpegAreaDescriptor;
+        owl:maxQualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass                  :TpegAreaDescriptor .
+
+:TpegGeometricArea  skos:definition  "A geometric area defined by a centre point and a radius."@en .
+
+:TpegHeight  rdf:type    owl:Class;
+        rdfs:subClassOf  :TpegLoc;
+        rdfs:subClassOf  _:b30 .
+
+_:b30   rdf:type                  owl:Restriction;
+        owl:onProperty            :tpegHeightType;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegLoc04HeightTypeEnum .
+
+:TpegHeight  rdfs:subClassOf  _:b31 .
+
+_:b31   rdf:type                     owl:Restriction;
+        owl:onProperty               :height;
+        owl:maxQualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass                  :MetresAsFloatValue .
+
+:TpegHeight  skos:definition  "Height information which provides additional discrimination for the applicable area."@en .
+
+:TpegIlcPointDescriptor
+        rdf:type         owl:Class;
+        rdfs:subClassOf  :TpegPointDescriptor;
+        rdfs:subClassOf  _:b32 .
+
+_:b32   rdf:type                  owl:Restriction;
+        owl:onProperty            :tpegIlcPointDescriptorType;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegLoc03IlcPointDescriptorSubtypeEnum .
+
+:TpegIlcPointDescriptor
+        skos:definition  "A descriptor for describing a junction by defining the intersecting roads."@en .
+
+:TpegJunction  rdf:type  owl:Class;
+        rdfs:subClassOf  :TpegPoint;
+        rdfs:subClassOf  _:b33 .
+
+_:b33   rdf:type            owl:Class;
+        owl:intersectionOf  _:b34 .
+
+_:b34   rdf:first  _:b35 .
+
+_:b35   rdf:type                     owl:Restriction;
+        owl:onProperty               :hasTpegIlcPointDescriptor;
+        owl:minQualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass                  :TpegIlcPointDescriptor .
+
+_:b34   rdf:rest  _:b36 .
+
+_:b36   rdf:first  _:b37 .
+
+_:b37   rdf:type                     owl:Restriction;
+        owl:onProperty               :hasTpegIlcPointDescriptor;
+        owl:maxQualifiedCardinality  "3"^^xsd:nonNegativeInteger;
+        owl:onClass                  :TpegIlcPointDescriptor .
+
+_:b36   rdf:rest  rdf:nil .
+
+:TpegJunction  rdfs:subClassOf  _:b38 .
+
+_:b38   rdf:type                     owl:Restriction;
+        owl:onProperty               :hasTpegJunctionPointDescriptor;
+        owl:maxQualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass                  :TpegJunctionPointDescriptor .
+
+:TpegJunction  owl:disjointWith  :TpegNonJunctionPoint;
+        skos:definition   "A point on the road network which is a road junction point."@en .
+
+:TpegJunctionPointDescriptor
+        rdf:type         owl:Class;
+        rdfs:subClassOf  :TpegPointDescriptor;
+        rdfs:subClassOf  _:b39 .
+
+_:b39   rdf:type                  owl:Restriction;
+        owl:onProperty            :tpegJunctionPointDescriptorType;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegLoc03JunctionPointDescriptorSubtypeEnum .
+
+:TpegJunctionPointDescriptor
+        skos:definition  "A descriptor for describing a point at a junction on a road network."@en .
+
+:TpegLinearLocation  rdf:type  owl:Class;
+        rdfs:subClassOf  :TpegLoc;
+        rdfs:subClassOf  _:b40 .
+
+_:b40   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasTpegPointTo;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegPoint .
+
+:TpegLinearLocation  rdfs:subClassOf  _:b41 .
+
+_:b41   rdf:type                  owl:Restriction;
+        owl:onProperty            :tpegDirection;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :DirectionEnum .
+
+:TpegLinearLocation  rdfs:subClassOf  _:b42 .
+
+_:b42   rdf:type                  owl:Restriction;
+        owl:onProperty            :tpegLinearLocationType;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TPEGLoc01LinearLocationSubtypeEnum .
+
+:TpegLinearLocation  skos:definition  "A linear section along a single road defined between two points on the same road by a TPEG-Loc structure."@en .
+
+:TpegLoc  rdf:type       owl:Class;
+        rdfs:subClassOf  :LocationObjects;
+        skos:definition  "Tpeg location"@en .
+
+:TpegLoc01AreaLocationSubtypeEnum
+        rdf:type             owl:Class;
+        owl:equivalentClass  _:b43 .
+
+_:b43   rdf:type   owl:Class;
+        owl:oneOf  _:b44 .
+
+_:b44   rdf:first  :largeArea;
+        rdf:rest   _:b45 .
+
+_:b45   rdf:first  :other;
+        rdf:rest   rdf:nil .
+
+:TpegLoc01AreaLocationSubtypeEnum
+        rdfs:subClassOf  :TpegEnumerations;
+        skos:definition  "Types of area."@en .
+
+:TpegLoc01FramedPointLocationSubtypeEnum
+        rdf:type             owl:Class;
+        owl:equivalentClass  _:b46 .
+
+_:b46   rdf:type   owl:Class;
+        owl:oneOf  _:b47 .
+
+_:b47   rdf:first  :framedPoint;
+        rdf:rest   rdf:nil .
+
+:TpegLoc01FramedPointLocationSubtypeEnum
+        rdfs:subClassOf  :TpegEnumerations;
+        skos:definition  "Types of points on the road network framed by two other points on the same road."@en .
+
+:TpegLoc01SimplePointLocationSubtypeEnum
+        rdf:type             owl:Class;
+        owl:equivalentClass  _:b48 .
+
+_:b48   rdf:type   owl:Class;
+        owl:oneOf  _:b49 .
+
+_:b49   rdf:first  :intersection;
+        rdf:rest   _:b50 .
+
+_:b50   rdf:first  :nonLinkedPoint;
+        rdf:rest   rdf:nil .
+
+:TpegLoc01SimplePointLocationSubtypeEnum
+        rdfs:subClassOf  :TpegEnumerations;
+        skos:definition  "Types of simple point."@en .
+
+:TpegLoc03AreaDescriptorSubtypeEnum
+        rdf:type             owl:Class;
+        owl:equivalentClass  _:b51 .
+
+_:b51   rdf:type   owl:Class;
+        owl:oneOf  _:b52 .
+
+_:b52   rdf:first  :administrativeAreaName;
+        rdf:rest   _:b53 .
+
+_:b53   rdf:first  :administrativeReferenceName;
+        rdf:rest   _:b54 .
+
+_:b54   rdf:first  :areaName;
+        rdf:rest   _:b55 .
+
+_:b55   rdf:first  :countyName;
+        rdf:rest   _:b56 .
+
+_:b56   rdf:first  :lakeName;
+        rdf:rest   _:b57 .
+
+_:b57   rdf:first  :nationName;
+        rdf:rest   _:b58 .
+
+_:b58   rdf:first  :other;
+        rdf:rest   _:b59 .
+
+_:b59   rdf:first  :policeForceControlAreaName;
+        rdf:rest   _:b60 .
+
+_:b60   rdf:first  :regionName;
+        rdf:rest   _:b61 .
+
+_:b61   rdf:first  :seaName;
+        rdf:rest   _:b62 .
+
+_:b62   rdf:first  :townName;
+        rdf:rest   rdf:nil .
+
+:TpegLoc03AreaDescriptorSubtypeEnum
+        rdfs:subClassOf  :TpegEnumerations;
+        skos:definition  "Descriptors for describing area locations."@en .
+
+:TpegLoc03IlcPointDescriptorSubtypeEnum
+        rdf:type             owl:Class;
+        owl:equivalentClass  _:b63 .
+
+_:b63   rdf:type   owl:Class;
+        owl:oneOf  _:b64 .
+
+_:b64   rdf:first  :tpegIlcName1;
+        rdf:rest   _:b65 .
+
+_:b65   rdf:first  :tpegIlcName2;
+        rdf:rest   _:b66 .
+
+_:b66   rdf:first  :tpegIlcName3;
+        rdf:rest   rdf:nil .
+
+:TpegLoc03IlcPointDescriptorSubtypeEnum
+        rdfs:subClassOf  :TpegEnumerations;
+        skos:definition  "Descriptors for describing a junction by identifying the intersecting roads at a road junction."@en .
+
+:TpegLoc03JunctionPointDescriptorSubtypeEnum
+        rdf:type             owl:Class;
+        owl:equivalentClass  _:b67 .
+
+_:b67   rdf:type   owl:Class;
+        owl:oneOf  _:b68 .
+
+_:b68   rdf:first  :junctionName;
+        rdf:rest   rdf:nil .
+
+:TpegLoc03JunctionPointDescriptorSubtypeEnum
+        rdfs:subClassOf  :TpegEnumerations;
+        skos:definition  "Descriptors for describing a point at a road junction."@en .
+
+:TpegLoc03OtherPointDescriptorSubtypeEnum
+        rdf:type             owl:Class;
+        owl:equivalentClass  _:b69 .
+
+_:b69   rdf:type   owl:Class;
+        owl:oneOf  _:b70 .
+
+_:b70   rdf:first  :administrativeAreaName;
+        rdf:rest   _:b71 .
+
+_:b71   rdf:first  :administrativeReferenceName;
+        rdf:rest   _:b72 .
+
+_:b72   rdf:first  :airportName;
+        rdf:rest   _:b73 .
+
+_:b73   rdf:first  :areaName;
+        rdf:rest   _:b74 .
+
+_:b74   rdf:first  :buildingName;
+        rdf:rest   _:b75 .
+
+_:b75   rdf:first  :busStopIdentifier;
+        rdf:rest   _:b76 .
+
+_:b76   rdf:first  :busStopName;
+        rdf:rest   _:b77 .
+
+_:b77   rdf:first  :canalName;
+        rdf:rest   _:b78 .
+
+_:b78   rdf:first  :countyName;
+        rdf:rest   _:b79 .
+
+_:b79   rdf:first  :ferryPortName;
+        rdf:rest   _:b80 .
+
+_:b80   rdf:first  :intersectionName;
+        rdf:rest   _:b81 .
+
+_:b81   rdf:first  :lakeName;
+        rdf:rest   _:b82 .
+
+_:b82   rdf:first  :linkName;
+        rdf:rest   _:b83 .
+
+_:b83   rdf:first  :localLinkName;
+        rdf:rest   _:b84 .
+
+_:b84   rdf:first  :metroStationName;
+        rdf:rest   _:b85 .
+
+_:b85   rdf:first  :nationName;
+        rdf:rest   _:b86 .
+
+_:b86   rdf:first  :nonLinkedPointName;
+        rdf:rest   _:b87 .
+
+_:b87   rdf:first  :other;
+        rdf:rest   _:b88 .
+
+_:b88   rdf:first  :parkingFacilityName;
+        rdf:rest   _:b89 .
+
+_:b89   rdf:first  :pointName;
+        rdf:rest   _:b90 .
+
+_:b90   rdf:first  :pointOfInterestName;
+        rdf:rest   _:b91 .
+
+_:b91   rdf:first  :railwayStation;
+        rdf:rest   _:b92 .
+
+_:b92   rdf:first  :regionName;
+        rdf:rest   _:b93 .
+
+_:b93   rdf:first  :riverName;
+        rdf:rest   _:b94 .
+
+_:b94   rdf:first  :seaName;
+        rdf:rest   _:b95 .
+
+_:b95   rdf:first  :serviceAreaName;
+        rdf:rest   _:b96 .
+
+_:b96   rdf:first  :tidalRiverName;
+        rdf:rest   _:b97 .
+
+_:b97   rdf:first  :townName;
+        rdf:rest   rdf:nil .
+
+:TpegLoc03OtherPointDescriptorSubtypeEnum
+        rdfs:subClassOf  :TpegEnumerations;
+        skos:definition  "Descriptors other than junction names and road descriptors which can help to identify the location of points on the road network."@en .
+
+:TpegLoc04HeightTypeEnum
+        rdf:type             owl:Class;
+        owl:equivalentClass  _:b98 .
+
+_:b98   rdf:type   owl:Class;
+        owl:oneOf  _:b99 .
+
+_:b99   rdf:first  :aboveSeaLevelTPEGHeight;
+        rdf:rest   _:b100 .
+
+_:b100  rdf:first  :aboveStreetLevelTPEGHeight;
+        rdf:rest   _:b101 .
+
+_:b101  rdf:first  :aboveTPEGHeight;
+        rdf:rest   _:b102 .
+
+_:b102  rdf:first  :atSeaLevelTPEGHeight;
+        rdf:rest   _:b103 .
+
+_:b103  rdf:first  :atStreetLevelTPEGHeight;
+        rdf:rest   _:b104 .
+
+_:b104  rdf:first  :atTPEGHeight;
+        rdf:rest   _:b105 .
+
+_:b105  rdf:first  :belowSeaLevelTPEGHeight;
+        rdf:rest   _:b106 .
+
+_:b106  rdf:first  :belowStreetLevelTPEGHeight;
+        rdf:rest   _:b107 .
+
+_:b107  rdf:first  :belowTPEGHeight;
+        rdf:rest   _:b108 .
+
+_:b108  rdf:first  :other;
+        rdf:rest   _:b109 .
+
+_:b109  rdf:first  :undefinedTPEGHeight;
+        rdf:rest   _:b110 .
+
+_:b110  rdf:first  :unknown;
+        rdf:rest   rdf:nil .
+
+:TpegLoc04HeightTypeEnum
+        rdfs:subClassOf  :TpegEnumerations;
+        skos:definition  "Types of height."@en .
+
+:TpegNamedOnlyArea  rdf:type  owl:Class;
+        rdfs:subClassOf  :TpegAreaLocation;
+        rdfs:subClassOf  _:b111 .
+
+_:b111  rdf:type            owl:Restriction;
+        owl:onProperty      :hasTpegAreaDescriptor;
+        owl:someValuesFrom  :TpegAreaDescriptor .
+
+:TpegNamedOnlyArea  skos:definition  "An area defined by a well-known name."@en .
+
+:TpegNonJunctionPoint
+        rdf:type         owl:Class;
+        rdfs:subClassOf  :TpegPoint;
+        rdfs:subClassOf  _:b112 .
+
+_:b112  rdf:type                     owl:Restriction;
+        owl:onProperty               :hasTpegOtherPointDescriptor;
+        owl:minQualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass                  :TpegOtherPointDescriptor .
+
+:TpegNonJunctionPoint
+        skos:definition  "A point on the road network which is not a road junction point."@en .
+
+:TpegOtherPointDescriptor
+        rdf:type         owl:Class;
+        rdfs:subClassOf  :TpegPointDescriptor;
+        rdfs:subClassOf  _:b113 .
+
+_:b113  rdf:type                  owl:Restriction;
+        owl:onProperty            :tpegOtherPointDescriptorType;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegLoc03OtherPointDescriptorSubtypeEnum .
+
+:TpegOtherPointDescriptor
+        skos:definition  "General descriptor for describing a point."@en .
+
+:TpegPointDescriptor  rdf:type  owl:Class;
+        rdfs:subClassOf  :TpegDescriptor;
+        skos:definition  "A descriptor for describing a point location."@en .
+
+:TpegPointLocation  rdf:type  owl:Class;
+        rdfs:subClassOf  :TpegLoc;
+        rdfs:subClassOf  _:b114 .
+
+_:b114  rdf:type                  owl:Restriction;
+        owl:onProperty            :tpegDirection;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :DirectionEnum .
+
+:TpegPointLocation  skos:definition  "A single point on the road network defined by a TPEG-Loc structure and which has an associated direction of traffic flow."@en .
+
+:TpegSimplePoint  rdf:type  owl:Class;
+        rdfs:subClassOf  :TpegPointLocation;
+        rdfs:subClassOf  _:b115 .
+
+_:b115  rdf:type                  owl:Restriction;
+        owl:onProperty            :hasTpegPoint;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegPoint .
+
+:TpegSimplePoint  rdfs:subClassOf  _:b116 .
+
+_:b116  rdf:type                  owl:Restriction;
+        owl:onProperty            :tpegSimplePointLocationType;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :TpegLoc01SimplePointLocationSubtypeEnum .
+
+:TpegSimplePoint  skos:definition  "A point on the road network which is not bounded by any other points on the road network."@en .

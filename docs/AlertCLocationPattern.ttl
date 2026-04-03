@@ -1,0 +1,657 @@
+BASE   <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX cc: <http://creativecommons.org/ns#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX vann: <http://purl.org/vocab/vann/>
+PREFIX xml: <http://www.w3.org/XML/1998/namespace>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX cdm1: <https://w3id.org/citydata/part1/v1/>
+PREFIX cdm2: <https://w3id.org/citydata/part2/v1/>
+PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+
+<AlertCLocationPattern/>
+        rdf:type                       owl:Ontology;
+        dcterms:title                  "Alert C concepts of the Location Ontology for ITS";
+        skos:definition                "This ontology defines concepts related to Alert C location within Intelligent Transportation Systems (ITS).";
+        vann:preferredNamespaceUri     "https://w3id.org/itsdata/location/v1/AlertCLocationPattern/";
+        vann:preferredNamespacePrefix  "its-location";
+        cdm1:mainModule                "false";
+        its-core:draft                 "true";
+        dcterms:creator                "Kenneth Vaughn";
+        dcterms:created                "Draft";
+        dcterms:source                 "https://docs.datex2.eu/_static/data/v3.7/umlmodel/html/index.htm"@en;
+        dcterms:source                 "http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti";
+        dcterms:contributor            "Tam Tam Research, CVUT, ESAM Technologies & LMT.";
+        dcterms:contributor            "Julian Gutierrez Moret (https://www.uv.es/uvweb/universidad/es/ficha-persona-1285950309813.html?p2=gumoju)";
+        rdfs:comment                   "This ontology was derived from the dtx_srti ontology, which was derived from the DATEX II v3.2 model; it has been updated to consider changes made up to DATEX II v3.7 and revised to support more generic representations, such as deriving classes from the City Data Model and other ontologies.";
+        dcterms:modified               "2026-03-24"^^xsd:date;
+        owl:versionInfo                "v0.0.2";
+        owl:versionIRI                 <AlertCLocationPattern/r0.2>;
+        dcterms:license                "http://creativecommons.org/licenses/by/4.0/";
+        owl:imports                    <Core/> .
+
+<http://datex2.eu/schema/3/common#AlertCLocationCode>
+        rdf:type             rdfs:Datatype;
+        skos:definition      "Unique code within an ALERT-C location table which identifies the specific point, linear or area location. A positive integer number (between 1 and 63487) which uniquely identifies a pre-defined Alert C location.";
+        rdfs:comment         "NOTE: Some tools have difficulty in properly interpreting the following and translate AlertCLocationCode to a Class and associated properties to ObjectProperties.";
+        owl:equivalentClass  _:b0 .
+
+_:b0    rdf:type              rdfs:Datatype;
+        owl:onDatatype        xsd:nonNegativeInteger;
+        owl:withRestrictions  _:b1 .
+
+_:b1    rdf:first  _:b2 .
+
+_:b2    xsd:minInclusive  1 .
+
+_:b1    rdf:rest  _:b3 .
+
+_:b3    rdf:first  _:b4 .
+
+_:b4    xsd:maxInclusive  63487 .
+
+_:b3    rdf:rest  rdf:nil .
+
+:hasAlertCAffectedDirection
+        rdf:type      owl:ObjectProperty;
+        rdfs:domain   :AlertCDirection;
+        rdfs:range    :LinearDirectionEnum;
+        rdfs:comment  "The direction(s) of traffic flow to which the situation, traffic data or information is related."@en .
+
+:hasAlertCDirection  rdf:type  owl:ObjectProperty;
+        rdfs:domain  _:b5 .
+
+_:b5    rdf:type     owl:Class;
+        owl:unionOf  _:b6 .
+
+_:b6    rdf:first  :AlertCLinearByCode;
+        rdf:rest   _:b7 .
+
+_:b7    rdf:first  :AlertCMethod2Linear;
+        rdf:rest   _:b8 .
+
+_:b8    rdf:first  :AlertCMethod2Point;
+        rdf:rest   _:b9 .
+
+_:b9    rdf:first  :AlertCMethod4Linear;
+        rdf:rest   _:b10 .
+
+_:b10   rdf:first  :AlertCMethod4Point;
+        rdf:rest   rdf:nil .
+
+:hasAlertCDirection  rdfs:range  :AlertCDirection;
+        rdfs:comment  "ALERT-C direction"@en;
+        rdfs:comment  "The direction of traffic flow along the road to which the information relates."@en .
+
+:hasAlertCDirectionCoded
+        rdf:type      owl:ObjectProperty;
+        rdfs:domain   :AlertCDirection;
+        rdfs:range    :AlertCDirectionEnum;
+        rdfs:comment  "Direction of navigation with respect to secondary to primary location (RDS direction)"@en .
+
+:hasAlertCLocation  rdf:type  owl:ObjectProperty;
+        rdfs:domain  _:b11 .
+
+_:b11   rdf:type     owl:Class;
+        owl:unionOf  _:b12 .
+
+_:b12   rdf:first  :AlertCArea;
+        rdf:rest   _:b13 .
+
+_:b13   rdf:first  :AlertCMethod2PrimaryPointLocation;
+        rdf:rest   _:b14 .
+
+_:b14   rdf:first  :AlertCMethod2SecondaryPointLocation;
+        rdf:rest   _:b15 .
+
+_:b15   rdf:first  :AlertCMethod4PrimaryPointLocation;
+        rdf:rest   _:b16 .
+
+_:b16   rdf:first  :AlertCMethod4SecondaryPointLocation;
+        rdf:rest   rdf:nil .
+
+:hasAlertCLocation  rdfs:range  :AlertCLocation;
+        rdfs:comment  "ALERT-C location"@en;
+        rdfs:comment  "Identification of a specific point, linear or area location in an ALERT-C location table."@en .
+
+:hasAlertCMethod2PrimaryPointLocation
+        rdf:type     owl:ObjectProperty;
+        rdfs:domain  _:b17 .
+
+_:b17   rdf:type     owl:Class;
+        owl:unionOf  _:b18 .
+
+_:b18   rdf:first  :AlertCMethod2Linear;
+        rdf:rest   _:b19 .
+
+_:b19   rdf:first  :AlertCMethod2Point;
+        rdf:rest   rdf:nil .
+
+:hasAlertCMethod2PrimaryPointLocation
+        rdfs:range    :AlertCMethod2PrimaryPointLocation;
+        rdfs:comment  "ALERT-C method2 primary point location"@en;
+        rdfs:comment  "The point (called Primary point) which is either a single point or at the downstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table."@en .
+
+:hasAlertCMethod2SecondaryPointLocation
+        rdf:type      owl:ObjectProperty;
+        rdfs:domain   :AlertCMethod2Linear;
+        rdfs:range    :AlertCMethod2SecondaryPointLocation;
+        rdfs:comment  "ALERT-C method2 secondary point location"@en;
+        rdfs:comment  "The point (called Secondary point) which is at the upstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table."@en .
+
+:hasAlertCMethod4PrimaryPointLocation
+        rdf:type     owl:ObjectProperty;
+        rdfs:domain  _:b20 .
+
+_:b20   rdf:type     owl:Class;
+        owl:unionOf  _:b21 .
+
+_:b21   rdf:first  :AlertCMethod4Linear;
+        rdf:rest   _:b22 .
+
+_:b22   rdf:first  :AlertCMethod4Point;
+        rdf:rest   rdf:nil .
+
+:hasAlertCMethod4PrimaryPointLocation
+        rdfs:range    :AlertCMethod4PrimaryPointLocation;
+        rdfs:comment  "ALERT-C method4 primary point location"@en;
+        rdfs:comment  "The point (called Primary point) which is either a single point or at the downstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table plus a non-negative offset distance."@en .
+
+:hasAlertCMethod4SecondaryPointLocation
+        rdf:type      owl:ObjectProperty;
+        rdfs:domain   :AlertCMethod4Linear;
+        rdfs:range    :AlertCMethod4SecondaryPointLocation;
+        rdfs:comment  "ALERT-C method4 secondary point location"@en;
+        rdfs:comment  "The point (called Secondary point) which is at the upstream end of a linear road section. The point is specified by a reference to a point in a pre-defined Alert-C location table plus a non-negative offset distance."@en .
+
+:hasLocationCodeForLinearLocation
+        rdf:type      owl:ObjectProperty;
+        rdfs:domain   :AlertCLinearByCode;
+        rdfs:range    :AlertCLocation;
+        rdfs:comment  "Specific location. Unique code within the ALERT-C location table which identifies the specific point, linear or area location.Unique code within the ALERT-C location table which identifies the specific point, linear or area location."@en .
+
+:hasOffsetDistance  rdf:type  owl:ObjectProperty;
+        rdfs:domain  _:b23 .
+
+_:b23   rdf:type     owl:Class;
+        owl:unionOf  _:b24 .
+
+_:b24   rdf:first  :AlertCMethod4PrimaryPointLocation;
+        rdf:rest   _:b25 .
+
+_:b25   rdf:first  :AlertCMethod4SecondaryPointLocation;
+        rdf:rest   rdf:nil .
+
+:hasOffsetDistance  rdfs:range  :OffsetDistance;
+        rdfs:comment  "The non-negative offset distance from the ALERT-C referenced point to the actual point."@en .
+
+:hasPointCoordinates  rdf:type  owl:ObjectProperty;
+        rdfs:domain  _:b26 .
+
+_:b26   rdf:type     owl:Class;
+        owl:unionOf  _:b27 .
+
+_:b27   rdf:first  :Location;
+        rdf:rest   _:b28 .
+
+_:b28   rdf:first  :OpenlrBaseReferencePoint;
+        rdf:rest   _:b29 .
+
+_:b29   rdf:first  :OpenlrPolygonCorners;
+        rdf:rest   _:b30 .
+
+_:b30   rdf:first  :OpenlrRectangle;
+        rdf:rest   _:b31 .
+
+_:b31   rdf:first  :PointByCoordinates;
+        rdf:rest   _:b32 .
+
+_:b32   rdf:first  :Referent;
+        rdf:rest   _:b33 .
+
+_:b33   rdf:first  :TpegJunction;
+        rdf:rest   _:b34 .
+
+_:b34   rdf:first  :TpegNonJunctionPoint;
+        rdf:rest   rdf:nil .
+
+:hasPointCoordinates  rdfs:range  :PointCoordinates;
+        rdfs:comment  "Coordinates that may be used by clients for visual display on user interfaces."@en .
+
+:offsetDistance  rdf:type  owl:ObjectProperty;
+        rdfs:domain   :OffsetDistance;
+        rdfs:range    :MetresAsNonNegativeIntegerValue;
+        rdfs:comment  "The non-negative offset distance from the ALERT-C referenced point to the actual point. The ALERT-C locations in the primary and secondary locations must always encompass the linear section being specified, thus offset distance is towards the other point."@en .
+
+:alertCLocationCountryCode
+        rdf:type     owl:DatatypeProperty;
+        rdfs:domain  _:b35 .
+
+_:b35   rdf:type     owl:Class;
+        owl:unionOf  _:b36 .
+
+_:b36   rdf:first  :AlertCArea;
+        rdf:rest   _:b37 .
+
+_:b37   rdf:first  :AlertCLinear;
+        rdf:rest   _:b38 .
+
+_:b38   rdf:first  :AlertCPoint;
+        rdf:rest   rdf:nil .
+
+:alertCLocationCountryCode
+        rdfs:range    xsd:string;
+        rdfs:comment  "ALERT-C country code as defined in IEC 62106."@en .
+
+:alertCLocationTableNumber
+        rdf:type     owl:DatatypeProperty;
+        rdfs:domain  _:b39 .
+
+_:b39   rdf:type     owl:Class;
+        owl:unionOf  _:b40 .
+
+_:b40   rdf:first  :AlertCArea;
+        rdf:rest   _:b41 .
+
+_:b41   rdf:first  :AlertCLinear;
+        rdf:rest   _:b42 .
+
+_:b42   rdf:first  :AlertCPoint;
+        rdf:rest   rdf:nil .
+
+:alertCLocationTableNumber
+        rdfs:range    xsd:string;
+        rdfs:comment  "Number allocated to an ALERT-C table in a country. Ref. EN ISO 14819-3 for the allocation of a location table number."@en .
+
+:alertCLocationTableVersion
+        rdf:type     owl:DatatypeProperty;
+        rdfs:domain  _:b43 .
+
+_:b43   rdf:type     owl:Class;
+        owl:unionOf  _:b44 .
+
+_:b44   rdf:first  :AlertCArea;
+        rdf:rest   _:b45 .
+
+_:b45   rdf:first  :AlertCLinear;
+        rdf:rest   _:b46 .
+
+_:b46   rdf:first  :AlertCPoint;
+        rdf:rest   rdf:nil .
+
+:alertCLocationTableVersion
+        rdfs:range    xsd:string;
+        rdfs:comment  "Version number associated with an ALERT-C table reference."@en .
+
+:specificLocation  rdf:type  owl:DatatypeProperty;
+        rdfs:domain   :AlertCLocation;
+        rdfs:range    <http://datex2.eu/schema/3/Common/3_1#AlertCLocationCode>;
+        rdfs:comment  "Unique code within the ALERT-C location table which identifies the specific point, linear or area location." .
+
+:LocationThing  rdf:type  owl:Class;
+        rdfs:subClassOf  </itsdata/core/ITSThing> .
+
+:AlertCThing  rdf:type   owl:Class;
+        rdfs:subClassOf  :LocationThing;
+        rdfs:comment     "Alert C location"@en .
+
+:AlertCArea  rdf:type    owl:Class;
+        rdfs:subClassOf  :AlertCThing;
+        rdfs:subClassOf  _:b47 .
+
+_:b47   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCLocation .
+
+:AlertCArea  rdfs:subClassOf  _:b48 .
+
+_:b48   rdf:type                  owl:Restriction;
+        owl:onProperty            :alertCLocationCountryCode;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onDataRange           xsd:string .
+
+:AlertCArea  rdfs:subClassOf  _:b49 .
+
+_:b49   rdf:type                  owl:Restriction;
+        owl:onProperty            :alertCLocationTableNumber;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onDataRange           xsd:string .
+
+:AlertCArea  rdfs:subClassOf  _:b50 .
+
+_:b50   rdf:type                  owl:Restriction;
+        owl:onProperty            :alertCLocationTableVersion;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onDataRange           xsd:string .
+
+:AlertCArea  rdfs:comment  "An area defined by reference to a predefined ALERT-C location table."@en .
+
+:AlertCDirection  rdf:type  owl:Class;
+        rdfs:subClassOf  :AlertCThing;
+        rdfs:subClassOf  _:b51 .
+
+_:b51   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCAffectedDirection;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :LinearDirectionEnum .
+
+:AlertCDirection  rdfs:subClassOf  _:b52 .
+
+_:b52   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCDirectionCoded;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCDirectionEnum .
+
+:AlertCDirection  owl:disjointWith  :AlertCLocation;
+        rdfs:comment      "The direction of traffic flow along the road to which the information relates."@en .
+
+:AlertCDirectionEnum  rdf:type  owl:Class;
+        owl:equivalentClass  _:b53 .
+
+_:b53   rdf:type   owl:Class;
+        owl:oneOf  _:b54 .
+
+_:b54   rdf:first  :both;
+        rdf:rest   _:b55 .
+
+_:b55   rdf:first  :negative;
+        rdf:rest   _:b56 .
+
+_:b56   rdf:first  :positive;
+        rdf:rest   rdf:nil .
+
+:AlertCDirectionEnum  rdfs:subClassOf  :LocationReferencingEnumerations;
+        rdfs:comment     "Direction used to reach the primary location from the secondary location in ALERT-C location table, as defined in CEN ISO 14819-1"@en .
+
+:AlertCLinear  rdf:type  owl:Class;
+        rdfs:subClassOf  :AlertCThing;
+        rdfs:subClassOf  _:b57 .
+
+_:b57   rdf:type                  owl:Restriction;
+        owl:onProperty            :alertCLocationCountryCode;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onDataRange           xsd:string .
+
+:AlertCLinear  rdfs:subClassOf  _:b58 .
+
+_:b58   rdf:type                  owl:Restriction;
+        owl:onProperty            :alertCLocationTableNumber;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onDataRange           xsd:string .
+
+:AlertCLinear  rdfs:subClassOf  _:b59 .
+
+_:b59   rdf:type                  owl:Restriction;
+        owl:onProperty            :alertCLocationTableVersion;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onDataRange           xsd:string .
+
+:AlertCLinear  rdfs:comment  "A linear section along a road defined between two points on the road by reference to a pre-defined ALERT-C location table. When there are multiple instances of AlertCLinear they should represent the same location using different location tables." .
+
+:AlertCLinearByCode  rdf:type  owl:Class;
+        rdfs:subClassOf  :AlertCLinear;
+        rdfs:subClassOf  _:b60 .
+
+_:b60   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCDirection;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCDirection .
+
+:AlertCLinearByCode  rdfs:subClassOf  _:b61 .
+
+_:b61   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasLocationCodeForLinearLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCLocation .
+
+:AlertCLinearByCode  rdfs:comment  "A linear section along a road defined by reference to a linear section in a pre-defined ALERT-C location table." .
+
+:AlertCLocation  rdf:type  owl:Class;
+        rdfs:subClassOf  :AlertCThing;
+        rdfs:comment     "Identification of a specific point, linear or area location in an ALERT-C location table."@en .
+
+:AlertCMethod2Linear  rdf:type  owl:Class;
+        rdfs:subClassOf  :AlertCLinear;
+        rdfs:subClassOf  _:b62 .
+
+_:b62   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCDirection;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCDirection .
+
+:AlertCMethod2Linear  rdfs:subClassOf  _:b63 .
+
+_:b63   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCMethod2PrimaryPointLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCMethod2PrimaryPointLocation .
+
+:AlertCMethod2Linear  rdfs:subClassOf  _:b64 .
+
+_:b64   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCMethod2SecondaryPointLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCMethod2SecondaryPointLocation .
+
+:AlertCMethod2Linear  rdfs:comment  "A linear section along a road between two points, primary and secondary, which are pre-defined in an ALERT-C location table. Direction is FROM the secondary point TO the primary point, i.e. the primary point is downstream of the secondary point." .
+
+:AlertCMethod2Point  rdf:type  owl:Class;
+        rdfs:subClassOf  :AlertCPoint;
+        rdfs:subClassOf  _:b65 .
+
+_:b65   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCDirection;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCDirection .
+
+:AlertCMethod2Point  rdfs:subClassOf  _:b66 .
+
+_:b66   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCMethod2PrimaryPointLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCMethod2PrimaryPointLocation .
+
+:AlertCMethod2Point  rdfs:comment  "A single point on the road network defined by reference to a point in a pre-defined ALERT-C location table and which has an associated direction of traffic flow."@en .
+
+:AlertCMethod2PrimaryPointLocation
+        rdf:type         owl:Class;
+        rdfs:subClassOf  :AlertCThing;
+        rdfs:subClassOf  _:b67 .
+
+_:b67   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCLocation .
+
+:AlertCMethod2PrimaryPointLocation
+        rdfs:comment  "The point (called Primary point) which is either a single point or at the downstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table."@en .
+
+:AlertCMethod2SecondaryPointLocation
+        rdf:type         owl:Class;
+        rdfs:subClassOf  :AlertCThing;
+        rdfs:subClassOf  _:b68 .
+
+_:b68   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCLocation .
+
+:AlertCMethod2SecondaryPointLocation
+        rdfs:comment  "The point (called Secondary point) which is at the upstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table."@en .
+
+:AlertCMethod4Linear  rdf:type  owl:Class;
+        rdfs:subClassOf  :AlertCLinear;
+        rdfs:subClassOf  _:b69 .
+
+_:b69   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCDirection;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCDirection .
+
+:AlertCMethod4Linear  rdfs:subClassOf  _:b70 .
+
+_:b70   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCMethod4PrimaryPointLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCMethod4PrimaryPointLocation .
+
+:AlertCMethod4Linear  rdfs:subClassOf  _:b71 .
+
+_:b71   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCMethod4SecondaryPointLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCMethod4SecondaryPointLocation .
+
+:AlertCMethod4Linear  rdfs:comment  "A linear section along a road between two points, primary and secondary, which are pre-defined ALERT-C locations plus offset distance. Direction is FROM the secondary point TO the primary point, i.e. the primary point is downstream of the secondary point." .
+
+:AlertCMethod4Point  rdf:type  owl:Class;
+        rdfs:subClassOf  :AlertCPoint;
+        rdfs:subClassOf  _:b72 .
+
+_:b72   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCDirection;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCDirection .
+
+:AlertCMethod4Point  rdfs:subClassOf  _:b73 .
+
+_:b73   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCMethod4PrimaryPointLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCMethod4PrimaryPointLocation .
+
+:AlertCMethod4Point  rdfs:comment  "A single point on the road network defined by reference to a point in a pre-defined ALERT-C location table plus an offset distance and which has an associated direction of traffic flow."@en .
+
+:AlertCMethod4PrimaryPointLocation
+        rdf:type         owl:Class;
+        rdfs:subClassOf  :AlertCThing;
+        rdfs:subClassOf  _:b74 .
+
+_:b74   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCLocation .
+
+:AlertCMethod4PrimaryPointLocation
+        rdfs:subClassOf  _:b75 .
+
+_:b75   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasOffsetDistance;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :OffsetDistance .
+
+:AlertCMethod4PrimaryPointLocation
+        rdfs:comment  "The point (called Primary point) which is either a single point or at the downstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table plus a non-negative offset distance."@en .
+
+:AlertCMethod4SecondaryPointLocation
+        rdf:type         owl:Class;
+        rdfs:subClassOf  :AlertCThing;
+        rdfs:subClassOf  _:b76 .
+
+_:b76   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasAlertCLocation;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :AlertCLocation .
+
+:AlertCMethod4SecondaryPointLocation
+        rdfs:subClassOf  _:b77 .
+
+_:b77   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasOffsetDistance;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :OffsetDistance .
+
+:AlertCMethod4SecondaryPointLocation
+        rdfs:comment  "The point (called Secondary point) which is at the upstream end of a linear road section. The point is specified by a reference to a point in a pre-defined Alert-C location table plus a non-negative offset distance."@en .
+
+:AlertCPoint  rdf:type   owl:Class;
+        rdfs:subClassOf  :AlertCThing;
+        rdfs:subClassOf  _:b78 .
+
+_:b78   rdf:type                  owl:Restriction;
+        owl:onProperty            :alertCLocationCountryCode;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onDataRange           xsd:string .
+
+:AlertCPoint  rdfs:subClassOf  _:b79 .
+
+_:b79   rdf:type                  owl:Restriction;
+        owl:onProperty            :alertCLocationTableNumber;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onDataRange           xsd:string .
+
+:AlertCPoint  rdfs:subClassOf  _:b80 .
+
+_:b80   rdf:type                  owl:Restriction;
+        owl:onProperty            :alertCLocationTableVersion;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onDataRange           xsd:string .
+
+:AlertCPoint  owl:disjointWith  :TpegPoint;
+        rdfs:comment      "A single point on the road network defined by reference to a pre-defined ALERT-C location table and which has an associated direction of traffic flow."@en .
+
+:LinearDirectionEnum  rdf:type  owl:Class;
+        owl:equivalentClass  _:b81 .
+
+_:b81   rdf:type   owl:Class;
+        owl:oneOf  _:b82 .
+
+_:b82   rdf:first  :aligned;
+        rdf:rest   _:b83 .
+
+_:b83   rdf:first  :both;
+        rdf:rest   _:b84 .
+
+_:b84   rdf:first  :opposite;
+        rdf:rest   _:b85 .
+
+_:b85   rdf:first  :unknown;
+        rdf:rest   rdf:nil .
+
+:LinearDirectionEnum  rdfs:subClassOf  :LocationReferencingEnumerations;
+        rdfs:comment     "Directions of traffic flow relative to the direction in which the linear element is defined."@en .
+
+:LocationReferencingEnumerations
+        rdf:type         owl:Class;
+        rdfs:subClassOf  :Enums;
+        rdfs:comment     "Only for organizational purposes"@en .
+
+:OffsetDistance  rdf:type  owl:Class;
+        rdfs:subClassOf  :LocationReferencing;
+        rdfs:subClassOf  _:b86 .
+
+_:b86   rdf:type                  owl:Restriction;
+        owl:onProperty            :offsetDistance;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :MetresAsNonNegativeIntegerValue .
+
+:OffsetDistance  rdfs:comment  "The non-negative offset distance from the ALERT-C referenced point to the actual point."@en .
+
+:TpegPoint  rdf:type     owl:Class;
+        rdfs:subClassOf  :TpegLoc;
+        rdfs:subClassOf  _:b87 .
+
+_:b87   rdf:type                  owl:Restriction;
+        owl:onProperty            :hasPointCoordinates;
+        owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger;
+        owl:onClass               :PointCoordinates .
+
+:TpegPoint  rdfs:comment  "A point on the road network which is either a junction point or a non junction point."@en .
+
+:both   rdf:type      owl:NamedIndividual;
+        rdf:type      :AlertCDirectionEnum;
+        rdf:type      :LinearDirectionEnum;
+        rdfs:comment  "Indicates that both directions of traffic flow are affected by the situation or relate to the traffic data."@en .
+
+:positive  rdf:type   owl:NamedIndividual;
+        rdf:type      :AlertCDirectionEnum;
+        rdfs:comment  "The direction of navigation in an ALERT-C table that corresponds to the positive offset usage to go from the secondary location to the primary location within the ALERT-C location table."@en .
+
+:negative  rdf:type   owl:NamedIndividual;
+        rdf:type      :AlertCDirectionEnum;
+        rdfs:comment  "The direction of navigation in an ALERT-C table that corresponds to the negative offset usage to go from the secondary location to the primary location within the ALERT-C location table."@en .

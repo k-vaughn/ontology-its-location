@@ -1,0 +1,963 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://w3id.org/itsdata/location/v1/"
+     xml:base="https://w3id.org/itsdata/location/v1/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:geo="https://www.opengis.net/ont/geosparql#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:cdm1="https://w3id.org/citydata/part1/"
+     xmlns:cdm2="https://w3id.org/citydata/part2/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:time="http://www.w3.org/2006/time#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:schema="https://schema.org/"
+     xmlns:protege="http://protege.stanford.edu/ontologies/metadata#"
+     xmlns:its-core="https://w3id.org/itsdata/core/"
+     xmlns:data-view="http://www.w3.org/2003/g/data-view#">
+    <owl:Ontology rdf:about="https://w3id.org/itsdata/location/v1/">
+        <owl:versionIRI rdf:resource="https://w3id.org/itsdata/location/v1/0.0.2"/>
+        <owl:imports rdf:resource="http://www.w3.org/2002/07/owl"/>
+        <owl:imports rdf:resource="http://www.w3.org/2003/11/swrl"/>
+        <owl:imports rdf:resource="http://www.w3.org/2003/11/swrlb"/>
+        <owl:imports rdf:resource="http://www.w3.org/2006/time"/>
+        <owl:imports rdf:resource="https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/GenericProperties"/>
+        <owl:imports rdf:resource="https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/Mereology"/>
+        <owl:imports rdf:resource="https://standards.iso.org/iso-iec/5087/-2/ed-1/en/ontology/Code"/>
+        <owl:imports rdf:resource="https://w3id.org/citydata/part1/"/>
+        <owl:imports rdf:resource="https://www.opengis.net/ont/geosparql"/>
+        <dc:title>Ontology for ITS Location Referencing</dc:title>
+        <terms:description>This ontology defines concepts related to locations and positioning within the ITS domain using concepts specified in ISO/IEC 5087-1 and ISO/IEC-5087-2. The core ontology (OWL) defines the semantic model and is intended to remain stable. Validation constraints are defined in separate SHACL shape graphs. Changes to SHACL shapes are considered non-breaking to the semantic model unless otherwise stated. Applications SHOULD validate data against the recommended shapes for the given version.</terms:description>
+        <its-core:draft>true</its-core:draft>
+    </owl:Ontology>
+    
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    <!-- https://w3id.org/itsdata/location/v1/LocationObjectProperty -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/areaLocation -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/areaLocation">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/areaLocation"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/itsdata/location/v1/AreaLocation"/>
+            </owl:Restriction>
+        </rdfs:range>
+        <terms:description>location defined by an area covering the surface (or near-surface) of the Earth</terms:description>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/areasAtWhichApplicable -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/areasAtWhichApplicable">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/coordinatesForDisplay -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/coordinatesForDisplay">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/destination -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/destination">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/destination"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/itsdata/location/v1/Destination"/>
+            </owl:Restriction>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/directionPurpose -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/directionPurpose">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/externalLocationReference -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/externalLocationReference">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/externalLocationReference"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/geographicDescriptor -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/geographicDescriptor">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/infrastructureDescriptor -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/infrastructureDescriptor">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/lengthAffected -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/lengthAffected">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/location -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/location">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+    <!-- https://w3id.org/itsdata/location/v1/locationContainedInGroup -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/locationContainedInGroup">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/locationContainedInItinerary -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/locationContainedInItinerary">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+        <rdfs:domain rdf:resource="https://w3id.org/itsdata/location/v1/ItineraryByIndexedLocations"/>
+        <rdfs:range rdf:resource="https://w3id.org/itsdata/location/v1/IndexedLocation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/locationPrecision -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/locationPrecision">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/networkLocation -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/networkLocation">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/pointLocation -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/pointLocation">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/positionConfidence -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/positionConfidence">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/positionOnCarriageway -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/positionOnCarriageway">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/positionalDescription -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/positionalDescription">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/routeDestination -->
+<!-- where is this used? -->
+    <owl:ObjectProperty rdf:about="https://w3id.org/itsdata/location/v1/routeDestination"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://w3id.org/citydata/part1/hasDescription -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/citydata/part1/hasDescription"/>
+    
+
+
+    <!-- https://w3id.org/citydata/part1/hasIdentifier -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/citydata/part1/hasIdentifier"/>
+    
+
+
+    <!-- https://w3id.org/citydata/part1/hasName -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/citydata/part1/hasName"/>
+    
+
+
+    <!-- https://w3id.org/itsdata/core/ITSDataProperty -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/itsdata/core/ITSDataProperty"/>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/LocationDataProperty -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/itsdata/location/v1/LocationDataProperty">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/core/ITSDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/elevation -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/itsdata/location/v1/elevation">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/index -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/itsdata/location/v1/index"/>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/latitude -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/itsdata/location/v1/latitude">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/locationDescription -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/itsdata/location/v1/locationDescription">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/longitude -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/itsdata/location/v1/longitude">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/itsdata/time/v1/predefinedItineraryReference -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/itsdata/time/v1/predefinedItineraryReference">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/time/v1/TimeDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+    <!-- https://w3id.org/itsdata/time/v1/predefinedLocationGroupReference -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/itsdata/time/v1/predefinedLocationGroupReference">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/time/v1/TimeDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+    <!-- https://w3id.org/itsdata/location/v1/sequentialRampNumber -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/itsdata/location/v1/sequentialRampNumber">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://w3id.org/citydata/part1/Length -->
+
+    <owl:Class rdf:about="https://w3id.org/citydata/part1/Length"/>
+    
+
+
+    <!-- https://w3id.org/citydata/part2/Code -->
+
+    <owl:Class rdf:about="https://w3id.org/citydata/part2/Code"/>
+    
+
+
+    <!-- https://w3id.org/itsdata/core/ITSPattern -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/core/ITSPattern"/>
+    
+
+
+    <!-- https://w3id.org/itsdata/core/ITSThing -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/core/ITSThing"/>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/AreaDestination -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/AreaDestination">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/Destination"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/areaLocation"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/itsdata/location/v1/AreaLocation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/AreaLocation -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/AreaLocation">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/Location"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/areasAtWhichApplicable"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/areasAtWhichApplicable"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/Destination -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/Destination">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationThing"/>
+    </owl:Class>
+    
+
+    <!-- https://w3id.org/itsdata/location/v1/DirectionCode -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/DirectionCode">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationThing"/>
+        <rdfs:subClassOf rdf:resource="https://w3id.org/citydata/part2/v1/Code"/>
+    </owl:Class>
+    
+
+    <!-- https://w3id.org/itsdata/location/v1/IndexedLocation -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/IndexedLocation">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationReference"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/location"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/itsdata/location/v1/Location"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/location"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/itsdata/location/v1/Location"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/index"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/index"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/Itinerary -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/Itinerary">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationReference"/>
+        <skos:definition xml:lang="en">Multiple (i.e. more than one) physically separate locations arranged as an ordered set that defines an itinerary or route.</skos:definition>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/routeDestination"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/itsdata/location/v1/Destination"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/ItineraryByIndexedLocations -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/ItineraryByIndexedLocations">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/Itinerary"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/locationContainedInItinerary"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/itsdata/location/v1/IndexedLocation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/JurisdictionalEntity -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/JurisdictionalEntity">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationThing"/>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/LinearLocation -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/LinearLocation">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/NetworkLocation"/>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/Location -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/Location">
+        <skos:definition xml:lang="en">The specification of a location either on a network (as a point or a linear location) or as an area. This may be provided in one or more referencing systems.</skos:definition>
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationReference"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/coordinatesForDisplay"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/itsdata/location/v1/PointCoordinates"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/externalLocationReference"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/coordinatesForDisplay"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/itsdata/location/v1/PointCoordinates"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/LocationGroup -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/LocationGroup">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationReference"/>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/LocationGroupByList -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/LocationGroupByList">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationGroup"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/locationContainedInGroup"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/itsdata/location/v1/Location"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/locationContainedInGroup"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/itsdata/location/v1/Location"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+    <!-- https://w3id.org/itsdata/location/v1/LocationReference -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/LocationReference">
+        <skos:definition xml:lang="en">Represents one or more physically separate locations. Multiple locations may be related, as in an itinerary or route, or may be unrelated. One LocationReference should not use multiple Location objects to represent the same physical location.</skos:definition>
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationThing"/>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/LocationThing -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/LocationThing">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/core/ITSThing"/>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/NetworkLocation -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/NetworkLocation">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/Location"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/positionalDescription"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/itsdata/location/v1/SupplementaryPositionalDescription"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/destination"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/itsdata/location/v1/Destination"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/positionalDescription"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/itsdata/location/v1/SupplementaryPositionalDescription"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+    <!-- https://w3id.org/itsdata/location/v1/Place -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/Place">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationThing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/placeType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/itsdata/location/v1/PlaceTypeCode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/citydata/part1/v1/hasName"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+    <!-- https://w3id.org/itsdata/location/v1/PlaceTypeCode -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/PlaceTypeCode">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationThing"/>
+        <rdfs:subClassOf rdf:resource="https://w3id.org/citydata/part2/Code"/>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/PointCoordinates -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/PointCoordinates">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationThing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/positionConfidence"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/itsdata/location/v1/PositionConfidenceEllipse"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/positionConfidence"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/itsdata/location/v1/PositionConfidenceEllipse"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/citydata/part1/hasIdentifier"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/elevation"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/latitude"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/longitude"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/latitude"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/longitude"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/citydata/part1/hasIdentifier"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/elevation"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/PointDestination -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/PointDestination">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/Destination"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/pointLocation"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/itsdata/location/v1/PointLocation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/pointLocation"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/itsdata/location/v1/PointLocation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/PointLocation -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/PointLocation">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/NetworkLocation"/>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/PositionConfidenceEllipse -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/PositionConfidenceEllipse">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationThing"/>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/itsdata/location/v1/SupplementaryPositionalDescription -->
+
+    <owl:Class rdf:about="https://w3id.org/itsdata/location/v1/SupplementaryPositionalDescription">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/itsdata/location/v1/LocationThing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/directionPurpose"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/geographicDescriptor"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/infrastructureDescriptor"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/lengthAffected"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/citydata/part1/Length"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/locationPrecision"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/citydata/part1/Length"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/positionOnCarriageway"/>
+                <owl:allValuesFrom rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/directionPurpose"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/geographicDescriptor"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/infrastructureDescriptor"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/lengthAffected"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/citydata/part1/Length"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/locationPrecision"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/citydata/part1/Length"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/positionOnCarriageway"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/citydata/part2/Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/locationDescription"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/sequentialRampNumber"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/locationDescription"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/itsdata/location/v1/sequentialRampNumber"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Rules
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="https://isotc204.org/ontologies/its/location#indexedLoc1">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://isotc204.org/ontologies/its/location#indexedLoc2">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://isotc204.org/ontologies/its/location#itinerary">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://isotc204.org/ontologies/its/location#indexVal">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdfs:comment>Enforces unique indices for IndexedLocations within an ItineraryByIndexedLocations (violation causes inconsistency)</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                        <swrl:argument1 rdf:resource="https://isotc204.org/ontologies/its/location#indexedLoc1"/>
+                        <swrl:argument2 rdf:resource="https://isotc204.org/ontologies/its/location#indexedLoc2"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                <swrl:classPredicate rdf:resource="https://w3id.org/itsdata/location/v1/ItineraryByIndexedLocations"/>
+                                <swrl:argument1 rdf:resource="https://isotc204.org/ontologies/its/location#itinerary"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="https://w3id.org/itsdata/location/v1/locationContainedInItinerary"/>
+                                        <swrl:argument1 rdf:resource="https://isotc204.org/ontologies/its/location#itinerary"/>
+                                        <swrl:argument2 rdf:resource="https://isotc204.org/ontologies/its/location#indexedLoc2"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="https://w3id.org/itsdata/location/v1/locationContainedInItinerary"/>
+                                                <swrl:argument1 rdf:resource="https://isotc204.org/ontologies/its/location#itinerary"/>
+                                                <swrl:argument2 rdf:resource="https://isotc204.org/ontologies/its/location#indexedLoc1"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                        <swrl:propertyPredicate rdf:resource="https://w3id.org/itsdata/location/v1/index"/>
+                                                        <swrl:argument1 rdf:resource="https://isotc204.org/ontologies/its/location#indexedLoc1"/>
+                                                        <swrl:argument2 rdf:resource="https://isotc204.org/ontologies/its/location#indexVal"/>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                                <swrl:propertyPredicate rdf:resource="https://w3id.org/itsdata/location/v1/index"/>
+                                                                <swrl:argument1 rdf:resource="https://isotc204.org/ontologies/its/location#indexedLoc2"/>
+                                                                <swrl:argument2 rdf:resource="https://isotc204.org/ontologies/its/location#indexVal"/>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+                        <swrl:argument1 rdf:resource="https://isotc204.org/ontologies/its/location#itinerary"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->

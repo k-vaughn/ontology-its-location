@@ -1,0 +1,1755 @@
+<!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+    <!-- Address Information -->
+    <!-- http://datex2.eu/schema/3/Common/3_1#CountryCode -->
+
+
+    <rdfs:Datatype rdf:about="http://datex2.eu/schema/3/Common/3_1#CountryCode">
+        <skos:definition xml:lang="en">EN ISO 3166-1 alpha-2 two-letter country code</skos:definition>
+        <rdfs:isDefinedBy xml:lang="en">http://datex2.eu/schema/3/Common/3_1#</rdfs:isDefinedBy>
+    </rdfs:Datatype>
+    
+
+    <!-- http://datex2.eu/schema/3/Common/3_1#SubdivisionCode -->
+
+    <rdfs:Datatype rdf:about="http://datex2.eu/schema/3/Common/3_1#SubdivisionCode">
+        <skos:definition xml:lang="en">ISO 3166-2 country sub-division code (up to 3 characters).</skos:definition>
+        <rdfs:isDefinedBy xml:lang="en">http://datex2.eu/schema/3/Common/3_1#</rdfs:isDefinedBy>
+    </rdfs:Datatype>
+    
+
+    <!-- Coordinates -->
+    <!-- http://datex2.eu/schema/3/Common/3_1#GmlPosList -->
+
+    <rdfs:Datatype rdf:about="http://datex2.eu/schema/3/Common/3_1#GmlPosList">
+        <skos:definition xml:lang="en">List of coordinates, space-separated, within the same coordinate reference system, defining a geometric entity. Modelled on DirectPositionListType in GML (EN ISO 19136), but constrained to represent a 2D or 3D polyline.</skos:definition>
+        <rdfs:isDefinedBy xml:lang="en">http://datex2.eu/schema/3/Common/3_1#</rdfs:isDefinedBy>
+    </rdfs:Datatype>
+    
+    <!-- http://www.opengis.net/ont/geosparql#dggsLiteral -->
+
+
+    <rdfs:Datatype rdf:about="http://www.opengis.net/ont/geosparql#dggsLiteral">
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/ont/geosparql#"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/spec/geosparql/1.1/req/geometry-extension/dggs-literal"/>
+        <rdfs:seeAlso rdf:resource="http://www.opengis.net/doc/AS/dggs/2.0"/>
+        <skos:definition xml:lang="en">A textual serialization of a Discrete Global Grid (DGGS) Geometry object.</skos:definition>
+        <skos:example rdf:resource="http://www.opengis.net/spec/geosparql/1.1/specification.html#B.1.2.4"/>
+        <skos:example> &quot;&lt;https://w3id.org/dggs/auspix&gt; OrdinateList (R3234)&quot;^^&lt;http://www.opengis.net/ont/geosparql#dggsLiteral&gt;</skos:example>
+        <skos:prefLabel xml:lang="en">DGGS Literal</skos:prefLabel>
+        <skos:scopeNote xml:lang="en">This datatype is not expected to be used directly but to serve as an abstract datatype for a series of specific DGGS literal types, for specific DGGS implementations</skos:scopeNote>
+    </rdfs:Datatype>
+    
+
+    <!-- http://www.opengis.net/ont/geosparql#geoJSONLiteral -->
+
+    <rdfs:Datatype rdf:about="http://www.opengis.net/ont/geosparql#geoJSONLiteral">
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/ont/geosparql#"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/spec/geosparql/1.1/req/geometry-extension/geojson-literal"/>
+        <rdfs:seeAlso rdf:resource="https://tools.ietf.org/html/rfc7946"/>
+        <skos:definition xml:lang="en">A GeoJSON serialization of a Geometry object.</skos:definition>
+        <skos:example rdf:resource="http://www.opengis.net/spec/geosparql/1.1/specification.html#B.1.2.4"/>
+        <skos:prefLabel xml:lang="en">GeoJSON Literal</skos:prefLabel>
+    </rdfs:Datatype>
+    
+
+    <!-- http://www.opengis.net/ont/geosparql#gmlLiteral -->
+
+    <rdfs:Datatype rdf:about="http://www.opengis.net/ont/geosparql#gmlLiteral">
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/ont/geosparql#"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/spec/geosparql/1.0/req/geometry-extension/gml-literal"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/spec/geosparql/1.1/req/geometry-extension/gml-literal"/>
+        <rdfs:seeAlso rdf:resource="https://portal.ogc.org/files/?artifact_id=20509"/>
+        <skos:definition xml:lang="en">A GML serialization of a Geometry object.</skos:definition>
+        <skos:example rdf:resource="http://www.opengis.net/spec/geosparql/1.1/specification.html#B.1.2.4"/>
+        <skos:prefLabel xml:lang="en">GML Literal</skos:prefLabel>
+    </rdfs:Datatype>
+    
+
+    <!-- http://www.opengis.net/ont/geosparql#kmlLiteral -->
+
+    <rdfs:Datatype rdf:about="http://www.opengis.net/ont/geosparql#kmlLiteral">
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/ont/geosparql#"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/spec/geosparql/1.1/req/geometry-extension/kml-literal"/>
+        <rdfs:seeAlso rdf:resource="https://www.ogc.org/standards/kml/"/>
+        <skos:definition xml:lang="en">A KML serialization of a Geometry object.</skos:definition>
+        <skos:example rdf:resource="http://www.opengis.net/spec/geosparql/1.1/specification.html#B.1.2.4"/>
+        <skos:prefLabel xml:lang="en">KML Literal</skos:prefLabel>
+    </rdfs:Datatype>
+
+
+    <!-- http://www.opengis.net/ont/geosparql#wktLiteral -->
+
+    <rdfs:Datatype rdf:about="http://www.opengis.net/ont/geosparql#wktLiteral">
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/ont/geosparql#"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/spec/geosparql/1.0/req/geometry-extension/wkt-literal"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/spec/geosparql/1.1/req/geometry-extension/wkt-literal"/>
+        <rdfs:seeAlso rdf:resource="https://portal.ogc.org/files/?artifact_id=25355"/>
+        <skos:definition xml:lang="en">A Well-known Text serialization of a Geometry object.</skos:definition>
+        <skos:example rdf:resource="http://www.opengis.net/spec/geosparql/1.1/specification.html#B.2.2.2"/>
+        <skos:prefLabel xml:lang="en">Well-known Text Literal</skos:prefLabel>
+    </rdfs:Datatype>
+    
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- Address -->
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#country -->
+
+    <owl:ObjectProperty rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#country">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#InternationalIdentifier"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NamedArea"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.omg.org/spec/LCC/Countries/CountryRepresentationi#Alpha2Code"/>
+    </owl:ObjectProperty>
+    
+
+     <!-- Positioning -->
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#accuracyPercentile50 -->
+
+    <owl:ObjectProperty rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#accuracyPercentile50">
+        <rdfs:domain rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionAccuracy"/>
+        <rdfs:range rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsFloatValue"/>
+        <skos:definition xml:lang="en">Accuracy defined by the 50th percentile of the cumulative distribution of position errors.</skos:definition>
+    </owl:ObjectProperty>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#accuracyPercentile75 -->
+
+    <owl:ObjectProperty rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#accuracyPercentile75">
+        <rdfs:domain rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionAccuracy"/>
+        <rdfs:range rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsFloatValue"/>
+        <skos:definition xml:lang="en">Accuracy defined by the 75th percentile of the cumulative distribution of position errors</skos:definition>
+    </owl:ObjectProperty>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#accuracyPercentile95 -->
+
+    <owl:ObjectProperty rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#accuracyPercentile95">
+        <rdfs:domain rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionAccuracy"/>
+        <rdfs:range rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsFloatValue"/>
+        <skos:definition xml:lang="en">Accuracy defined by the 95th percentile of the cumulative distribution of position errors</skos:definition>
+    </owl:ObjectProperty>
+    
+    <!-- Movement -->
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#bearing -->
+
+    <owl:ObjectProperty rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#bearing">
+        <rdfs:domain rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointByCoordinates"/>
+        <rdfs:range rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AngleInDegreesValue"/>
+        <skos:definition xml:lang="en"></skos:definition>
+    </owl:ObjectProperty>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#directionAtPoint -->
+
+    <owl:ObjectProperty rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#directionAtPoint">
+        <rdfs:domain rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointAlongLinearElement"/>
+        <rdfs:range rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DirectionEnum"/>
+        <skos:definition xml:lang="en">The direction of traffic flow at the specified point in terms of general destination direction.</skos:definition>
+    </owl:ObjectProperty>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#directionOnLinearSection -->
+
+    <owl:ObjectProperty rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#directionOnLinearSection">
+        <rdfs:domain rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearWithinLinearElement"/>
+        <rdfs:range rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DirectionEnum"/>
+        <skos:definition xml:lang="en">The direction of traffic flow on the linear section in terms of general destination direction.</skos:definition>
+    </owl:ObjectProperty>
+    
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AltitudeAccuracyEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AltitudeAccuracyEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan100Metres"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan10Centimetres"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan10Metres"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan1Centimetre"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan1Metre"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan200Metres"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan20Centimetres"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan20Metres"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan2Centimetres"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan2Metres"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan50Centimetres"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan50Metres"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan5Centimetres"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#equalToOrLessThan5Metres"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencingEnumerations"/>
+        <skos:definition xml:lang="en">Coded level of vertical accuracy</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AltitudeConfidence -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AltitudeConfidence">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#HeightCoordinateAssociationFrom"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasAltitudeAccuracyCodedValue"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AltitudeAccuracyEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasPositionConfidenceCodedErrorEnum"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionConfidenceCodedErrorEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition>Evaluation of the altitude confidence assessed according to ETSI ISO 102894-2</skos:definition>
+    </owl:Class>     
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AreaLocation -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AreaLocation">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Location"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasAreaPlacesEnum"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AreaPlacesEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasGmlMultiPolygon"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlMultiPolygon"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasNamedArea"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NamedArea"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrAreaLocationReference"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrAreaLocationReference"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasTpegAreaLocation"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#TpegAreaLocation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Location representing a geographic or geometric defined area which may be qualified by height information to provide additional geospatial discrimination (e.g. for snow in an area but only above a certain altitude). Associations:
+0..*	AlertCArea
+0..1	TpegAreaLocation
+0..1	NamedArea
+0..1	GmlMultiPolygon
+0..1	OpenlrAreaLocationReference</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AreaPlacesEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AreaPlacesEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#atBorders"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#atHighAltitudes"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#inBuiltUpAreas"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#inForestedAreas"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#inGalleries"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#inLowLyingAreas"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#inRuralAreas"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#inShadedAreas"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#inTheInnerCityAreas"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#inTunnels"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#onBridges"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#onDownhillSections"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#onElevatedSections"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#onEnteringOrLeavingTunnels"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#onFlyovers"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#onPasses"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#onUndergroundSections"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#onUnderpasses"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencingEnumerations"/>
+        <skos:definition xml:lang="en">Type of area place(s)</skos:definition>
+    </owl:Class>
+    
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DistanceAlongLinearElement -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DistanceAlongLinearElement">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearReferencing"/>
+        <skos:definition xml:lang="en">Distance of a point along a linear element either measured from the start node or a defined referent on that linear element, where the start node is relative to the element definition rather than the direction of traffic flow.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DistanceFromLinearElementReferent -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DistanceFromLinearElementReferent">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DistanceAlongLinearElement"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#distanceAlong"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsFloatValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasReferentFrom"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Referent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasReferentTowards"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Referent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Distance of a point along a linear element measured from a &quot;from referent&quot; on the linear element, in the sense relative to the linear element definition rather than the direction of traffic flow or optionally towards a &quot;towards referent&quot;.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DistanceFromLinearElementStart -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DistanceFromLinearElementStart">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DistanceAlongLinearElement"/>
+        <skos:definition xml:lang="en">Distance of a point along a linear element measured from the start node of the linear element, where start node is relative to the element definition rather than the direction of traffic flow.</skos:definition>
+    </owl:Class>
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GeoSparqlClasses -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GeoSparqlClasses">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#ImportedClasses"/>
+        <skos:definition xml:lang="en">The OGC GeoSPARQL standard supports representing and querying geospatial data on the Semantic Web. GeoSPARQL defines a vocabulary for representing geospatial data in RDF, and it defines an extension to the SPARQL query language for processing geospatial data.</skos:definition>
+    </owl:Class>
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Geo_WGS84DataPropertiesDataProperties -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Geo_WGS84DataPropertiesDataProperties">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#ImportedClasses"/>
+        <skos:definition xml:lang="en">Geo WGS84 vocabulary</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Gml -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Gml">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationObjects"/>
+        <skos:definition xml:lang="en">GML location</skos:definition>
+    </owl:Class>
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlLineString -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlLineString">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Gml"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#gmlPosList"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://datex2.eu/schema/3/Common/3_1#GmlPosList"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#srsDimension"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#srsName"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://datex2.eu/schema/3/Common/3_1#MultilingualString"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Line string based on GML (EN ISO 19136) definition: a curve defined by a series of two or more coordinate tuples. Unlike GML may be self-intersecting. If srsName attribute is not present, posList is assumed to use &quot;ETRS89-LatLonh&quot; reference system.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlLinearRing -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlLinearRing">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlLineString"/>
+        <skos:definition xml:lang="en">Closed line string not self-intersecting (i.e. having as last point the first point)</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlMultiPolygon -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlMultiPolygon">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Gml"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasGmlPolygon"/>
+                <owl:someValuesFrom rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlPolygon"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#gmlAreaName"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">An area defined by a set of polygons acording to GML (EN ISO 19136).</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlPolygon -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlPolygon">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Gml"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasGmlExteriorLinearRing"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlLinearRing"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Planar surface defined by 1 exterior boundary and 0 or more interior boundaries</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#IsoNamedArea -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#IsoNamedArea">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NamedArea"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasCountrySubdivision"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.omg.org/spec/LCC/Countries/CountryRepresentation#CountrySubdivision"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasSubdivisionTypeEnum"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#SubdivisionTypeEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Iso named area	The ISO 3166-2 representation for the named area.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElement -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElement">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearReferencing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasLinearElementNature"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElementNatureEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasRoadNumber"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti/roads#RoadNumber"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#linearElementReferenceModel"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#linearElementReferenceModelVersion"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#roadName"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">A linear element along a single linear object, consistent with EN ISO 19148 definitions.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElementByCode -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElementByCode">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElement"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#linearElementIdentifier"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">A linear element along a single linear object defined by its identifier or code in a road network reference model (specified in LinearElement class) which segments the road network according to specific business rules.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElementByLineString -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElementByLineString">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElement"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasGmlLineString"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlLineString"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">A linear element defined by a line string (class GmlLineString).</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElementByPoints -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElementByPoints">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElement"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasReferentEndPointLinearElement"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Referent"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasReferentIntermediatePointLinearElement"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Referent"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasReferentStartPointLinearElement"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Referent"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <skos:definition xml:lang="en">A linear element along a single linear object defined by its start and end points.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElementNatureEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElementNatureEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#other"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#road"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#roadSection"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#slipRoad"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencingEnumerations"/>
+        <skos:definition xml:lang="en">List of indicative natures of linear elements.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearLocation -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearLocation">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NetworkLocation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasGmlLineString"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GmlLineString"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrLinear"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLinear"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasSecondarySupplementaryDescription"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#SupplementaryPositionalDescription"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Location representing a linear section with optional directionality defined between two points. Any LinearLocation must have an instance of at least one of these classes. If using multiple instances, producers must take care to ensure they represent the same location.
+Associations:
+0..1	OpenlrLinear
+0..1	GmlLineString
+0..1	SupplementaryPositionalDescription</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearReferencing -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearReferencing">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencing"/>
+        <skos:definition xml:lang="en">Only for organizational purposes.Package LinearReferencing</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearWithinLinearElement -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearWithinLinearElement">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearReferencing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasDistanceAlongLinearElementFrom"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DistanceAlongLinearElement"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasDistanceAlongLinearElementTo"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DistanceAlongLinearElement"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasLinearElement"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearElement"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#directionOnLinearSection"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DirectionEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#directionRelativeOnLinearSection"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearDirectionEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasAdministrativeAreaOfLinearSection"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti/administrativeUnit#AdministrativeUnit"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasHeightGradeOfLinearSection"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#HeightGradeEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">A linear section along a linear element where the linear element is either a part of or the whole of a linear object (i.e. a road), consistent with ISO 19148 definitions.</skos:definition>
+    </owl:Class>
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Location -->
+
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Location">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReference"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasPointCoordinates"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinates"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <terms:replaces xml:lang="en">groupOfLocations</terms:replaces>
+        <skos:definition xml:lang="en">The specification of a location either on a network (as a point or a linear location) or as an area. This may be provided in one or more referencing systems. Association: 0..1PointCoordinates. In SRTI is not included LocationByReference.</skos:definition>
+        <rdfs:label xml:lang="en">Location</rdfs:label>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationObjects -->
+
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationObjects">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PayLoadPublishing"/>
+        <skos:definition xml:lang="en">Only for organizational purposes</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReference -->
+
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReference">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencing"/>
+        <skos:definition xml:lang="en">Represents one or more physically separate locations. Multiple locations may be related, as in an itinerary or route, or may be unrelated. One LocationReference should not use multiple Location objects to represent the same physical location. In SRTI is not included LocationGroup</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencing -->
+
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencing">
+        <skos:definition>Only for organizational purposes.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NamedArea -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NamedArea">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#CommonClasses"/>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#country"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.omg.org/spec/LCC/Countries/CountryRepresentationi#Alpha2Code"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasNamedAreaTypeEnum"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NamedAreaTypeEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#areaNameProperty"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://datex2.eu/schema/3/Common/3_1#MultilingualString"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">An area defined by a name and/or in terms of known boundaries, such as country or county boundaries or allocated control area of particular authority. The attributes do not form a union; instead, the smallest intersection forms the resulting area.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NamedAreaTypeEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NamedAreaTypeEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#accidentInvolvingRadioactiveMaterial"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#applicationRegion"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#carParkArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#carpoolArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#continent"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#country"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#countryGroup"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#fuzzyArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#industrialArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#lake"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#meteorologicalArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#metropolitanArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#municipality"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#order1AdministrativeArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#order2AdministrativeArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#order3AdministrativeArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#order4AdministrativeArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#order5AdministrativeArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#parkAndRideSite"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#policeForceControlArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#roadOperatorControlArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#ruralCounty"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#sea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#touristArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#trafficArea"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#urbanCounty"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#waterArea"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencingEnumerations"/>
+        <skos:definition xml:lang="en">Types of areas.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NetworkLocation -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NetworkLocation">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Location"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasSupplementaryPositionalDescription"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#SupplementaryPositionalDescription"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en"></skos:definition>
+        <skos:definition xml:lang="en">The specification of a location on a network (as a point or a linear location).Association: 0..1 SupplementaryPositionalDescription</skos:definition>
+    </owl:Class>
+    
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenLR -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenLR">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationObjects"/>
+        <skos:definition xml:lang="en">OpenLR location</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrAreaLocationReference -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrAreaLocationReference">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenLR"/>
+        <skos:definition xml:lang="en">A two-dimensional part of the surface of the earth which is bounded by a closed curve. An area location may cover parts of the road network but does not necessarily need to. It is represented according to the OpenLR standard for Area Locations</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrBasePointLocation -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrBasePointLocation">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPointLocationReference"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrLastLocationReferencePoint"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLastLocationReferencePoint"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrLocationReferencePoint"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLocationReferencePoint"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrOrientation"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrOrientationEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrSideOfRoad"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrSideOfRoadEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrOffsets"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrOffsets"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Holds common data that are used both in OpenlrPointAccessPoint and OpenlrPointAlongLine.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrBaseReferencePoint -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrBaseReferencePoint">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenLR"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrLineAttributes"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLineAttributes"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Base class used to hold data about a reference point.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrCircleLocationReference -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrCircleLocationReference">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrAreaLocationReference"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrGeoCoordinate"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrGeoCoordinate"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#openlrRadius"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsNonNegativeIntegerValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">The OpenLR method of area definition by providing a center position and a radius</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrClosedLineLocationReference -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrClosedLineLocationReference">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrAreaLocationReference"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrLocationReferencePoint"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLocationReferencePoint"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrLastLocationReferencePoint"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLastLocationReferencePoint"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">The OpenLR method of area definition by providing a closed path (i.e. a circuit) in the road network.
+The boundary always consists of road segments</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrEnumerations -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrEnumerations">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Enums"/>
+        <skos:definition xml:lang="en">Only for organizational purposes</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrFormOfWayEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrFormOfWayEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#motorway"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#multipleCarriageway"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#other"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#roundabout"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#singleCarriageway"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#slipRoad"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#trafficSquare"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#undefined"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrEnumerations"/>
+        <skos:definition xml:lang="en">Enumeration of form of way</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrFunctionalRoadClassEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrFunctionalRoadClassEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#frc0"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#frc1"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#frc2"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#frc3"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#frc4"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#frc5"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#frc6"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#frc7"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrEnumerations"/>
+        <skos:definition xml:lang="en">Enumuration of functional road class</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrGeoCoordinate -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrGeoCoordinate">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPointLocationReference"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrCoordinates"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinates"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">A geo-coordinate pair is a position in a map defined by its longitude and latitude coordinate values.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrGridLocationReference -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrGridLocationReference">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrAreaLocationReference"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrRectangle"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrRectangle"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#openlrNumColumns"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#openlrNumRows"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Area defined using an OpenLR™ method consisting in defining it by a tessellation of rectangles</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLastLocationReferencePoint -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLastLocationReferencePoint">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrBaseReferencePoint"/>
+        <skos:definition xml:lang="en">The sequence of location reference points is terminated by a last location reference point.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLine -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLine">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenLR"/>
+        <skos:definition xml:lang="en">Only for organizational purposes.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLineAttributes -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLineAttributes">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenLR"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrFormOfWayEnum"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrFormOfWayEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrLowestFrcToNextLRPoint"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrFunctionalRoadClassEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#openlrBearing"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AngleInDegreesValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Line attributes are part of a location reference point and consists of functional road class (FRC),form of way (FOW) and bearing (BEAR) data.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLineLocationReference -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLineLocationReference">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLine"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrLocationReferencePoint"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLocationReferencePoint"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrLastLocationReferencePoint"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLastLocationReferencePoint"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">A line location reference is defined by an ordered sequence of location reference points and a terminating last location reference point.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLinear -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLinear">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLine"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrFirstDirection"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLineLocationReference"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrOffsets"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrOffsets"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrOppositeDirection"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLineLocationReference"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">OpenLR line location reference</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLocationReferencePoint -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrLocationReferencePoint">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrBaseReferencePoint"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrPathAttributes"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPathAttributes"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">The basis of a location reference is a sequence of location reference points (LRPs).</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrOffsets -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrOffsets">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenLR"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#openlrNegativeOffset"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsNonNegativeIntegerValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#openlrPositiveOffset"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsNonNegativeIntegerValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Offsets are used to locate the start and end of a location more precisely than bounding to the nodes in a network.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrOrientationEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrOrientationEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#againstLineDirection"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#bothDirections"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#noOrientationOrUnknown"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#withLineDirection"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrEnumerations"/>
+        <skos:definition xml:lang="en">Enumeration of side of road</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPathAttributes -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPathAttributes">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenLR"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrLowestFrcToNextLRPoint"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrFunctionalRoadClassEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#openlrDistanceToNextLRPoint"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Properties of the path from the associated location reference point to the next location reference point, which are specified to assist correct identification of the point in an external map data source.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPoiWithAccessPoint -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPoiWithAccessPoint">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrBasePointLocation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrCoordinates"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinates"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">A point of interest (POI) along a line with access is a point location which is defined by a linear reference path, an offset value (defining the access point) from the starting node of this path and a coordinate pair that defines the POI itself.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPointAlongLine -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPointAlongLine">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrBasePointLocation"/>
+        <skos:definition xml:lang="en">Point along a line</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPointLocationReference -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPointLocationReference">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenLR"/>
+        <skos:definition xml:lang="en">A point location is a zero-dimensional element in a map that specifies a geometric location.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPolygonCorners -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPolygonCorners">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenLR"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasPointCoordinates"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinates"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">A geodetic coordinate Tuple that defines the vertices of the underlying geometrical polygon.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPolygonLocationReference -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPolygonLocationReference">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrAreaLocationReference"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrPolygonCorners"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPolygonCorners"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">The OpenLR method of area definition by providing points that bound the area</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrRectangle -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrRectangle">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenLR"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrLowerLeft"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinates"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrUpperRight"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinates"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Area delimited by a rectangle defined by the geodetic co-ordinates of the two ends of its diagonal from south-west to north-east (the rectangle having two sides that are parallel to lines of latitude)</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrRectangleLocationReference -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrRectangleLocationReference">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrAreaLocationReference"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrRectangle"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrRectangle"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">The openLR method of area definition by providing a rectangular shape defined by two geo-coordinate pairs</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrSideOfRoadEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrSideOfRoadEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#bothSides"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#left"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#onRoadOrUnknown"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#right"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrEnumerations"/>
+        <skos:definition xml:lang="en">Enumeration of side of road</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointByCoordinates -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointByCoordinates">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinatesAssociationsTo"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasPointCoordinates"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinates"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#bearing"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AngleInDegreesValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">A single point defined only by a coordinate set with an optional bearing direction.</skos:definition>
+    </owl:Class>
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinates -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinates">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencing"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasHeightCoordinate"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#HeightCoordinate"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasHorizontalPositionAccuracy"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionAccuracy"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasPositionConfidenceEllipse"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionConfidenceEllipse"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#lat"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#lon"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://datos.ign.es/def/geo_coreDataProperties#xETRS89"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://datos.ign.es/def/geo_coreDataProperties#yETRS89"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">In Datex II definition, a pair of planar coordinates defining the geodetic position of a single point using the European Terrestrial Reference System 1989 (ETRS89).
+
+Note: At the moment, in Spain it is used the WGS84 and so, the 2 references are possible ( geo/wgs84_pos (lat, long) / geo_coreDataProperties (xETRS89,yETRS89) ).</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinatesAssociationsFrom -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinatesAssociationsFrom">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencing"/>
+        <skos:definition xml:lang="en">Only for organizational purposes.Package PointCoordinates.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinatesAssociationsTo -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinatesAssociationsTo">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencing"/>
+        <skos:definition xml:lang="en">A pair of planar coordinates defining the geodetic position of a single point using the European Terrestrial Reference System 1989 (ETRS89).</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointLocation -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointLocation">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NetworkLocation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasOpenlrPointLocationReference"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#OpenlrPointLocationReference"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasPointByCoordinates"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointByCoordinates"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasTpegPointLocation"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#TpegPointLocation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">At least one of these aggregated classes must be present. If using multiple instances of the agregated classes, producers must take care to ensure they present the same location.
+
+Associations:
+0..1	PointByCoordinates
+0..*	PointAlongLinearElement
+0..*	AlertCPoint
+0..1	TpegPointLocation
+0..1	OpenlrPointLocationReference</skos:definition>
+        <skos:definition xml:lang="en">Location representing a single geospatial point.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionAccuracy -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionAccuracy">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinatesAssociationsFrom"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#accuracyPercentile50"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsFloatValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#accuracyPercentile75"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsFloatValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#accuracyPercentile95"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsFloatValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition>Horizontal position accuracy parameters defined according to EN 16803-1</skos:definition>
+    </owl:Class>
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionConfidenceCodedErrorEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionConfidenceCodedErrorEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#outOfRange"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#unavailable"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencingEnumerations"/>
+        <skos:definition xml:lang="en">Error code for horizontal or vertical position confidence</skos:definition>
+    </owl:Class>
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionConfidenceEllipse -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionConfidenceEllipse">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinatesAssociationsFrom"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasSemiMajorAxisLengthCodedError"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionConfidenceCodedErrorEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasSemiMinorAxisLengthCodedError"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PositionConfidenceCodedErrorEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#semiMajorAxisLength"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsFloatValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#semiMajorAxisOrientation"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#AngleInDegreesValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#semiMinorAxisLength"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsFloatValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#semiMajorAxisOrientationError"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition>Confidence ellipse position defined in a shape of ellipse with a predefined confidence level (e.g. 95 %). The centre of the ellipse shape corresponds to the reference position point for which the position accuracy is evaluated.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Referent -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#Referent">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearReferencing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasReferentTypeEnum"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#ReferentTypeEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasPointCoordinates"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#PointCoordinates"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#referentIdentifier"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#referentDescription"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://datex2.eu/schema/3/Common/3_1#MultilingualString"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#referentName"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">A referent on a linear object that has a known location such as a node, a reference marker (e.g. a marker-post), an intersection etc.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#ReferentTypeEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#ReferentTypeEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#boundary"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#intersection"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#landmark"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#referenceMarker"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#roadNode"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencingEnumerations"/>
+        <skos:definition xml:lang="en">A set of types of known points along a linear object such as a road.</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#RelativePositionOnCarriagewayEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#RelativePositionOnCarriagewayEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#inTheCentre"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#onTheLeft"/>
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#onTheRight"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencingEnumerations"/>
+        <skos:definition xml:lang="en">Identifies a relative position across a carriageway</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#SingleRoadLinearLocation -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#SingleRoadLinearLocation">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LinearLocation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasTpegLinearLocation"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#TpegLinearLocation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">Location representing a linear section along a single road with optional directionality defined between two points on the same road. No matter the kind of linear reference it uses, the constraint of using only a single road must be preserved. Associations:
+0..1	TpegLinearLocation
+0..*	AlertCLinear</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#SupplementaryPositionalDescription -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#SupplementaryPositionalDescription">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#SupplementaryPositionalPack"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasDirectionPurpose"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#DirectionPurposeEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasGeographicDescriptor"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#GeographicCharacteristicEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasInfrastructureDescriptor"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#InfrastructureDescriptorEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasNamedArea"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#NamedArea"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#hasPositionOnCarriageway"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#RelativePositionOnCarriagewayEnum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#lengthAffected"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsFloatValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#locationPrecision"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#MetresAsNonNegativeIntegerValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#locationDescription"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://datex2.eu/schema/3/Common/3_1#MultilingualString"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#sequentialRampNumber"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition xml:lang="en">A collection of supplementary positional information which improves the precision of the location.</skos:definition>
+    </owl:Class>
+
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#SupplementaryPositionalPack -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#SupplementaryPositionalPack">
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#LocationReferencing"/>
+        <skos:definition xml:lang="en">Supplementary positional information</skos:definition>
+    </owl:Class>
+    
+
+    <!-- http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#TPEGLoc01LinearLocationSubtypeEnum -->
+
+    <owl:Class rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#TPEGLoc01LinearLocationSubtypeEnum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#segment"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#TpegEnumerations"/>
+        <skos:definition xml:lang="en">Types of linear location.</skos:definition>
+    </owl:Class>
+    

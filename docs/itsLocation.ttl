@@ -1,11 +1,12 @@
-@prefix : <https://isotc204.org/ontologies/its/location#> .
+@prefix : <https://w3id.org/itsdata/location/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix geo: <https://www.opengis.net/ont/geosparql#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix code: <https://standards.iso.org/iso-iec/5087/-2/ed-1/en/ontology/Code#> .
+@prefix cdm1: <https://w3id.org/citydata/part1/> .
+@prefix cdm2: <https://w3id.org/citydata/part2/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix swrl: <http://www.w3.org/2003/11/swrl#> .
@@ -14,26 +15,24 @@
 @prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
 @prefix terms: <http://purl.org/dc/terms/> .
 @prefix schema: <https://schema.org/> .
-@prefix genProp: <https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/GenericProperties#> .
 @prefix protege: <http://protege.stanford.edu/ontologies/metadata#> .
-@prefix cityunits: <https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/CityUnits/> .
+@prefix its-core: <https://w3id.org/itsdata/core/> .
 @prefix data-view: <http://www.w3.org/2003/g/data-view#> .
-@prefix partwhole: <https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/Mereology#> .
-@prefix transportnetwork: <https://isotc204.org/25965/transport/transportnetwork#> .
-@base <https://isotc204.org/ontologies/its/location#> .
+@base <https://w3id.org/itsdata/location/> .
 
-<https://isotc204.org/ontologies/its/location#> rdf:type owl:Ontology ;
-                                                 owl:imports <http://www.w3.org/2002/07/owl> ,
-                                                             <http://www.w3.org/2003/11/swrl> ,
-                                                             <http://www.w3.org/2003/11/swrlb> ,
-                                                             <http://www.w3.org/2006/time> ,
-                                                             <https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/GenericProperties> ,
-                                                             <https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/Mereology> ,
-                                                             cityunits: ,
-                                                             <https://standards.iso.org/iso-iec/5087/-2/ed-1/en/ontology/Code> ,
-                                                             <https://www.opengis.net/ont/geosparql> ;
-                                                 dc:title "Ontology for ITS Location Referencing" ;
-                                                 terms:description "This ontology defines concepts related to locations and positioning within the ITS domain using concepts specified in ISO/IEC 5087-1 and ISO/IEC-5087-2." .
+<https://w3id.org/itsdata/location/> rdf:type owl:Ontology ;
+                                      owl:versionIRI <https://w3id.org/itsdata/location/0.0.2> ;
+                                      owl:imports <http://www.w3.org/2002/07/owl> ,
+                                                  <http://www.w3.org/2003/11/swrl> ,
+                                                  <http://www.w3.org/2003/11/swrlb> ,
+                                                  <http://www.w3.org/2006/time> ,
+                                                  <https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/GenericProperties> ,
+                                                  <https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/Mereology> ,
+                                                  <https://standards.iso.org/iso-iec/5087/-2/ed-1/en/ontology/Code> ,
+                                                  cdm1: ,
+                                                  <https://www.opengis.net/ont/geosparql> ;
+                                      dc:title "Ontology for ITS Location Referencing" ;
+                                      terms:description "This ontology defines concepts related to locations and positioning within the ITS domain using concepts specified in ISO/IEC 5087-1 and ISO/IEC-5087-2." .
 
 #################################################################
 #    Annotation properties
@@ -41,6 +40,18 @@
 
 ###  http://purl.org/dc/elements/1.1/description
 dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/description
+terms:description rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2001/XMLSchema#pattern
+xsd:pattern rdf:type owl:AnnotationProperty .
 
 
 #################################################################
@@ -67,11 +78,11 @@ xsd:time rdf:type rdfs:Datatype .
 #    Object Properties
 #################################################################
 
-###  https://isotc204.org/ontologies/its/location#LocationObjectProperty
+###  https://w3id.org/itsdata/location/LocationObjectProperty
 :LocationObjectProperty rdf:type owl:ObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#areaLocation
+###  https://w3id.org/itsdata/location/areaLocation
 :areaLocation rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :LocationObjectProperty ;
               rdfs:range [ rdf:type owl:Restriction ;
@@ -81,17 +92,17 @@ xsd:time rdf:type rdfs:Datatype .
               terms:description "location defined by an area covering the surface (or near-surface) of the Earth" .
 
 
-###  https://isotc204.org/ontologies/its/location#areasAtWhichApplicable
+###  https://w3id.org/itsdata/location/areasAtWhichApplicable
 :areasAtWhichApplicable rdf:type owl:ObjectProperty ;
                         rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#coordinatesForDisplay
+###  https://w3id.org/itsdata/location/coordinatesForDisplay
 :coordinatesForDisplay rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#destination
+###  https://w3id.org/itsdata/location/destination
 :destination rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :LocationObjectProperty ;
              rdfs:range [ rdf:type owl:Restriction ;
@@ -100,92 +111,92 @@ xsd:time rdf:type rdfs:Datatype .
                         ] .
 
 
-###  https://isotc204.org/ontologies/its/location#directionPurpose
+###  https://w3id.org/itsdata/location/directionPurpose
 :directionPurpose rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#externalLocationReference
+###  https://w3id.org/itsdata/location/externalLocationReference
 :externalLocationReference rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf :LocationObjectProperty ;
                            rdfs:domain [ rdf:type owl:Restriction ;
                                          owl:onProperty :externalLocationReference ;
-                                         owl:allValuesFrom code:Code
+                                         owl:allValuesFrom cdm2:Code
                                        ] .
 
 
-###  https://isotc204.org/ontologies/its/location#geographicDescriptor
+###  https://w3id.org/itsdata/location/geographicDescriptor
 :geographicDescriptor rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#infrastructureDescriptor
+###  https://w3id.org/itsdata/location/infrastructureDescriptor
 :infrastructureDescriptor rdf:type owl:ObjectProperty ;
                           rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#lengthAffected
+###  https://w3id.org/itsdata/location/lengthAffected
 :lengthAffected rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#location
+###  https://w3id.org/itsdata/location/location
 :location rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#locationByOrder
+###  https://w3id.org/itsdata/location/locationByOrder
 :locationByOrder rdf:type owl:ObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#locationContainedInGroup
+###  https://w3id.org/itsdata/location/locationContainedInGroup
 :locationContainedInGroup rdf:type owl:ObjectProperty ;
                           rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#locationContainedInItinerary
+###  https://w3id.org/itsdata/location/locationContainedInItinerary
 :locationContainedInItinerary rdf:type owl:ObjectProperty ;
                               rdfs:subPropertyOf :LocationObjectProperty ;
                               rdfs:domain :ItineraryByIndexedLocations ;
                               rdfs:range :IndexedLocation .
 
 
-###  https://isotc204.org/ontologies/its/location#locationPrecision
+###  https://w3id.org/itsdata/location/locationPrecision
 :locationPrecision rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#namedArea
+###  https://w3id.org/itsdata/location/namedArea
 :namedArea rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#networkLocation
+###  https://w3id.org/itsdata/location/networkLocation
 :networkLocation rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#pointLocation
+###  https://w3id.org/itsdata/location/pointLocation
 :pointLocation rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#positionConfidence
+###  https://w3id.org/itsdata/location/positionConfidence
 :positionConfidence rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#positionOnCarriageway
+###  https://w3id.org/itsdata/location/positionOnCarriageway
 :positionOnCarriageway rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#positionalDescription
+###  https://w3id.org/itsdata/location/positionalDescription
 :positionalDescription rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf :LocationObjectProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#routeDestination
+###  https://w3id.org/itsdata/location/routeDestination
 :routeDestination rdf:type owl:ObjectProperty .
 
 
@@ -193,69 +204,77 @@ xsd:time rdf:type rdfs:Datatype .
 #    Data properties
 #################################################################
 
-###  https://isotc204.org/25965/transport/transportnetwork#ITSDataProperty
-transportnetwork:ITSDataProperty rdf:type owl:DatatypeProperty .
+###  https://w3id.org/citydata/part1/hasDescription
+cdm1:hasDescription rdf:type owl:DatatypeProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#LocationDataProperty
+###  https://w3id.org/citydata/part1/hasIdentifier
+cdm1:hasIdentifier rdf:type owl:DatatypeProperty .
+
+
+###  https://w3id.org/citydata/part1/hasName
+cdm1:hasName rdf:type owl:DatatypeProperty .
+
+
+###  https://w3id.org/itsdata/core/ITSDataProperty
+its-core:ITSDataProperty rdf:type owl:DatatypeProperty .
+
+
+###  https://w3id.org/itsdata/location/LocationDataProperty
 :LocationDataProperty rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf transportnetwork:ITSDataProperty .
+                      rdfs:subPropertyOf its-core:ITSDataProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#elevation
+###  https://w3id.org/itsdata/location/elevation
 :elevation rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf :LocationDataProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#index
+###  https://w3id.org/itsdata/location/index
 :index rdf:type owl:DatatypeProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#latitude
+###  https://w3id.org/itsdata/location/latitude
 :latitude rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf :LocationDataProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#locationDescription
+###  https://w3id.org/itsdata/location/locationDescription
 :locationDescription rdf:type owl:DatatypeProperty ;
                      rdfs:subPropertyOf :LocationDataProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#longitude
+###  https://w3id.org/itsdata/location/longitude
 :longitude rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf :LocationDataProperty .
 
 
-###  https://isotc204.org/ontologies/its/location#sequentialRampNumber
+###  https://w3id.org/itsdata/location/sequentialRampNumber
 :sequentialRampNumber rdf:type owl:DatatypeProperty ;
                       rdfs:subPropertyOf :LocationDataProperty .
-
-
-###  https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/GenericProperties#hasDescription
-genProp:hasDescription rdf:type owl:DatatypeProperty .
-
-
-###  https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/GenericProperties#hasIdentifier
-genProp:hasIdentifier rdf:type owl:DatatypeProperty .
-
-
-###  https://standards.iso.org/iso-iec/5087/-1/ed-1/en/ontology/GenericProperties#hasName
-genProp:hasName rdf:type owl:DatatypeProperty .
 
 
 #################################################################
 #    Classes
 #################################################################
 
-###  https://isotc204.org/25965/transport/transportnetwork#ITSPattern
-transportnetwork:ITSPattern rdf:type owl:Class .
+###  https://w3id.org/citydata/part1/Length
+cdm1:Length rdf:type owl:Class .
 
 
-###  https://isotc204.org/25965/transport/transportnetwork#ITSThing
-transportnetwork:ITSThing rdf:type owl:Class .
+###  https://w3id.org/citydata/part2/Code
+cdm2:Code rdf:type owl:Class .
 
 
-###  https://isotc204.org/ontologies/its/location#AreaDestination
+###  https://w3id.org/itsdata/core/ITSPattern
+its-core:ITSPattern rdf:type owl:Class .
+
+
+###  https://w3id.org/itsdata/core/ITSThing
+its-core:ITSThing rdf:type owl:Class .
+
+
+###  https://w3id.org/itsdata/location/AreaDestination
 :AreaDestination rdf:type owl:Class ;
                  rdfs:subClassOf :Destination ,
                                  [ rdf:type owl:Restriction ;
@@ -266,28 +285,28 @@ transportnetwork:ITSThing rdf:type owl:Class .
                  xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#AreaLocation
+###  https://w3id.org/itsdata/location/AreaLocation
 :AreaLocation rdf:type owl:Class ;
               rdfs:subClassOf :Location ,
                               [ rdf:type owl:Restriction ;
                                 owl:onProperty :areasAtWhichApplicable ;
-                                owl:allValuesFrom code:Code
+                                owl:allValuesFrom cdm2:Code
                               ] ,
                               [ rdf:type owl:Restriction ;
                                 owl:onProperty :areasAtWhichApplicable ;
                                 owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                owl:onClass code:Code
+                                owl:onClass cdm2:Code
                               ] ;
               xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#Destination
+###  https://w3id.org/itsdata/location/Destination
 :Destination rdf:type owl:Class ;
              rdfs:subClassOf :LocationThing ;
              xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#IndexedLocation
+###  https://w3id.org/itsdata/location/IndexedLocation
 :IndexedLocation rdf:type owl:Class ;
                  rdfs:subClassOf :LocationReference ,
                                  [ rdf:type owl:Restriction ;
@@ -311,7 +330,7 @@ transportnetwork:ITSThing rdf:type owl:Class .
                  xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#Itinerary
+###  https://w3id.org/itsdata/location/Itinerary
 :Itinerary rdf:type owl:Class ;
            rdfs:subClassOf :LocationReference ,
                            [ rdf:type owl:Restriction ;
@@ -321,7 +340,7 @@ transportnetwork:ITSThing rdf:type owl:Class .
            xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#ItineraryByIndexedLocations
+###  https://w3id.org/itsdata/location/ItineraryByIndexedLocations
 :ItineraryByIndexedLocations rdf:type owl:Class ;
                              rdfs:subClassOf :Itinerary ,
                                              [ rdf:type owl:Restriction ;
@@ -331,19 +350,19 @@ transportnetwork:ITSThing rdf:type owl:Class .
                              xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#JurisdictionalEntity
+###  https://w3id.org/itsdata/location/JurisdictionalEntity
 :JurisdictionalEntity rdf:type owl:Class ;
                       rdfs:subClassOf :LocationThing ;
                       xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#LinearLocation
+###  https://w3id.org/itsdata/location/LinearLocation
 :LinearLocation rdf:type owl:Class ;
                 rdfs:subClassOf :NetworkLocation ;
                 xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#Location
+###  https://w3id.org/itsdata/location/Location
 :Location rdf:type owl:Class ;
           rdfs:subClassOf :LocationReference ,
                           [ rdf:type owl:Restriction ;
@@ -352,7 +371,7 @@ transportnetwork:ITSThing rdf:type owl:Class .
                           ] ,
                           [ rdf:type owl:Restriction ;
                             owl:onProperty :externalLocationReference ;
-                            owl:allValuesFrom code:Code
+                            owl:allValuesFrom cdm2:Code
                           ] ,
                           [ rdf:type owl:Restriction ;
                             owl:onProperty :coordinatesForDisplay ;
@@ -362,13 +381,13 @@ transportnetwork:ITSThing rdf:type owl:Class .
           xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#LocationGroup
+###  https://w3id.org/itsdata/location/LocationGroup
 :LocationGroup rdf:type owl:Class ;
                rdfs:subClassOf :LocationReference ;
                xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#LocationGroupByList
+###  https://w3id.org/itsdata/location/LocationGroupByList
 :LocationGroupByList rdf:type owl:Class ;
                      rdfs:subClassOf :LocationGroup ,
                                      [ rdf:type owl:Restriction ;
@@ -383,30 +402,30 @@ transportnetwork:ITSThing rdf:type owl:Class .
                      xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#LocationPattern
+###  https://w3id.org/itsdata/location/LocationPattern
 :LocationPattern rdf:type owl:Class ;
-                 rdfs:subClassOf transportnetwork:ITSPattern .
+                 rdfs:subClassOf its-core:ITSPattern .
 
 
-###  https://isotc204.org/ontologies/its/location#LocationReference
+###  https://w3id.org/itsdata/location/LocationReference
 :LocationReference rdf:type owl:Class ;
                    rdfs:subClassOf :LocationThing ;
                    xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#LocationThing
+###  https://w3id.org/itsdata/location/LocationThing
 :LocationThing rdf:type owl:Class ;
-               rdfs:subClassOf transportnetwork:ITSThing ;
+               rdfs:subClassOf its-core:ITSThing ;
                xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#NamedArea
+###  https://w3id.org/itsdata/location/NamedArea
 :NamedArea rdf:type owl:Class ;
            rdfs:subClassOf :LocationThing ;
            xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#NetworkLocation
+###  https://w3id.org/itsdata/location/NetworkLocation
 :NetworkLocation rdf:type owl:Class ;
                  rdfs:subClassOf :Location ,
                                  [ rdf:type owl:Restriction ;
@@ -426,7 +445,7 @@ transportnetwork:ITSThing rdf:type owl:Class .
                  xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#PointCoordinates
+###  https://w3id.org/itsdata/location/PointCoordinates
 :PointCoordinates rdf:type owl:Class ;
                   rdfs:subClassOf :LocationThing ,
                                   [ rdf:type owl:Restriction ;
@@ -439,22 +458,22 @@ transportnetwork:ITSThing rdf:type owl:Class .
                                     owl:onClass :PositionConfidenceEllipse
                                   ] ,
                                   [ rdf:type owl:Restriction ;
-                                    owl:onProperty :elevation ;
-                                    owl:allValuesFrom xsd:float
-                                  ] ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty :latitude ;
-                                    owl:allValuesFrom xsd:float
-                                  ] ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty :longitude ;
-                                    owl:allValuesFrom xsd:float
-                                  ] ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty genProp:hasIdentifier ;
+                                    owl:onProperty cdm1:hasIdentifier ;
                                     owl:allValuesFrom xsd:string
                                   ] ,
                                   [ rdf:type owl:Restriction ;
+                                    owl:onProperty :elevation ;
+                                    owl:allValuesFrom xsd:float
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :latitude ;
+                                    owl:allValuesFrom xsd:float
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :longitude ;
+                                    owl:allValuesFrom xsd:float
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
                                     owl:onProperty :latitude ;
                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                     owl:onDataRange xsd:float
@@ -465,19 +484,19 @@ transportnetwork:ITSThing rdf:type owl:Class .
                                     owl:onDataRange xsd:float
                                   ] ,
                                   [ rdf:type owl:Restriction ;
+                                    owl:onProperty cdm1:hasIdentifier ;
+                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onDataRange xsd:string
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
                                     owl:onProperty :elevation ;
                                     owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                     owl:onDataRange xsd:float
-                                  ] ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty genProp:hasIdentifier ;
-                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                    owl:onDataRange xsd:string
                                   ] ;
                   xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#PointDestination
+###  https://w3id.org/itsdata/location/PointDestination
 :PointDestination rdf:type owl:Class ;
                   rdfs:subClassOf :Destination ,
                                   [ rdf:type owl:Restriction ;
@@ -492,74 +511,74 @@ transportnetwork:ITSThing rdf:type owl:Class .
                   xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#PointLocation
+###  https://w3id.org/itsdata/location/PointLocation
 :PointLocation rdf:type owl:Class ;
                rdfs:subClassOf :NetworkLocation ;
                xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#PositionConfidenceEllipse
+###  https://w3id.org/itsdata/location/PositionConfidenceEllipse
 :PositionConfidenceEllipse rdf:type owl:Class ;
                            rdfs:subClassOf :LocationThing ;
                            xsd:pattern "LocationPattern" .
 
 
-###  https://isotc204.org/ontologies/its/location#SupplementaryPositionalDescription
+###  https://w3id.org/itsdata/location/SupplementaryPositionalDescription
 :SupplementaryPositionalDescription rdf:type owl:Class ;
                                     rdfs:subClassOf :LocationThing ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :directionPurpose ;
-                                                      owl:allValuesFrom code:Code
+                                                      owl:allValuesFrom cdm2:Code
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :geographicDescriptor ;
-                                                      owl:allValuesFrom code:Code
+                                                      owl:allValuesFrom cdm2:Code
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :infrastructureDescriptor ;
-                                                      owl:allValuesFrom code:Code
+                                                      owl:allValuesFrom cdm2:Code
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :lengthAffected ;
-                                                      owl:allValuesFrom cityunits:Length
+                                                      owl:allValuesFrom cdm1:Length
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :locationPrecision ;
-                                                      owl:allValuesFrom cityunits:Length
+                                                      owl:allValuesFrom cdm1:Length
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :positionOnCarriageway ;
-                                                      owl:allValuesFrom code:Code
+                                                      owl:allValuesFrom cdm2:Code
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :directionPurpose ;
                                                       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                      owl:onClass code:Code
+                                                      owl:onClass cdm2:Code
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :geographicDescriptor ;
                                                       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                      owl:onClass code:Code
+                                                      owl:onClass cdm2:Code
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :infrastructureDescriptor ;
                                                       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                      owl:onClass code:Code
+                                                      owl:onClass cdm2:Code
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :lengthAffected ;
                                                       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                      owl:onClass cityunits:Length
+                                                      owl:onClass cdm1:Length
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :locationPrecision ;
                                                       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                      owl:onClass cityunits:Length
+                                                      owl:onClass cdm1:Length
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :positionOnCarriageway ;
                                                       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                      owl:onClass code:Code
+                                                      owl:onClass cdm2:Code
                                                     ] ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty :locationDescription ;
@@ -580,10 +599,6 @@ transportnetwork:ITSThing rdf:type owl:Class .
                                                       owl:onDataRange xsd:integer
                                                     ] ;
                                     xsd:pattern "LocationPattern" .
-
-
-###  https://standards.iso.org/iso-iec/5087/-2/ed-1/en/ontology/Code#Code
-code:Code rdf:type owl:Class .
 
 
 #################################################################
