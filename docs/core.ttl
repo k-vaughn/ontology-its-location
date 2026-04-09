@@ -1,48 +1,42 @@
-BASE   <https://w3id.org/itsdata/location/v1/>
-PREFIX : <https://w3id.org/itsdata/location/v1/>
-PREFIX cc: <http://creativecommons.org/ns#>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX vann: <http://purl.org/vocab/vann/>
-PREFIX xml: <http://www.w3.org/XML/1998/namespace>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX cdm1: <https://w3id.org/citydata/part1/v1/>
-PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
 
-<Core/>  rdf:type                      owl:Ontology;
-        dcterms:title                  "Core concepts of the Location Ontology for ITS";
-        skos:definition                "This ontology defines concepts related to location within Intelligent Transportation Systems (ITS).";
-        vann:preferredNamespaceUri     "https://w3id.org/itsdata/location/v1/";
-        vann:preferredNamespacePrefix  "its-location";
-        cdm1:mainModule                "false";
-        its-core:draft                 "true";
-        dcterms:creator                "Kenneth Vaughn";
-        dcterms:created                "Draft";
-        dcterms:modified               "2026-03-06"^^xsd:date;
-        owl:versionInfo                "v0.0.2";
-        owl:versionIRI                 <Core/r0.2>;
-        dcterms:license                "http://creativecommons.org/licenses/by/4.0/";
-        owl:imports                    its-core: .
+:Core
+    dcterms:created               "Draft" ;
+    dcterms:creator               "Kenneth Vaughn" ;
+    dcterms:license               "http://creativecommons.org/licenses/by/4.0/" ;
+    dcterms:modified              "2026-04-07"^^xsd:date ;
+    dcterms:title                 "Core concepts of the Location Ontology for ITS" ;
+    its-core:draft                "true" ;
+    owl:imports                   its-core: ;
+    owl:priorVersion              :r0.2 ;
+    owl:versionIRI                :r0.3 ;
+    owl:versionInfo               "0.0.3" ;
+    rdf:type                      owl:Ontology ;
+    skos:definition               "This ontology defines concepts related to location within Intelligent Transportation Systems (ITS)." ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri    "https://w3id.org/itsdata/location/v1/" .
+
+:LocationThing
+    rdf:type        owl:Class ;
+    rdfs:subClassOf its-core:ITSThing ;
+    skos:definition "A class to organize all location-related classes defined in the ITS Location Ontology." .
 
 :LocationObjectProperty
-        rdf:type            owl:ObjectProperty;
-        skos:definition     "An object property to organize all object properties defined in the Location Ontology.";
-        rdfs:subPropertyOf  its-core:ITSObjectProperty .
+    rdf:type           owl:ObjectProperty ;
+    rdfs:subPropertyOf its-core:ITSObjectProperty ;
+    skos:definition    "An object property to organize all object properties defined in the ITS Location Ontology." .
 
 :LocationDataProperty
-        rdf:type            owl:DatatypeProperty;
-        rdfs:subPropertyOf  its-core:ITSDataProperty .
+    rdf:type           owl:DatatypeProperty ;
+    rdfs:subPropertyOf its-core:ITSDataProperty ;
+    skos:definition    "A data property to organize all data properties defined in the ITS Location Ontology." .
 
-:predefinedItineraryReference
-        rdf:type            owl:DatatypeProperty;
-        rdfs:subPropertyOf  :LocationDataProperty .
 
-:predefinedLocationGroupReference
-        rdf:type            owl:DatatypeProperty;
-        rdfs:subPropertyOf  :LocationDataProperty .
-
-:LocationThing  rdf:type  owl:Class;
-        rdfs:subClassOf  its-core:ITSThing .

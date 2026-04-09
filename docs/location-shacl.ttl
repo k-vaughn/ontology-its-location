@@ -1,0 +1,395 @@
+BASE <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX cdm1: <https://w3id.org/citydata/part1/v1/>
+PREFIX its-sh: <https://w3id.org/itsdata/shacl/v1/>
+PREFIX sf: <http://www.opengis.net/ont/sf#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+:AltitudeConfidenceShape a sh:NodeShape ;
+    sh:targetClass :AltitudeConfidence ;
+    sh:property [
+        sh:path :altitudeAccuracyCodedError ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype :PositionConfidenceErrorCode ;
+    ] ;
+    sh:property [
+        sh:path :altitudeAccuracyCodedValue ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype :AltitudeAccuracyCode ;
+    ] .
+
+:AreaDestinationShape a sh:NodeShape ;
+    sh:targetClass :AreaDestination ;
+    sh:property [
+        sh:path :hasAreaLocation ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :AreaLocation ;
+    ] .
+
+:AreaLocationShape a sh:NodeShape ;
+    sh:targetClass :AreaLocation ;
+    sh:property [
+        sh:path :areasAtWhichApplicable ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :AreaPlacesCode ;
+    ] ;
+    sh:property [
+        sh:path :hasAlertCArea ;
+        sh:class :AlertCArea ;
+    ] ;
+    sh:property [
+        sh:path :hasTpegAreaLocation ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :TpegAreaLocation ;
+    ] ;
+    sh:property [
+        sh:path :hasNamedArea ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :NamedArea ;
+    ] ;
+    sh:property [
+        sh:path :hasMultiPolygon ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class sf:MultiPolygon ;
+    ] ;
+    sh:property [
+        sh:path :hasOpenLRAreaLocationReference ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :OpenLRAreaLocationReference ;
+    ] .
+
+:DestinationShape a sh:NodeShape ;
+    sh:targetClass :Destination .
+
+:ExternalReferencingShape a sh:NodeShape ;
+    sh:targetClass :ExternalReferencing ;
+    sh:property [
+        sh:path :externalLocationCode ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path :externalReferencingSystem ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:string ;
+    ] .
+
+:HeightCoordinateShape a sh:NodeShape ;
+    sh:targetClass :HeightCoordinate ;
+    sh:property [
+        sh:path :heightType ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :HeightTypeCode ;
+    ] ;
+    sh:property [
+        sh:path :heightValue ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:hasValue cdm1:Length ;
+    ] ;
+    sh:property [
+        sh:path :verticalPositionAccuracy ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :PositionAccuracy ;
+    ] ;
+    sh:property [
+        sh:path :hasAltitudeConfidence ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :AltitudeConfidence ;
+    ] .
+
+:IndexedLocationShape a sh:NodeShape ;
+    sh:targetClass :IndexedLocation ;
+    sh:property [
+        sh:path :hasLocation ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :Location ;
+    ] ;
+    sh:property [
+        sh:path :index ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] .
+
+:ItineraryShape a sh:NodeShape ;
+    sh:targetClass :Itinerary ;
+    sh:property [
+        sh:path :routeDestination ;
+        sh:class :Destination ;
+    ] .
+
+:ItineraryByIndexedLocationsShape a sh:NodeShape ;
+    sh:targetClass :ItineraryByIndexedLocations ;
+    sh:property [
+        sh:path :locationContainedInItinerary ;
+        sh:minCount 2 ;
+        sh:class :IndexedLocation ;
+    ] ;
+    # Enforces unique indices within the same itinerary
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Indices of IndexedLocations within an ItineraryByIndexedLocations must be unique." ;
+        sh:select """
+            PREFIX : <https://w3id.org/itsdata/location/v1/>
+            SELECT $this ?index ?loc1 ?loc2
+            WHERE {
+                $this a :ItineraryByIndexedLocations .
+                ?loc1 :locationContainedInItinerary $this ;
+                      :index ?index .
+                ?loc2 :locationContainedInItinerary $this ;
+                      :index ?index .
+                FILTER (?loc1 != ?loc2)
+            }
+        """ ;
+    ] .
+
+:LinearLocationShape a sh:NodeShape ;
+    sh:targetClass :LinearLocation ;
+    sh:property [
+        sh:path :secondarySupplementaryDescription ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :SupplementaryPositionalDescription ;
+    ] ;
+    sh:property [
+        sh:path :hasLineString ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class sf:LineString ;
+    ] ;
+    sh:property [
+        sh:path :hasOpenLRLinear ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :OpenLRLinear ;
+    ] .
+
+:LocationShape a sh:NodeShape ;
+    sh:targetClass :Location ;
+    sh:property [
+        sh:path :coordinatesForDisplay ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :PointCoordinates ;
+    ] ;
+    sh:property [
+        sh:path :hasExternalReferencing ;
+        sh:class :ExternalReferencing ;
+    ] .
+:LocationGroupShape a sh:NodeShape ;
+    sh:targetClass :LocationGroup .
+
+:LocationGroupByListShape a sh:NodeShape ;
+    sh:targetClass :LocationGroupByList ;
+    sh:property [
+        sh:path :locationContainedInGroup ;
+        sh:minCount 2 ;
+        sh:class :Location ;
+        sh:message "A LocationGroupByList must contain at least two Locations." ;
+    ] .
+:LocationReferenceShape a sh:NodeShape ;
+    sh:targetClass  :LocationReference ;
+    sh:property [
+        sh:path :hasVersion ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype xsd:integer ;
+    ] .
+
+:NetworkLocationShape a sh:NodeShape ;
+    sh:targetClass :NetworkLocation ;
+    sh:property [
+        sh:path :hasPositionalDescription ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :SupplementaryPositionalDescription ;
+    ] ;
+    sh:property [
+        sh:path :hasDestination ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :Destination ;
+    ] .
+
+# :PlaceShape a sh:NodeShape ;
+#    sh:targetClass :Place ;
+#    sh:property [
+#        sh:path :placeType ;
+#        sh:node its-sh:ExactlyOneShape ;
+#        sh:class :PlaceTypeCode ;
+#    ] ;
+#    sh:property [
+#        sh:path cdm1:hasName ;
+#        sh:node :SingleMultilingualShape ;
+#        sh:node its-sh:MaxOneShape ;
+#    ] .
+
+:PointCoordinatesShape a sh:NodeShape ;
+    sh:targetClass :PointCoordinates ;
+    sh:property [
+        sh:path :latitude ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:decimal ;
+    ] ;
+    sh:property [
+        sh:path :longitude ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:decimal ;
+    ] ;
+    sh:property [
+        sh:path :elevation ;
+        sh:maxCount 3 ;
+        sh:datatype :HeightCoordinate ;
+        sh:message "Elevation can have up to three values, representing ellipsoidal height, gravity-related height, and height from ground level." ;
+    ] ;
+    sh:property [
+        sh:path cdm1:hasIdentifier ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path :hasPositionConfidenceEllipse ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :PositionConfidenceEllipse ;
+    ] ;
+    sh:property [
+        sh:path :hasPositionAccuracy ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :PositionAccuracy ;
+    ] .
+
+:PointDestinationShape a sh:NodeShape ;
+    sh:targetClass :PointDestination ;
+    sh:property [
+        sh:path :hasPointLocation ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :PointLocation ;
+    ] .
+:PointLocationShape a sh:NodeShape ;
+    sh:targetClass :PointLocation ;
+    sh:property [
+        sh:path :hasPointByCoordinates ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :PointByCoordinates ;
+    ] ;
+    sh:property [
+        sh:path :hasPointAlongLinearElement ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :PointAlongLinearElement ;
+    ] ;
+    sh:property [
+        sh:path :hasTpegPointLocation ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :TpegPointLocation ;
+    ] ;
+    sh:property [
+        sh:path :hasAlertCPoint ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :AlertCPoint ;
+    ] ;
+    sh:property [
+        sh:path :hasOpenLRPointLocationReference ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :OpenLRPointLocationReference ;
+    ] .
+
+:PositionAccuracyShape a sh:NodeShape ;
+    sh:targetClass :PositionAccuracy ;
+    sh:property [
+        sh:path :accuracyPercentile50 ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype cdm1:Length ;
+    ] ;
+    sh:property [
+        sh:path :accuracyPercentile75 ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype cdm1:Length ;
+    ] ;
+    sh:property [
+        sh:path :accuracyPercentile95 ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype cdm1:Length ;
+    ] .
+
+:PositionConfidenceEllipseShape a sh:NodeShape ;
+    sh:targetClass :PositionConfidenceEllipse ;
+    sh:property [
+        sh:path :semiMajorAxisLength ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype cdm1:Length ;
+    ] ;
+    sh:property [
+        sh:path :semiMajorAxisLengthCodedError ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype :PositionConfidenceErrorCode ;
+    ] ;
+    sh:property [
+        sh:path :semiMajorAxisOrientation ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype :Angle ;
+    ] ;
+    sh:property [
+        sh:path :semiMajorAxisOrientationError ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype xsd:boolean ;
+    ] ;
+    sh:property [
+        sh:path :semiMinorAxisLength ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype cdm1:Length ;
+    ] ;
+    sh:property [
+        sh:path :semiMinorAxisLengthCodedError ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype :PositionConfidenceErrorCode ;
+    ] .
+
+:SupplementaryPositionalDescriptionShape a sh:NodeShape ;
+    sh:targetClass :SupplementaryPositionalDescription ;
+    sh:property [
+        sh:path :hasDirectionPurpose ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :DirectionPurposeCode ;
+    ] ;
+    sh:property [
+        sh:path :hasGeographicDescriptor ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :GeographicCharacteristicCode ;
+    ] ;
+    sh:property [
+        sh:path :hasInfrastructureDescriptor ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :InfrastructureDescriptorCode ;
+    ] ;
+    sh:property [
+        sh:path :lengthAffected ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class cdm1:Length ;
+    ] ;
+    sh:property [
+        sh:path :locationDescription ;
+        sh:node its-sh:MaxOneShape ;
+        sh:node :SingleMultilingualShape ;
+    ] ;
+    sh:property [
+        sh:path :locationPrecision ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class cdm1:Length
+    ] ;
+    sh:property [
+        sh:path :hasPositionOnCarriageway ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :PositionOnCarriagewayCode ;
+    ] ;
+    sh:property [
+        sh:path :sequentialRampNumber ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+    sh:property [
+        sh:path :hasRoadInformation ;
+        sh:class :RoadInformation ;
+    ] ;
+    sh:property [
+        sh:path :hasCarriageway ;
+        sh:class :Carriageway ;
+    ] ;
+    sh:property [
+        sh:path :hasNamedArea ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :NamedArea ;
+     ] .

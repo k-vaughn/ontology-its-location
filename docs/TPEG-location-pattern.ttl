@@ -61,6 +61,11 @@ PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
     rdfs:range :TpegAreaDescriptor ;
     skos:definition "Name of area."@en .
 
+:hasTpegAreaLocation a owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :TpegAreaLocation ;
+    skos:definition "A location which is defined as an area."@en .
+    
 :hasTpegFramedPoint a owl:ObjectProperty ;
     rdfs:domain :TpegFramedPoint ;
     rdfs:range :TpegNonJunctionPoint ;

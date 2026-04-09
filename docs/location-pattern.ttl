@@ -1,0 +1,570 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix cdm1: <https://w3id.org/citydata/part1/> .
+@prefix cdm2: <https://w3id.org/citydata/part2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix i72: <https://w3id.org/citydata/21972/v1/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+
+:LocationPattern
+    dcterms:created               "Draft" ;
+    dcterms:creator               "Kenneth Vaughn" ;
+    dcterms:license               "http://creativecommons.org/licenses/by/4.0/" ;
+    dcterms:modified              "2026-04-07"^^xsd:date ;
+    dcterms:source                "https://docs.datex2.eu/_static/data/v3.7/umlmodel/html/index.htm"@en ;
+    dcterms:source                "http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti" ;
+    dcterms:title                 "Ontology for ITS Location Referencing" ;
+    its-core:draft                "true" ;
+
+    owl:imports                   :LocationPattern ;
+    owl:imports                   :TPEGLocationPattern ;
+    owl:priorVersion              <https://w3id.org/itsdata/location/v1/LocationPattern/r0.2> ;
+    owl:versionIRI                <https://w3id.org/itsdata/location/v1/LocationPattern/r0.3> ;
+    owl:versionInfo               "0.0.3" ;
+    rdf:type                      owl:Ontology ;
+    skos:definition               "This ontology defines concepts related to locations and positioning within the ITS domain using concepts specified in ISO/IEC 5087-1 and ISO/IEC-5087-2. The core ontology (OWL) defines the semantic model and is intended to remain stable. Validation constraints are defined in separate SHACL shape graphs. Changes to SHACL shapes are considered non-breaking to the semantic model unless otherwise stated. Applications SHOULD validate data against the recommended shapes for the given version." ;
+    skos:note                     "This ontology was derived from the dtx_srti ontology, which was derived from the DATEX II v3.2 model; it has been updated to consider changes made up to DATEX II v3.7 and revised to support more generic representations, such as deriving classes from the City Data Model and other ontologies." ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri    "https://w3id.org/itsdata/location/v1/" .
+
+:AltitudeAccuracyCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:Code ;
+    skos:definition "A code indicating the altitude accuracy."@en .
+
+:AltitudeConfidence
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "Evaluation of the altitude confidence."@en .
+
+:Angle
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf i72:Quantity ;
+    rdfs:subClassOf [
+        owl:allValuesFrom [
+            owl:intersectionOf ( i72:Measure [
+                owl:allValuesFrom :AngleUnit ;
+                owl:onProperty    i72:unit_of_measure ;
+                rdf:type          owl:Restriction ;
+            ] ) ;
+            rdf:type           owl:Class ;
+        ] ;
+        owl:onProperty    i72:value ;
+        rdf:type          owl:Restriction ;
+    ] ;
+    skos:definition "An angle defined by two lines."@en .
+
+:AngleUnit
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf i72:Unit_of_measure ;
+    skos:definition "A specified system of units for angles."@en .
+
+:AreaDestination
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Destination ;
+    skos:definition "The specification of the destination of a defined route or itinerary which is an area."@en .
+
+:AreaLocation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Location ;
+    skos:definition "Location representing a geographic or geometric defined area which may be qualified by height information to provide additional geospatial discrimination (e.g. for snow in an area but only above a certain altitude)."@en .
+
+:AreaPlacesCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:Code ;
+    skos:definition "A code indicating generic place terms (e.g. at border, in city center, on bridges)."@en .
+
+:Carriageway
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A carriageway of a road."@en .
+
+:Destination
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "The specification of a destination. This may be either a point location or an area location."@en .
+
+:DirectionCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:Code ;
+    skos:definition "A code of directions of travel."@en .
+
+:DirectionPurposeCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:Code ;
+    skos:definition "A code that identifies the main purpose of the road at the location."@en .
+
+:ExternalReferencing
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A location defined by reference to an external/other referencing system."@en .
+
+:GeographicCharacteristicCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:Code ;
+    skos:definition "A code indicating a geographic characteristic."@en ;
+    skos:example    "on mountain pass"@en .
+
+:HeightCoordinate
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A height coordinate for points defined geodetically."@en .
+
+:HeightTypeCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:Code ;
+    skos:definition "A code indicating the type of height information provided for a location."@en .
+
+:IndexedLocation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Location ;
+    skos:definition "A location that is identified by an index."@en .
+
+:InfrastructureDescriptorCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:Code ;
+    skos:definition "A code indicating an infrastructure characteristic."@en ;
+    skos:example    "in tunnel"@en .
+
+:Itinerary
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationReference ;
+    skos:definition "Multiple (i.e. more than one) physically separate locations arranged as an ordered set that defines an itinerary or route."@en .
+
+:ItineraryByIndexedLocations
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Itinerary ;
+    skos:definition "Multiple physically separate locations arranged as an ordered set that defines an itinerary or route. The index qualifier indicates the order."@en .
+
+:LinearLocation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :NetworkLocation ;
+    skos:definition "Location representing a linear section with optional directionality defined between two points."@en .
+
+:Location
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationReference ;
+    skos:definition "The specification of a location either on a network (as a point or a linear location) or as an area. This may be provided in one or more referencing systems."@en .
+
+:LocationGroup
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationReference ;
+    skos:definition "Multiple (i.e. more than one) physically separate locations which have no specific order."@en .
+
+:LocationGroupByList
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationGroup ;
+    skos:definition "A group of (i.e. more than one) physically separate locations which have no specific order and where each location is explicitly listed."@en .
+
+:LocationReference
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "Represents one or more physically separate locations. Multiple locations may be related, as in an itinerary or route, or may be unrelated. One LocationReference should not use multiple Location objects to represent the same physical location."@en .
+
+:NamedArea
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:NamedArea ;
+    skos:definition "An area defined by a name and/or in terms of known boundaries, such as country or county boundaries or allocated control area of particular authority. The attributes do not form a union; instead, the smallest intersection forms the resulting area."@en .
+
+:NetworkLocation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Location ;
+    skos:definition "The specification of a location on a network (as a point or a linear location)."@en .
+
+:PointAlongLinearElement
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A point on a linear element where the linear element is either a part of or the whole of a linear object (i.e. a road)."@en .
+
+:PointByCoordinates
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A single point defined only by a coordinate set with an optional bearing direction."@en .
+
+:PointCoordinates
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A pair of planar coordinates defining the geodetic position of a single point."@en .
+
+:PointDestination
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Destination ;
+    skos:definition "The specification of the destination of a defined route or itinerary which is a point."@en .
+
+:PointLocation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :NetworkLocation ;
+    skos:definition "Location representing a single geospatial point."@en .
+
+:PositionAccuracy
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "Horizontal position accuracy parameters."@en .
+
+:PositionConfidenceEllipse
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "Confidence ellipse position defined in a shape of ellipse with a predefined confidence level (e.g. 95 %). The centre of the ellipse shape corresponds to the reference position point for which the position accuracy is evaluated."@en .
+
+:PositionConfidenceErrorCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:Code ;
+    skos:definition "A code indicating the position confidence error."@en .
+
+:PositionOnCarriagewayCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:Code ;
+    skos:definition "A code indicating the relative position across carriageway."@en .
+
+:RoadInformation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "Information about the road at the location."@en .
+
+:SupplementaryPositionalDescription
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A collection of supplementary positional information which improves the precision of the location."@en .
+
+:accuracyPercentile50
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            cdm1:Length ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :PositionAccuracy ;
+    skos:definition       "Accuracy defined by the 50th percentile of the cumulative distribution of position."@en .
+
+:accuracyPercentile75
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            cdm1:Length ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :PositionAccuracy ;
+    skos:definition       "Accuracy defined by the 75th percentile of the cumulative distribution of position."@en .
+
+:accuracyPercentile95
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            cdm1:Length ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :PositionAccuracy ;
+    skos:definition       "Accuracy defined by the 95th percentile of the cumulative distribution of position."@en .
+
+:altitudeAccuracyCodedError
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :PositionConfidenceErrorCode ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :AltitudeConfidence ;
+    skos:definition       "Error code in case the altitude confidence is out of range or cannot be determined."@en .
+
+:altitudeAccuracyCodedValue
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :AltitudeAccuracyCode ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :AltitudeConfidence ;
+    skos:definition       "Absolute accuracy of reported value of a geographical point for a confidence level expressed by a coded scale."@en .
+
+:areasAtWhichApplicable
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :AreaPlacesCode ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :AreaLocation ;
+    skos:definition       "Places, in generic terms, at which the corresponding information applies."@en .
+
+:coordinatesForDisplay
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :Coordinates ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :Location ;
+    skos:definition       "Coordinates for display purposes."@en .
+
+:elevation
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :HeightCoordinate ;
+    rdfs:subPropertyOf    :LocationDataProperty ;
+    schema:domainIncludes :PointCoordinates ;
+    skos:definition       "Elevation of the location above or below mean sea level."@en .
+
+:hasAlertCPoint
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :AlertCPoint ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :PointCoordinates ;
+    skos:definition       "Location defined by a single point on the road network."@en .
+
+:hasAltitudeConfidence
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :AltitudeConfidence ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :HeightCoordinate ;
+    skos:definition       "Evaluation of the altitude confidence."@en .
+
+:hasAreaLocation
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :AreaLocation ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :AreaDestination ;
+    skos:definition       "Location defined by an area covering the surface (or near-surface) of the Earth"@en .
+
+:hasCarriageway
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :Carriageway ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :SupplementaryPositionalDescription ;
+    skos:definition       "The carriageway of the road at the location."@en .
+
+:hasDestination
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :Destination ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :Location ;
+    schema:domainIncludes :NetworkLocation ;
+    skos:definition       "The destination associated with the location."@en .
+
+:hasDirectionPurpose
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :DirectionPurposeCode ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :SupplementaryPositionalDescription ;
+    skos:definition       "Identifies the main purpose of the road at the location"@en ;
+    skos:example          "inbound, outbound"@en .
+
+:hasExternalReferencing
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :ExternalReferencing ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :Location ;
+    skos:definition       "A reference to an external location reference code."@en .
+
+:hasGeographicDescriptor
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :GeographicDescriptorCode ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :SupplementaryPositionalDescription ;
+    skos:definition       "Descriptor which identifies a geographic characteristic to help identify the specific location"@en .
+
+:hasInfrastructureDescriptor
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :InfrastructureDescriptorCode ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :SupplementaryPositionalDescription ;
+    skos:definition       "Descriptor which identifies infrastructure to help identify the specific location"@en .
+
+:hasLocation
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :Location ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :IndexedLocation ;
+    skos:definition       "The location associated with the object."@en .
+
+:hasNamedArea
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :NamedArea ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :AreaLocation ;
+    schema:domainIncludes :SupplementaryPositionalDescription ;
+    skos:definition       "A named area associated with the location."@en .
+
+:hasPointAlongLinearElement
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :PointAlongLinearElement ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :PointLocation ;
+    skos:definition       "Location defined by a point along a linear element."@en .
+
+:hasPointByCoordinates
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :PointByCoordinates ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :PointLocation ;
+    skos:definition       "Location defined only by a coordinate set with an optional bearing direction"@en .
+
+:hasPointLocation
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :PointLocation ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :PointDestination ;
+    skos:definition       "Location defined by a point on the surface (or near-surface) of the Earth."@en .
+
+:hasPositionConfidence
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :PositionConfidenceEllipse ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :PointCoordinates ;
+    skos:definition       "The position confidence ellipse associated with the location."@en .
+
+:hasPositionOnCarriageway
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :PositionOnCarriagewayCode ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :SupplementaryPositionalDescription ;
+    skos:definition       "The position of the location on the carriageway."@en .
+
+:hasPositionalDescription
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :SupplementaryPositionalDescription ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :NetworkLocation ;
+    skos:definition       "A supplementary positional description of the location."@en .
+
+:hasRoadInformation
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :RoadInformation ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :SupplementaryPositionalDescription ;
+    skos:definition       "Information about the road at the location."@en .
+
+:heightType
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :HeightTypeCode ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :HeightCoordinate ;
+    skos:definition       "The type of height information provided for the location."@en .
+
+:heightValue
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :cdm1:Length ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :HeightCoordinate ;
+    skos:definition       "The height value for the location."@en .
+
+:lengthAffected
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            cdm1:Length ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :SupplementaryPositionalDescription ;
+    skos:definition       "This indicates the length of carriageway (and lanes) affected by the associated traffic element."@en .
+
+:locationContainedInGroup
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :Location ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :LocationGroupByList ;
+    skos:definition       "The location is contained within a specific group."@en .
+
+:locationContainedInItinerary
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :IndexedLocation ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :ItineraryByIndexedLocations ;
+    skos:definition       "The location is contained within a specific itinerary."@en .
+
+:locationPrecision
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            cdm1:Length ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :SupplementaryPositionalDescription ;
+    skos:definition       "Indicates that the location is given with a precision which is at least as good as the stated value."@en .
+
+:newLayout
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :NetworkLocation ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :AlternateRoadOrCarriagewayOrLaneLayout ;
+    skos:definition       "Indicates a new layout at the location."@en .
+
+:predefinedItineraryReference
+    rdf:type              owl:ObjectProperty ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :ItineraryByReference ;
+    skos:definition       "A reference to a predefined itinerary."@en .
+
+:predefinedLocationGroupReference
+    rdf:type              owl:ObjectProperty ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :LocationGroupByReference ;
+    skos:definition       "A reference to a predefined location group."@en .
+
+:routeDestination
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :Destination ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :Itinerary ;
+    skos:definition       "The destination of the route."@en .
+
+:secondarySupplementaryDescription
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :SupplementaryPositionalDescription ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :LinearLocation ;
+    skos:definition       "A secondary supplementary positional description of the location."@en .
+
+:verticalPositionAccuracy
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :PositionAccuracy ;
+    rdfs:subPropertyOf    :LocationObjectProperty ;
+    schema:domainIncludes :HeightCoordinate ;
+    skos:definition       "Vertical position accuracy parameters."@en .
+    
+:externalLocationCode
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:string ;
+    rdfs:subPropertyOf    :LocationDataProperty ;
+    schema:domainIncludes :ExternalReferencing ;
+    skos:definition       "A code in the external referencing system which defines the location."@en .
+
+:externalReferencingSystem
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:string ;
+    rdfs:subPropertyOf    :LocationDataProperty ;
+    schema:domainIncludes :ExternalReferencing ;
+    skos:definition       "Identification of the external/other location referencing system."@en .
+
+:heightValue
+    rdf:type              owl:DataProperty ;
+    rdfs:range            cdm1:Length ;
+    rdfs:subPropertyOf    :LocationDataProperty ;
+    schema:domainIncludes :HeightCoordinate ;
+    skos:definition       "The height value for the location."@en .
+
+:index
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:nonNegativeInteger ;
+    rdfs:subPropertyOf    :LocationDataProperty ;
+    schema:domainIncludes :IndexedLocation ;
+    skos:definition       "The index of the location."@en .
+
+:latitude
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:decimal ;
+    rdfs:subPropertyOf    :LocationDataProperty ;
+    schema:domainIncludes :PointCoordinates ;
+    skos:definition       "Latitude of the location."@en .
+
+:locationDescription
+    rdf:type              owl:DataProperty ;
+    rdfs:range            rdf:langString ;
+    rdfs:subPropertyOf    :LocationDataProperty ;
+    schema:domainIncludes :Location ;
+    skos:definition       "A textual description of the location."@en .
+
+:longitude
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:decimal ;
+    rdfs:subPropertyOf    :LocationDataProperty ;
+    schema:domainIncludes :PointCoordinates ;
+    skos:definition       "Longitude of the location."@en .
+
+:sequentialRampNumber
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:nonNegativeInteger ;
+    rdfs:subPropertyOf    :LocationDataProperty ;
+    schema:domainIncludes :SupplementaryPositionalDescription ;
+    skos:definition       "The sequential number of the ramp at the location."@en .
+
+
