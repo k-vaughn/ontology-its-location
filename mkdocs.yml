@@ -1,51 +1,68 @@
-site_name: METR - Ontology
-site_description: A registry for documenting the ontology of METR terms
-repo_url: https://github.com/k-vaughn/ontology-metr
+site_name: ITS Ontology - Location
+site_description: A registry for documenting the ontology of ITS Location terms
+repo_url: https://github.com/ISO-TC204/ontology-its-location-v1
 nav:
 - Home: index.md
-- Ontology for ITS Location Referencing:
-  - Location Pattern (itsLocation):
-    - Area Destination: classes/itsLocation__AreaDestination.md
-    - Area Location: classes/itsLocation__AreaLocation.md
-    - Destination: classes/itsLocation__Destination.md
-    - Indexed Location: classes/itsLocation__IndexedLocation.md
-    - Itinerary: classes/itsLocation__Itinerary.md
-    - Itinerary By Indexed Locations: classes/itsLocation__ItineraryByIndexedLocations.md
-    - Jurisdictional Entity: classes/itsLocation__JurisdictionalEntity.md
-    - Linear Location: classes/itsLocation__LinearLocation.md
-    - Location: classes/itsLocation__Location.md
-    - Location Group: classes/itsLocation__LocationGroup.md
-    - Location Group By List: classes/itsLocation__LocationGroupByList.md
-    - Location Reference (itsLocation): classes/itsLocation__LocationReference.md
-    - Location Thing: classes/itsLocation__LocationThing.md
-    - Named Area: classes/itsLocation__NamedArea.md
-    - Network Location: classes/itsLocation__NetworkLocation.md
-    - Point Coordinates: classes/itsLocation__PointCoordinates.md
-    - Point Destination: classes/itsLocation__PointDestination.md
-    - Point Location: classes/itsLocation__PointLocation.md
-    - Position Confidence Ellipse: classes/itsLocation__PositionConfidenceEllipse.md
-    - Supplementary Positional Description: classes/itsLocation__SupplementaryPositionalDescription.md
-- OpenLR Ontology:
-  - Circle Location Reference (OpenLR): classes/OpenLR__CircleLocationReference.md
-  - Closed Line Location Reference (OpenLR): classes/OpenLR__ClosedLineLocationReference.md
-  - Coordinates (OpenLR): classes/OpenLR__Coordinates.md
-  - Form Of Way (OpenLR): classes/OpenLR__FormOfWay.md
-  - Functional Road Class (OpenLR): classes/OpenLR__FunctionalRoadClass.md
-  - Geo Coordinate Location Reference (OpenLR): classes/OpenLR__GeoCoordinateLocationReference.md
-  - Grid Location Reference (OpenLR): classes/OpenLR__GridLocationReference.md
-  - Line Attributes (OpenLR): classes/OpenLR__LineAttributes.md
-  - Line Location Reference (OpenLR): classes/OpenLR__LineLocationReference.md
-  - Location Reference (OpenLR): classes/OpenLR__LocationReference.md
-  - Location Reference Point (OpenLR): classes/OpenLR__LocationReferencePoint.md
-  - Open LR Thing (OpenLR): classes/OpenLR__OpenLRThing.md
-  - Orientation (OpenLR): classes/OpenLR__Orientation.md
-  - Path Attributes (OpenLR): classes/OpenLR__PathAttributes.md
-  - Point Along Line Location Reference (OpenLR): classes/OpenLR__PointAlongLineLocationReference.md
-  - Poi With Access Point Location Reference (OpenLR): classes/OpenLR__PoiWithAccessPointLocationReference.md
-  - Polygon Location Reference (OpenLR): classes/OpenLR__PolygonLocationReference.md
-  - Rectangle Location Reference (OpenLR): classes/OpenLR__RectangleLocationReference.md
-  - Side Of Road (OpenLR): classes/OpenLR__SideOfRoad.md
-site_url: https://github.com/k-vaughn/ontology-metr
+- Area Pattern:
+  - Area Pattern: area-pattern.md
+  - Area By Circle: AreaByCircle.md
+  - Area By Code: AreaByCode.md
+  - Area By Grid: AreaByGrid.md
+  - Area By Linear Boundaries: AreaByLinearBoundaries.md
+  - Area By Multi Polygon: AreaByMultiPolygon.md
+  - Area By Polygon: AreaByPolygon.md
+  - Area By Rectangle: AreaByRectangle.md
+  - Area Location: AreaLocation.md
+  - Area Representation: AreaRepresentation.md
+- Core Pattern:
+  - Core Pattern: core-pattern.md
+  - Coordinate Geometry: CoordinateGeometry.md
+  - Coordinate Reference System: CoordinateReferenceSystem.md
+  - Feature: Feature.md
+  - Geometry: Geometry.md
+  - Location: Location.md
+  - Location Code: LocationCode.md
+  - Location Group: LocationGroup.md
+  - Location Thing: LocationThing.md
+  - Spatial Object: SpatialObject.md
+- Itinerary Pattern:
+  - Itinerary Pattern: itinerary-pattern.md
+  - Itinerary: Itinerary.md
+  - Itinerary By Waypoints: ItineraryByWaypoints.md
+  - Itinerary Code: ItineraryCode.md
+  - Itinerary Representation: ItineraryRepresentation.md
+  - Location List: LocationList.md
+- Linear Pattern:
+  - Linear Pattern: linear-pattern.md
+  - Linear By Code: LinearByCode.md
+  - Linear By Linear Ring: LinearByLinearRing.md
+  - Linear By Line String: LinearByLineString.md
+  - Linear By Multi Line String: LinearByMultiLineString.md
+  - Linear By Point Representations: LinearByPointRepresentations.md
+  - Linear By Points: LinearByPoints.md
+  - Linear Location: LinearLocation.md
+  - Linear Representation: LinearRepresentation.md
+  - Offset Distance: OffsetDistance.md
+  - Point By Linear Position: PointByLinearPosition.md
+  - Point Location List: PointLocationList.md
+  - Point Representation List: PointRepresentationList.md
+- Point Pattern:
+  - Point Pattern: point-pattern.md
+  - Distance Accuracy: DistanceAccuracy.md
+  - Elevation: Elevation.md
+  - Elevation Accuracy: ElevationAccuracy.md
+  - Elevation Height Code: ElevationHeightCode.md
+  - Elevation Reference Code: ElevationReferenceCode.md
+  - Measurement Error Code: MeasurementErrorCode.md
+  - Point By Code: PointByCode.md
+  - Point By Coordinates: PointByCoordinates.md
+  - Point By Geo Coordinates: PointByGeoCoordinates.md
+  - Point By Projected Coordinates: PointByProjectedCoordinates.md
+  - Point Location: PointLocation.md
+  - Point Representation: PointRepresentation.md
+  - Position Accuracy: PositionAccuracy.md
+  - Position Confidence Ellipse: PositionConfidenceEllipse.md
+site_url: https://isotc204.org/ontology-its-location-v1/latest/
 copyright: <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
   <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank"
   rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"

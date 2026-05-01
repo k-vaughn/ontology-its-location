@@ -1,0 +1,31 @@
+BASE <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+:LocationQualitySHACL
+    a owl:Ontology ;
+    dcterms:title "SHACL rules for ITS Location Positional Quality"@en ;
+    skos:definition "SHACL shapes for positional quality concepts."@en ;
+    its-core:draft "true" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-04-23"^^xsd:date ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <LocationQualitySHACL/r0.1> .
+
+:PositionAccuracyShape
+    a sh:NodeShape ;
+    sh:targetClass :PositionAccuracy .
+
+:PositionConfidenceEllipseShape
+    a sh:NodeShape ;
+    sh:targetClass :PositionConfidenceEllipse .
+
+:AltitudeConfidenceShape
+    a sh:NodeShape ;
+    sh:targetClass :AltitudeConfidence .
+

@@ -1,0 +1,23 @@
+BASE <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+:TPEGAdapterSHACL
+    a owl:Ontology ;
+    dcterms:title "TPEG adapter SHACL (ITS location referencing scaffold)"@en ;
+    skos:definition "SHACL adapter stub for TPEG alignment. Existing TPEG SHACL files are unchanged."@en ;
+    its-core:draft "true" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-04-23"^^xsd:date ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <TPEGAdapterSHACL/r0.1> .
+
+:TPEGLocationShape
+    a sh:NodeShape ;
+    sh:targetClass :TPEGLocation .
+

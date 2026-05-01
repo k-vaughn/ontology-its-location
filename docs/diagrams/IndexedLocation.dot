@@ -1,0 +1,23 @@
+// Diagram for IndexedLocation
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+	}
+	IndexedLocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">IndexedLocation</TD></TR><TR><TD ALIGN="LEFT">index : xsd:nonNegativeInteger [1]</TD></TR></TABLE>> URL="../IndexedLocation" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		Location [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Location</TD></TR></TABLE>> URL="../Location" margin=0]
+	}
+	IndexedLocation -> Invis [style=invis]
+	Invis -> Location [style=invis]
+	Location [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Location</TD></TR></TABLE>> URL="../Location" margin=0]
+	IndexedLocation -> Location [label="hasLocation
+1" arrowhead=normal style=solid]
+}

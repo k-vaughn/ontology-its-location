@@ -1,0 +1,24 @@
+// Diagram for LinearByPointRepresentations
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		LinearRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LinearRepresentation</TD></TR></TABLE>> URL="../LinearRepresentation" margin=0]
+	}
+	LinearByPointRepresentations [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LinearByPointRepresentations</TD></TR></TABLE>> URL="../LinearByPointRepresentations" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		PointRepresentationList [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointRepresentationList</TD></TR></TABLE>> URL="../PointRepresentationList" margin=0]
+	}
+	LinearByPointRepresentations -> LinearRepresentation [arrowhead=onormal style=solid]
+	LinearByPointRepresentations -> Invis [style=invis]
+	Invis -> PointRepresentationList [style=invis]
+	PointRepresentationList [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointRepresentationList</TD></TR></TABLE>> URL="../PointRepresentationList" margin=0]
+	LinearByPointRepresentations -> PointRepresentationList [label=hasPointRepresentationList arrowhead=normal style=solid]
+}

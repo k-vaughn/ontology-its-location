@@ -1,0 +1,89 @@
+BASE   <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+PREFIX its-sh: <https://w3id.org/itsdata/shacl/v1/>
+
+:LocationSHACL a owl:Ontology;
+    # Ontology metadata
+    dcterms:title          "The SHACL rules for the Location Ontology for ITS";
+    skos:definition        "This ontology defines SHACL rules related to location within Intelligent Transportation Systems (ITS).";
+    dcterms:license        "http://creativecommons.org/licenses/by/4.0/";
+    its-core:draft         "true";
+    
+    #Provenance metadata
+    dcterms:creator        "Kenneth Vaughn";
+    dcterms:created        "Draft";
+    dcterms:modified       "2026-04-09"^^xsd:date;
+    owl:versionInfo        "0.0.4";
+    owl:versionIRI         <LocationSHACL/r0.4>;
+    owl:priorVersion       <LocationSHACL/r0.3> .
+    
+:AngleShape a sh:NodeShape ;
+    sh:targetClass :Angle ;
+    sh:property [
+        sh:path :hasValue ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:decimal ;
+    ] ;
+     sh:property [
+        sh:path :hasUnit ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :AngleUnit ;
+    ] .
+
+:AngleUnitShape a sh:NodeShape ;
+    sh:targetClass :AngleUnit ;
+    sh:property [
+        sh:path :hasUnit ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :AngleUnit ;
+    ] .
+
+:IndexedLocationShape a sh:NodeShape ;
+    sh:targetClass :IndexedLocation ;
+    sh:property [
+        sh:path :hasLocation ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :Location ;
+    ] ;
+    sh:property [
+        sh:path :index ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] .
+
+:LocationShape a sh:NodeShape ;
+    sh:targetClass :Location ;
+    sh:property [
+        sh:path :coordinatesForDisplay ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :PointCoordinates ;
+    ] ;
+    sh:property [
+        sh:path :hasExternalReferencing ;
+        sh:class :ExternalReferencing ;
+    ] .
+:LocationGroupShape a sh:NodeShape ;
+    sh:targetClass :LocationGroup .
+
+:LocationGroupByListShape a sh:NodeShape ;
+    sh:targetClass :LocationGroupByList ;
+    sh:property [
+        sh:path :locationContainedInGroup ;
+        sh:minCount 2 ;
+        sh:class :Location ;
+        sh:message "A LocationGroupByList must contain at least two Locations." ;
+    ] .
+:LocationReferenceShape a sh:NodeShape ;
+    sh:targetClass  :LocationReference ;
+    sh:property [
+        sh:path :hasVersion ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype xsd:integer ;
+    ] .
+

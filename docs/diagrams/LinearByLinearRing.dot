@@ -1,0 +1,21 @@
+// Diagram for LinearByLinearRing
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		LinearRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LinearRepresentation</TD></TR></TABLE>> URL="../LinearRepresentation" margin=0]
+		sf_LinearRing [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">sf:LinearRing</TD></TR></TABLE>> URL="https://w3id.org/citydata/imported/sf/latest/LinearRing" margin=0]
+	}
+	LinearByLinearRing [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LinearByLinearRing</TD></TR></TABLE>> URL="../LinearByLinearRing" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+	}
+	LinearByLinearRing -> LinearRepresentation [arrowhead=onormal style=solid]
+	LinearByLinearRing -> sf_LinearRing [arrowhead=onormal style=solid]
+}

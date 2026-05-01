@@ -1,0 +1,79 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+
+:ItineraryPattern
+    a owl:Ontology ;
+    dcterms:title "ITS Itinerary Referencing"@en ;
+    skos:definition "Methodology module for itineraries (ordered sets of locations) and itinerary representations."@en ;
+    dcterms:creator "Kenneth Vaughn" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-05-01"^^xsd:date ;
+    dcterms:license "http://creativecommons.org/licenses/by/4.0/" ;
+    its-core:draft "true" ;
+    owl:imports :LocationCorePattern ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <https://w3id.org/itsdata/location/v1/ItineraryPattern/r0.1> ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri "https://w3id.org/itsdata/location/v1/" .
+
+#################################################################
+# Classes
+#################################################################
+
+:Itinerary
+    a owl:Class ;
+    rdfs:subClassOf :Feature ;
+    skos:definition "An ordered set of multiple physically separate locations forming a route or itinerary."@en .
+
+:ItineraryRepresentation
+    a owl:Class ;
+    rdfs:subClassOf :Geometry ;
+    skos:definition "A geometry/representation that encodes an itinerary using a specific method."@en .
+
+:ItineraryByWaypoints
+    a owl:Class ;
+    rdfs:subClassOf :ItineraryRepresentation ;
+    skos:definition "An itinerary representation encoded as an ordered sequence of locations (waypoints)."@en .
+
+:ItineraryCode
+    a owl:Class ;
+    rdfs:subClassOf :ItineraryRepresentation ;
+    rdfs:subClassOf its-core:Code ;
+    skos:definition "An itinerary representation encoded as a code that references an entry in an external itinerary/route referencing system."@en .
+
+:LocationList
+    a owl:Class ;
+    rdfs:subClassOf rdf:List ;
+    rdfs:subClassOf [
+        owl:onProperty    rdf:first ;
+        owl:allValuesFrom :Location ;
+    ] ;
+    skos:definition "An ordered list of member locations."@en .
+
+#################################################################
+# Properties
+#################################################################
+
+:locationContainedInItinerary
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    rdfs:subPropertyOf :hasWaypointList ;
+    schema:domainIncludes :ItineraryByWaypoints ;
+    schema:rangeIncludes :LocationList ;
+    skos:definition "DATEX-aligned property name for associating an itinerary-by-waypoints representation with its ordered list of member locations."@en .
+
+:hasWaypointList
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :ItineraryByWaypoints ;
+    schema:rangeIncludes :LocationList ;
+    skos:definition "Associates an itinerary-by-waypoints representation with its ordered list of member locations (waypoints)."@en .
+

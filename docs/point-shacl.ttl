@@ -1,0 +1,197 @@
+BASE <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX cdm1: <https://w3id.org/citydata/part1/v1/>
+PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+PREFIX its-sh: <https://w3id.org/itsdata/shacl/v1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+:PointSHACL
+    a owl:Ontology ;
+    dcterms:title "SHACL rules for ITS Point Referencing"@en ;
+    skos:definition "SHACL shapes for point-based locations and point representations."@en ;
+    its-core:draft "true" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-04-29"^^xsd:date ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <PointSHACL/r0.1> ;
+    owl:imports :LocationCoreSHACL .
+
+#################################################################
+# Node shapes
+#################################################################
+
+:PointLocationShape
+    a sh:NodeShape ;
+    sh:targetClass :PointLocation ;
+    sh:and ( :LocationShape ) ;
+    sh:property [
+        sh:path :bearing ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class its-core:Bearing ;
+    ] ;
+    sh:property [
+        sh:path :hasPrimaryRepresentation ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :PointRepresentation ;
+    ] ;
+    sh:property [
+        sh:path :hasAlternativeRepresentation ;
+        sh:node its-sh:UnlimitedShape ;
+        sh:class :PointRepresentation ;
+    ] .
+
+:PointRepresentationShape
+    a sh:NodeShape ;
+    sh:targetClass :PointRepresentation ;
+    sh:and ( :GeometryShape ) .
+
+:PointByCoordinatesShape a sh:NodeShape ;
+    sh:targetClass :PointByCoordinates ;
+    sh:and ( :CoordinateGeometryShape ) ;
+    sh:and ( :PointRepresentationShape ) ;
+    sh:property [
+        sh:path :hasPositionAccuracy ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :PositionAccuracy ;
+    ] ;
+    sh:property [
+        sh:path :hasPositionConfidenceEllipse ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :PositionConfidenceEllipse ;
+    ] ;
+    sh:property [
+        sh:path :hasElevation ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :Elevation ;
+    ] ;
+    sh:property [
+        sh:path :hasElevationAccuracy ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :ElevationAccuracy ;
+    ] .
+
+:PointByGeoCoordinatesShape
+    a sh:NodeShape ;
+    sh:targetClass :PointByGeoCoordinates ;
+    sh:and ( :PointByCoordinatesShape ) ;
+    sh:property [
+        sh:path :latitude ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive -90 ;
+        sh:maxInclusive 90 ;
+    ] ;
+    sh:property [
+        sh:path :longitude ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive -180 ;
+        sh:maxInclusive 180 ;
+    ] .
+
+:PointByProjectedCoordinatesShape
+    a sh:NodeShape ;
+    sh:targetClass :PointByProjectedCoordinates ;
+    sh:and ( :PointByCoordinatesShape ) ;
+    sh:property [
+        sh:path :northing ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:decimal ;
+    ] ;
+    sh:property [
+        sh:path :easting ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:decimal ;
+    ] .
+
+:ElevationShape
+    a sh:NodeShape ;
+    sh:targetClass :Elevation ;
+    sh:property [
+        sh:path :hasElevationReference ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :ElevationReferenceCode ;
+    ] ;
+    sh:property [
+        sh:path :hasElevationDistance ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class cdm1:Length ;
+    ] ;
+    sh:property [
+        sh:path :hasElevationHeightCode ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :ElevationHeightCode ;
+    ] ;
+    sh:property [
+        sh:path :hasElevationAccuracy ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :ElevationAccuracy ;
+    ] .
+
+:DistanceAccuracyShape
+    a sh:NodeShape ;
+    sh:targetClass :DistanceAccuracy ;
+    sh:property [
+        sh:path :hasDistanceAccuracy ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class cdm1:Length ;
+    ] ;
+    sh:property [
+        sh:path :confidencePercentage ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class cdm1:Ratio ;
+    ] ;
+    sh:property [
+        sh:path :distanceAccuracyErrorCode ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :MeasurementErrorCode ;
+    ] .
+
+:ElevationAccuracyShape
+    a sh:NodeShape ;
+    sh:targetClass :ElevationAccuracy ;
+    sh:and ( :DistanceAccuracyShape ) .
+
+:PositionAccuracyShape
+    a sh:NodeShape ;
+    sh:targetClass :PositionAccuracy ;
+    sh:and ( :DistanceAccuracyShape ) .
+
+:PositionConfidenceEllipseShape
+    a sh:NodeShape ;
+    sh:targetClass :PositionConfidenceEllipse ;
+    sh:property [
+        sh:path :semiMajorAxisLength ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class cdm1:Length ;
+    ] ;
+    sh:property [
+        sh:path :semiMinorAxisLength ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class cdm1:Length ;
+    ] ;
+    sh:property [
+        sh:path :semiMajorAxisOrientation ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class its-core:Bearing ;
+    ] ;
+    sh:property [
+        sh:path :semiMajorAxisLengthErrorCode ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :MeasurementErrorCode ;
+    ] ;
+    sh:property [
+        sh:path :semiMinorAxisLengthErrorCode ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :MeasurementErrorCode ;
+    ] ;
+    sh:property [
+        sh:path :semiMajorAxisOrientationErrorCode ;
+        sh:node its-sh:MaxOneShape ;
+        sh:class :MeasurementErrorCode ;
+    ] .
+

@@ -1,0 +1,33 @@
+// Diagram for PointByLinearPosition
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		PointRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointRepresentation</TD></TR></TABLE>> URL="../PointRepresentation" margin=0]
+	}
+	PointByLinearPosition [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointByLinearPosition</TD></TR></TABLE>> URL="../PointByLinearPosition" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		LinearByPoints [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LinearByPoints</TD></TR></TABLE>> URL="../LinearByPoints" margin=0]
+		OffsetDistance [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">OffsetDistance</TD></TR></TABLE>> URL="../OffsetDistance" margin=0]
+		PointLocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointLocation</TD></TR></TABLE>> URL="../PointLocation" margin=0]
+	}
+	PointByLinearPosition -> PointRepresentation [arrowhead=onormal style=solid]
+	PointByLinearPosition -> Invis [style=invis]
+	Invis -> LinearByPoints [style=invis]
+	LinearByPoints -> OffsetDistance [style=invis]
+	OffsetDistance -> PointLocation [style=invis]
+	LinearByPoints [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LinearByPoints</TD></TR></TABLE>> URL="../LinearByPoints" margin=0]
+	PointByLinearPosition -> LinearByPoints [label=alongLinearRepresentation arrowhead=normal style=solid]
+	OffsetDistance [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">OffsetDistance</TD></TR></TABLE>> URL="../OffsetDistance" margin=0]
+	PointByLinearPosition -> OffsetDistance [label=hasOffsetDistance arrowhead=normal style=solid]
+	PointLocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointLocation</TD></TR></TABLE>> URL="../PointLocation" margin=0]
+	PointByLinearPosition -> PointLocation [label=basePoint arrowhead=normal style=solid]
+	PointByLinearPosition -> PointLocation [label=directionPoint arrowhead=normal style=solid]
+}

@@ -1,0 +1,109 @@
+BASE <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+PREFIX its-sh: <https://w3id.org/itsdata/shacl/v1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX cdm1: <https://w3id.org/citydata/part1/v1/>
+
+:AreaSHACL
+    a owl:Ontology ;
+    dcterms:title "SHACL rules for ITS Area Referencing"@en ;
+    skos:definition "SHACL shapes for area-based locations and area representations."@en ;
+    its-core:draft "true" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-05-01"^^xsd:date ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <AreaSHACL/r0.1> ;
+    owl:imports :LocationCoreSHACL ;
+    owl:imports :LinearSHACL .
+
+#################################################################
+# Node shapes
+#################################################################
+
+:AreaLocationShape
+    a sh:NodeShape ;
+    sh:targetClass :AreaLocation ;
+    sh:and ( :LocationShape ) ;
+    sh:property [
+        sh:path :hasPrimaryRepresentation ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :AreaRepresentation ;
+    ] ;
+    sh:property [
+        sh:path :hasAlternativeRepresentation ;
+        sh:node its-sh:UnlimitedShape ;
+        sh:class :AreaRepresentation ;
+    ] .
+
+:AreaRepresentationShape
+    a sh:NodeShape ;
+    sh:targetClass :AreaRepresentation ;
+    sh:and ( :GeometryShape ) .
+
+:AreaByLinearBoundariesShape
+    a sh:NodeShape ;
+    sh:targetClass :AreaByLinearBoundaries ;
+    sh:and ( :AreaRepresentationShape ) ;
+    sh:property [
+        sh:path :hasLinearBoundary ;
+        sh:minCount 1 ;
+        sh:class :LinearLocation ;
+        sh:message "AreaByLinearBoundaries must have at least one linear boundary location." ;
+    ] .
+
+:AreaByCircleShape
+    a sh:NodeShape ;
+    sh:targetClass :AreaByCircle ;
+    sh:and ( :AreaRepresentationShape ) ;
+    sh:property [
+        sh:path :hasCenter ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :PointLocation ;
+        sh:message "AreaByCircle must have exactly one center point." ;
+    ] ;
+    sh:property [
+        sh:path :radius ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class cdm1:Length ;
+        sh:message "AreaByCircle must have exactly one radius (cdm1:Length)." ;
+    ] .
+
+:AreaByRectangleShape
+    a sh:NodeShape ;
+    sh:targetClass :AreaByRectangle ;
+    sh:and ( :AreaRepresentationShape ) ;
+    sh:property [
+        sh:path :hasLowerLeft ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :PointLocation ;
+        sh:message "AreaByRectangle must have exactly one lower-left point." ;
+    ] ;
+    sh:property [
+        sh:path :hasUpperRight ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :PointLocation ;
+        sh:message "AreaByRectangle must have exactly one upper-right point." ;
+    ] .
+
+:AreaByGridShape
+    a sh:NodeShape ;
+    sh:targetClass :AreaByGrid ;
+    sh:and ( :AreaByRectangleShape ) ;
+    sh:property [
+        sh:path :numColumns ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:message "AreaByGrid must have exactly one numColumns, which is the number of times the base rectangle cell is replicated eastward in the grid area representation. The width of the area is the width of the base cell multiplied by the number of columns." ;
+    ] ;
+    sh:property [
+        sh:path :numRows ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:message "AreaByGrid must have exactly one numRows, which is the number of times the base rectangle cell is replicated northward in the grid area representation. The height of the area is the height of the base cell multiplied by the number of rows." ;
+    ] .
+

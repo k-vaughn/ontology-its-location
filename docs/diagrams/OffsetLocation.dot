@@ -1,0 +1,30 @@
+// Diagram for OffsetLocation
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		Location [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Location</TD></TR></TABLE>> URL="../Location" margin=0]
+	}
+	OffsetLocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">OffsetLocation</TD></TR></TABLE>> URL="../OffsetLocation" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		OffsetDistance [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">OffsetDistance</TD></TR></TABLE>> URL="../OffsetDistance" margin=0]
+		owl_Thing [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">owl:Thing</TD></TR></TABLE>> URL="https://w3id.org/citydata/imported/owl/latest/Thing" margin=0]
+	}
+	OffsetLocation -> Location [arrowhead=onormal style=solid]
+	OffsetLocation -> Invis [style=invis]
+	Invis -> OffsetDistance [style=invis]
+	OffsetDistance -> owl_Thing [style=invis]
+	owl_Thing [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">owl:Thing</TD></TR></TABLE>> URL="https://w3id.org/citydata/imported/owl/latest/Thing" margin=0]
+	OffsetLocation -> owl_Thing [label="hasReferent
+1" arrowhead=normal style=solid]
+	OffsetDistance [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">OffsetDistance</TD></TR></TABLE>> URL="../OffsetDistance" margin=0]
+	OffsetLocation -> OffsetDistance [label="hasOffsetDistance
+1" arrowhead=normal style=solid]
+}

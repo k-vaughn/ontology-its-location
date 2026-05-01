@@ -1,0 +1,165 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix cdm1: <https://w3id.org/citydata/part1/v1/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+
+:LinearPattern
+    a owl:Ontology ;
+    dcterms:title "ITS Linear Referencing"@en ;
+    skos:definition "Methodology module for linear elements, linear locations, and linear location representations."@en ;
+    dcterms:creator "Kenneth Vaughn" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-04-30"^^xsd:date ;
+    dcterms:license "http://creativecommons.org/licenses/by/4.0/" ;
+    its-core:draft "true" ;
+    owl:imports :LocationCorePattern ;
+    owl:imports :PointPattern ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <https://w3id.org/itsdata/location/v1/LinearPattern/r0.1> ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri "https://w3id.org/itsdata/location/v1/" .
+
+#################################################################
+# Classes
+#################################################################
+
+:LinearLocation
+    a owl:Class ;
+    rdfs:subClassOf :Location ;
+    skos:definition "spatial location that extends between two point locations along a defined path"@en .
+
+:LinearRepresentation
+    a owl:Class ;
+    rdfs:subClassOf :Geometry ;
+    skos:definition "A geometry/representation that encodes a linear location using a specific method."@en .
+
+:LinearByCode
+    a owl:Class ;
+    rdfs:subClassOf :LinearRepresentation ;
+    rdfs:subClassOf :LocationCode ;
+    skos:definition "A linear representation encoded as a code that references an entry in an external location referencing system."@en .
+
+:LinearByLineString
+    a owl:Class ;
+    rdfs:subClassOf :LinearRepresentation ;
+    rdfs:subClassOf sf:LineString ;
+    skos:definition "A linear representation encoded as a LineString geometry."@en .
+
+:LinearByLinearRing
+    a owl:Class ;
+    rdfs:subClassOf :LinearRepresentation ;
+    rdfs:subClassOf sf:LinearRing ;
+    skos:definition "A linear representation encoded as a LinearRing geometry."@en .
+
+:LinearByMultiLineString
+    a owl:Class ;
+    rdfs:subClassOf :LinearRepresentation ;
+    rdfs:subClassOf sf:MultiLineString ;
+    skos:definition "A linear representation encoded as a MultiLineString geometry."@en .
+
+:LinearByPoints
+    a owl:Class ;
+    rdfs:subClassOf :LinearRepresentation ;
+    skos:definition "A linear representation encoded as an ordered sequence of points."@en .
+
+:LinearByPointRepresentations
+    a owl:Class ;
+    rdfs:subClassOf :LinearRepresentation ;
+    skos:definition "A linear representation encoded as an ordered sequence of point representations."@en .
+
+:OffsetDistance
+    a owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "An offset distance expressed either as a length or as a percentage."@en .
+
+:PointByLinearPosition
+    a owl:Class ;
+    rdfs:subClassOf :PointRepresentation ;
+    skos:definition "A point representation defined by an offset along a linear representation."@en .
+
+:PointLocationList
+    a owl:Class ;
+    rdfs:subClassOf rdf:List ;
+    rdfs:subClassOf [
+        owl:onProperty    rdf:first ;
+        owl:allValuesFrom :PointLocation ;
+    ] ;
+    skos:definition "An ordered list of member points."@en .
+
+:PointRepresentationList
+    a owl:Class ;
+    rdfs:subClassOf rdf:List ;
+    rdfs:subClassOf [
+        owl:onProperty    rdf:first ;
+        owl:allValuesFrom :PointRepresentation ;
+    ] ;
+    skos:definition "An ordered list of member point representations."@en .
+
+#################################################################
+# Properties
+#################################################################
+
+:hasPointList
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :LinearByPoints ;
+    schema:rangeIncludes :PointLocationList ;
+    skos:definition "Associates a LinearByPoints representation with its ordered list of member points."@en .
+
+:hasPointRepresentationList
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :LinearByPointRepresentations ;
+    schema:rangeIncludes :PointRepresentationList ;
+    skos:definition "Associates a LinearByPointRepresentations representation with its ordered list of member point representations."@en .
+
+:hasOffsetDistance
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PointByLinearPosition ;
+    schema:rangeIncludes :OffsetDistance ;
+    skos:definition "Associates a PointByLinearPosition with its offset distance value."@en .
+
+:offsetLength
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :OffsetDistance ;
+    schema:rangeIncludes cdm1:Length ;
+    skos:definition "Length form of an offset distance."@en .
+
+:offsetPercentage
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :OffsetDistance ;
+    schema:rangeIncludes cdm1:Ratio ;
+    skos:definition "Percentage form of an offset distance."@en .
+
+:alongLinearRepresentation
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PointByLinearPosition ;
+    schema:rangeIncludes :LinearRepresentation ;
+    skos:definition "Associates a PointByLinearPosition to the linear representation that it is located along."@en .
+
+:basePoint
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PointByLinearPosition ;
+    schema:rangeIncludes :PointLocation ;
+    skos:definition "The base/reference point from which the offset is measured."@en .
+
+:directionPoint
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PointByLinearPosition ;
+    schema:rangeIncludes :PointLocation ;
+    skos:definition "A second point used to establish the direction of offset relative to the basePoint."@en .
+

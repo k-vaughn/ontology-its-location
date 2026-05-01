@@ -1,0 +1,94 @@
+BASE <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+PREFIX its-sh: <https://w3id.org/itsdata/shacl/v1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+:ExternalIdLocationSHACL
+    a owl:Ontology ;
+    dcterms:title "SHACL rules for ITS External Identifier Location Referencing"@en ;
+    skos:definition "SHACL shapes for external identifier-based location referencing."@en ;
+    its-core:draft "true" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-04-23"^^xsd:date ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <ExternalIdLocationSHACL/r0.1> .
+
+:LocationCodeShape
+    a sh:NodeShape ;
+    sh:targetClass :LocationCode ;
+    sh:node :CodeShape ;
+    sh:property [
+        sh:path cdm1:hasName ;
+        sh:node its-sh:ExactlyOneMultilingualShape ;
+    ] ;
+    sh:property [
+        sh:path its-core:fromCodeList ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :LocationCodeList ;
+    ] ;
+    sh:property [
+        sh:path :identifiesLocation ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :Location ;
+    ] .
+
+:LocationCodeListShape
+    a sh:NodeShape ;
+    sh:targetClass :LocationCodeList ;
+    sh:node :CodeListShape .
+
+:AreaLocationCodeShape
+    a sh:NodeShape ;
+    sh:targetClass :AreaLocationCode ;
+    sh:node :CodeShape ;
+    sh:property [
+        sh:path :identifiesLocation ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :AreaLocation ;
+    ] .
+
+:LinearLocationCodeShape
+    a sh:NodeShape ;
+    sh:targetClass :LinearLocationCode ;
+    sh:node :CodeShape ;
+    sh:property [
+        sh:path :identifiesLocation ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :LinearLocation ;
+    ] .
+
+:LinearDirectionShape
+    a sh:NodeShape ;
+    sh:targetClass :LinearDirection ;
+    sh:property [
+        sh:path :affectedDirection ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :LinearAffectedDirectionCode ;
+    ] ;
+    sh:property [
+        sh:path :codedDirection ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :OffsetDirectionCode ;
+    ] ;
+    sh:property [
+        sh:path :namedDirection ;
+        sh:node its-sh:MaxOneMultilingualShape ;
+    ] .
+
+:PointLocationCodeShape
+    a sh:NodeShape ;
+    sh:targetClass :PointLocationCode ;
+    sh:node :CodeShape ;
+    sh:property [
+        sh:path :identifiesLocation ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :PointLocation ;
+    ] .
+
+

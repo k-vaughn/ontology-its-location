@@ -1,0 +1,68 @@
+BASE <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+PREFIX its-sh: <https://w3id.org/itsdata/shacl/v1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+:LocationCoreSHACL
+    a owl:Ontology ;
+    dcterms:title "SHACL rules for ITS Location Referencing Core"@en ;
+    skos:definition "SHACL shapes for core location referencing abstractions."@en ;
+    its-core:draft "true" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-04-23"^^xsd:date ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <LocationCoreSHACL/r0.1> .
+
+:IndexedLocationShape
+    a sh:NodeShape ;
+    sh:targetClass :IndexedLocation ;
+    sh:property [
+        sh:path :hasLocation ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :Location ;
+    ] ;
+    sh:property [
+        sh:path :index ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] .
+
+:LocationGroupShape
+    a sh:NodeShape ;
+    sh:targetClass :LocationGroup ;
+    sh:property [
+        sh:path :hasMember ;
+        sh:minCount 2 ;
+        sh:class :Location ;
+        sh:message "A LocationGroup must contain at least two member Locations." ;
+    ] .
+
+:ItineraryShape
+    a sh:NodeShape ;
+    sh:targetClass :Itinerary ;
+    sh:property [
+        sh:path :locationContainedInItinerary ;
+        sh:minCount 2 ;
+        sh:class :IndexedLocation ;
+        sh:message "An Itinerary must contain at least two IndexedLocations." ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Indices of IndexedLocations within an Itinerary must be unique." ;
+        sh:select """
+            PREFIX : <https://w3id.org/itsdata/location/v1/>
+            SELECT $this ?index ?loc1 ?loc2
+            WHERE {
+                $this a :Itinerary .
+                ?loc1 :locationContainedInItinerary $this ; :index ?index .
+                ?loc2 :locationContainedInItinerary $this ; :index ?index .
+                FILTER (?loc1 != ?loc2)
+            }
+        """ ;
+    ] .
+

@@ -1,0 +1,51 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix cdm1: <https://w3id.org/citydata/part1/> .
+@prefix cdm2: <https://w3id.org/citydata/part2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix i72: <https://w3id.org/citydata/21972/v1/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+
+:ExternalLocationPattern
+    dcterms:created               "Draft" ;
+    dcterms:creator               "Kenneth Vaughn" ;
+    dcterms:license               "http://creativecommons.org/licenses/by/4.0/" ;
+    dcterms:modified              "2026-04-07"^^xsd:date ;
+    dcterms:source                "https://docs.datex2.eu/_static/data/v3.7/umlmodel/html/index.htm"@en ;
+    dcterms:source                "http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti" ;
+    dcterms:title                 "Ontology for ITS Location Referencing" ;
+    its-core:draft                "true" ;
+
+    owl:priorVersion              <https://w3id.org/itsdata/location/v1/ExternalLocationPattern/r0.2> ;
+    owl:versionIRI                <https://w3id.org/itsdata/location/v1/ExternalLocationPattern/r0.3> ;
+    owl:versionInfo               "0.0.3" ;
+    rdf:type                      owl:Ontology ;
+    skos:definition               "This ontology defines concepts related to externally defined locations." ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri    "https://w3id.org/itsdata/location/v1/" .
+
+:ExternalReference
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A location defined by reference to an external/other referencing system."@en .
+
+:externalLocationCode
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:string ;
+    rdfs:subPropertyOf    :LocationDataProperty ;
+    schema:domainIncludes :ExternalReferencing ;
+    skos:definition       "A code in the external referencing system which defines the location."@en .
+
+:externalReferencingSystem
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:string ;
+    rdfs:subPropertyOf    :LocationDataProperty ;
+    schema:domainIncludes :ExternalReferencing ;
+    skos:definition       "Identification of the external/other location referencing system."@en .
+

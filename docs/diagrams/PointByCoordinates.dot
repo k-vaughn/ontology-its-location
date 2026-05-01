@@ -1,0 +1,38 @@
+// Diagram for PointByCoordinates
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		CoordinateGeometry [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">CoordinateGeometry</TD></TR></TABLE>> URL="../CoordinateGeometry" margin=0]
+		PointRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointRepresentation</TD></TR></TABLE>> URL="../PointRepresentation" margin=0]
+	}
+	PointByCoordinates [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointByCoordinates</TD></TR></TABLE>> URL="../PointByCoordinates" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		Elevation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Elevation</TD></TR></TABLE>> URL="../Elevation" margin=0]
+		ElevationAccuracy [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">ElevationAccuracy</TD></TR></TABLE>> URL="../ElevationAccuracy" margin=0]
+		PositionAccuracy [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PositionAccuracy</TD></TR></TABLE>> URL="../PositionAccuracy" margin=0]
+		PositionConfidenceEllipse [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PositionConfidenceEllipse</TD></TR></TABLE>> URL="../PositionConfidenceEllipse" margin=0]
+	}
+	PointByCoordinates -> CoordinateGeometry [arrowhead=onormal style=solid]
+	PointByCoordinates -> PointRepresentation [arrowhead=onormal style=solid]
+	PointByCoordinates -> Invis [style=invis]
+	Invis -> Elevation [style=invis]
+	Elevation -> ElevationAccuracy [style=invis]
+	ElevationAccuracy -> PositionAccuracy [style=invis]
+	PositionAccuracy -> PositionConfidenceEllipse [style=invis]
+	PositionAccuracy [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PositionAccuracy</TD></TR></TABLE>> URL="../PositionAccuracy" margin=0]
+	PointByCoordinates -> PositionAccuracy [label=hasPositionAccuracy arrowhead=normal style=solid]
+	PositionConfidenceEllipse [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PositionConfidenceEllipse</TD></TR></TABLE>> URL="../PositionConfidenceEllipse" margin=0]
+	PointByCoordinates -> PositionConfidenceEllipse [label=hasPositionConfidenceEllipse arrowhead=normal style=solid]
+	Elevation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Elevation</TD></TR></TABLE>> URL="../Elevation" margin=0]
+	PointByCoordinates -> Elevation [label=hasElevation arrowhead=normal style=solid]
+	ElevationAccuracy [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">ElevationAccuracy</TD></TR></TABLE>> URL="../ElevationAccuracy" margin=0]
+	PointByCoordinates -> ElevationAccuracy [label=hasElevationAccuracy arrowhead=normal style=solid]
+}

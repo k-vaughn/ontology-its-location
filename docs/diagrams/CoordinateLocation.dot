@@ -1,0 +1,25 @@
+// Diagram for CoordinateLocation
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		Location [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Location</TD></TR></TABLE>> URL="../Location" margin=0]
+	}
+	CoordinateLocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">CoordinateLocation</TD></TR></TABLE>> URL="../CoordinateLocation" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		PointCoordinates [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointCoordinates</TD></TR></TABLE>> URL="../PointCoordinates" margin=0]
+	}
+	CoordinateLocation -> Location [arrowhead=onormal style=solid]
+	CoordinateLocation -> Invis [style=invis]
+	Invis -> PointCoordinates [style=invis]
+	PointCoordinates [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointCoordinates</TD></TR></TABLE>> URL="../PointCoordinates" margin=0]
+	CoordinateLocation -> PointCoordinates [label="hasPointCoordinates
+1" arrowhead=normal style=solid]
+}

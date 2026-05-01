@@ -1,0 +1,98 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix cdm1: <https://w3id.org/citydata/part1/> .
+@prefix cdm2: <https://w3id.org/citydata/part2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix i72: <https://w3id.org/citydata/21972/v1/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+
+:LocationPattern
+    dcterms:created               "Draft" ;
+    dcterms:creator               "Kenneth Vaughn" ;
+    dcterms:license               "http://creativecommons.org/licenses/by/4.0/" ;
+    dcterms:modified              "2026-04-07"^^xsd:date ;
+    dcterms:source                "https://docs.datex2.eu/_static/data/v3.7/umlmodel/html/index.htm"@en ;
+    dcterms:source                "http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti" ;
+    dcterms:title                 "Ontology for ITS Location Referencing" ;
+    its-core:draft                "true" ;
+
+    owl:imports                   :LocationPattern ;
+    owl:imports                   :TPEGLocationPattern ;
+    owl:priorVersion              <https://w3id.org/itsdata/location/v1/LocationPattern/r0.2> ;
+    owl:versionIRI                <https://w3id.org/itsdata/location/v1/LocationPattern/r0.3> ;
+    owl:versionInfo               "0.0.3" ;
+    rdf:type                      owl:Ontology ;
+    skos:definition               "This ontology defines concepts related to locations and positioning within the ITS domain using concepts specified in ISO/IEC 5087-1 and ISO/IEC-5087-2. The core ontology (OWL) defines the semantic model and is intended to remain stable. Validation constraints are defined in separate SHACL shape graphs. Changes to SHACL shapes are considered non-breaking to the semantic model unless otherwise stated. Applications SHOULD validate data against the recommended shapes for the given version." ;
+    skos:note                     "This ontology was derived from the dtx_srti ontology, which was derived from the DATEX II v3.2 model; it has been updated to consider changes made up to DATEX II v3.7 and revised to support more generic representations, such as deriving classes from the City Data Model and other ontologies." ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri    "https://w3id.org/itsdata/location/v1/" .
+
+:Angle
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf i72:Quantity ;
+    rdfs:subClassOf [
+        owl:allValuesFrom [
+            owl:intersectionOf ( i72:Measure [
+                owl:allValuesFrom :AngleUnit ;
+                owl:onProperty    i72:unit_of_measure ;
+                rdf:type          owl:Restriction ;
+            ] ) ;
+            rdf:type           owl:Class ;
+        ] ;
+        owl:onProperty    i72:value ;
+        rdf:type          owl:Restriction ;
+    ] ;
+    skos:definition "An angle defined by two lines."@en .
+
+:AngleUnit
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf i72:Unit_of_measure ;
+    skos:definition "A specified system of units for angles."@en .
+
+:DirectionCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:Code ;
+    skos:definition "A code of directions of travel."@en ;
+    skos:example     "north, inbound, positive, clockwise"@en .
+
+:GeographicCharacteristicCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf cdm2:Code ;
+    skos:definition "A code indicating a geographic characteristic."@en ;
+    skos:example    "on mountain pass"@en .
+
+:IndexedLocation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Location ;
+    skos:definition "A location that is identified by an index."@en .
+
+:Location
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationReference ;
+    skos:definition "The specification of a location either on a network (as a point or a linear location) or as an area. This may be provided in one or more referencing systems."@en .
+
+:LocationGroup
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationReference ;
+    skos:definition "Multiple (i.e. more than one) physically separate locations which have no specific order."@en .
+
+:LocationGroupByList
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationGroup ;
+    skos:definition "A group of (i.e. more than one) physically separate locations which have no specific order and where each location is explicitly listed."@en .
+
+:LocationReference
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "Represents one or more physically separate locations. Multiple locations may be related, as in an itinerary or route, or may be unrelated. One LocationReference should not use multiple Location objects to represent the same physical location."@en .
+

@@ -1,0 +1,21 @@
+// Diagram for AreaByGrid
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		AreaByRectangle [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaByRectangle</TD></TR></TABLE>> URL="../AreaByRectangle" margin=0]
+		AreaRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaRepresentation</TD></TR></TABLE>> URL="../AreaRepresentation" margin=0]
+	}
+	AreaByGrid [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaByGrid</TD></TR><TR><TD ALIGN="LEFT">numColumns : xsd:nonNegativeInteger</TD></TR><TR><TD ALIGN="LEFT">numRows : xsd:nonNegativeInteger</TD></TR></TABLE>> URL="../AreaByGrid" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+	}
+	AreaByGrid -> AreaByRectangle [arrowhead=onormal style=solid]
+	AreaByGrid -> AreaRepresentation [arrowhead=onormal style=solid]
+}

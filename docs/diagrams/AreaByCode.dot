@@ -1,0 +1,21 @@
+// Diagram for AreaByCode
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		AreaRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaRepresentation</TD></TR></TABLE>> URL="../AreaRepresentation" margin=0]
+		LocationCode [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LocationCode</TD></TR></TABLE>> URL="../LocationCode" margin=0]
+	}
+	AreaByCode [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaByCode</TD></TR></TABLE>> URL="../AreaByCode" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+	}
+	AreaByCode -> AreaRepresentation [arrowhead=onormal style=solid]
+	AreaByCode -> LocationCode [arrowhead=onormal style=solid]
+}

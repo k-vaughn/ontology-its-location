@@ -1,0 +1,25 @@
+// Diagram for Location
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		Feature [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Feature</TD></TR></TABLE>> URL="../Feature" margin=0]
+	}
+	Location [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Location</TD></TR><TR><TD ALIGN="LEFT">hasName : rdf:langString</TD></TR></TABLE>> URL="../Location" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		Geometry [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Geometry</TD></TR></TABLE>> URL="../Geometry" margin=0]
+	}
+	Location -> Feature [arrowhead=onormal style=solid]
+	Location -> Invis [style=invis]
+	Invis -> Geometry [style=invis]
+	Geometry [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Geometry</TD></TR></TABLE>> URL="../Geometry" margin=0]
+	Location -> Geometry [label=hasPrimaryRepresentation arrowhead=normal style=solid]
+	Location -> Geometry [label=hasAlternativeRepresentation arrowhead=normal style=solid]
+}

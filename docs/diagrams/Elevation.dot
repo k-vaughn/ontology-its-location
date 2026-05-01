@@ -1,0 +1,36 @@
+// Diagram for Elevation
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		LocationThing [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LocationThing</TD></TR></TABLE>> URL="../LocationThing" margin=0]
+	}
+	Elevation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Elevation</TD></TR></TABLE>> URL="../Elevation" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		cdm1_Length [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">cdm1:Length</TD></TR></TABLE>> URL="https://w3id.org/citydata/part1/v1/Length" margin=0]
+		ElevationAccuracy [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">ElevationAccuracy</TD></TR></TABLE>> URL="../ElevationAccuracy" margin=0]
+		ElevationHeightCode [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">ElevationHeightCode</TD></TR></TABLE>> URL="../ElevationHeightCode" margin=0]
+		ElevationReferenceCode [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">ElevationReferenceCode</TD></TR></TABLE>> URL="../ElevationReferenceCode" margin=0]
+	}
+	Elevation -> LocationThing [arrowhead=onormal style=solid]
+	Elevation -> Invis [style=invis]
+	Invis -> cdm1_Length [style=invis]
+	cdm1_Length -> ElevationAccuracy [style=invis]
+	ElevationAccuracy -> ElevationHeightCode [style=invis]
+	ElevationHeightCode -> ElevationReferenceCode [style=invis]
+	ElevationReferenceCode [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">ElevationReferenceCode</TD></TR></TABLE>> URL="../ElevationReferenceCode" margin=0]
+	Elevation -> ElevationReferenceCode [label=hasElevationReference arrowhead=normal style=solid]
+	cdm1_Length [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">cdm1:Length</TD></TR></TABLE>> URL="https://w3id.org/citydata/part1/v1/Length" margin=0]
+	Elevation -> cdm1_Length [label=hasElevationDistance arrowhead=normal style=solid]
+	ElevationHeightCode [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">ElevationHeightCode</TD></TR></TABLE>> URL="../ElevationHeightCode" margin=0]
+	Elevation -> ElevationHeightCode [label=hasElevationHeightCode arrowhead=normal style=solid]
+	ElevationAccuracy [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">ElevationAccuracy</TD></TR></TABLE>> URL="../ElevationAccuracy" margin=0]
+	Elevation -> ElevationAccuracy [label=hasElevationAccuracy arrowhead=normal style=solid]
+}

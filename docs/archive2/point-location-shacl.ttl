@@ -1,0 +1,57 @@
+BASE <https://w3id.org/itsdata/location/v1/>
+PREFIX : <https://w3id.org/itsdata/location/v1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX its-core: <https://w3id.org/itsdata/core/v1/>
+PREFIX its-sh: <https://w3id.org/itsdata/shacl/v1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+:PointLocationSHACL
+    a owl:Ontology ;
+    dcterms:title "SHACL rules for ITS Point-based Location Referencing"@en ;
+    skos:definition "SHACL shapes for point-based location referencing."@en ;
+    its-core:draft "true" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-04-23"^^xsd:date ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <PointLocationSHACL/r0.1> .
+
+:PointCoordinatesShape
+    a sh:NodeShape ;
+    sh:targetClass :PointCoordinates ;
+    sh:property [
+        sh:path :latitude ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:decimal ;
+    ] ;
+    sh:property [
+        sh:path :longitude ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:datatype xsd:decimal ;
+    ] ;
+    sh:property [
+        sh:path :elevation ;
+        sh:node its-sh:MaxOneShape ;
+        sh:datatype xsd:decimal ;
+    ] .
+
+:PointByOffsetShape
+    a sh:NodeShape ;
+    sh:targetClass :PointByOffset ;
+    sh:property [
+        sh:path :hasReferent ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :LinearLocation ;
+    ] ;
+    sh:property [
+        sh:path :hasOffsetDistance ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :OffsetDistance ;   # can be length quantity or percent of linear element length
+    ] ;
+    sh:property [
+        sh:path :hasOffsetDirection ;
+        sh:node its-sh:ExactlyOneShape ;
+        sh:class :OffsetDirectionCode ;   
+    ] .    

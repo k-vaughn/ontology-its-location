@@ -1,0 +1,135 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix cdm1: <https://w3id.org/citydata/part1/v1/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+
+:AreaPattern
+    a owl:Ontology ;
+    dcterms:title "ITS Area Referencing"@en ;
+    skos:definition "Methodology module for area-based locations and area location representations."@en ;
+    dcterms:creator "Kenneth Vaughn" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-05-01"^^xsd:date ;
+    dcterms:license "http://creativecommons.org/licenses/by/4.0/" ;
+    its-core:draft "true" ;
+    owl:imports :LocationCorePattern ;
+    owl:imports :LinearPattern ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <https://w3id.org/itsdata/location/v1/AreaPattern/r0.1> ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri "https://w3id.org/itsdata/location/v1/" .
+
+#################################################################
+# Classes
+#################################################################
+
+:AreaLocation
+    a owl:Class ;
+    rdfs:subClassOf :Location ;
+    skos:definition "A spatial location enclosed within a two-dimensional boundary or boundaries across a defined surface."@en .
+
+:AreaRepresentation
+    a owl:Class ;
+    rdfs:subClassOf :Geometry ;
+    skos:definition "A geometry/representation that encodes an area location using a specific method."@en .
+
+:AreaByPolygon
+    a owl:Class ;
+    rdfs:subClassOf :AreaRepresentation ;
+    rdfs:subClassOf sf:Polygon ;
+    skos:definition "An area representation encoded as a Polygon geometry."@en .
+
+:AreaByMultiPolygon
+    a owl:Class ;
+    rdfs:subClassOf :AreaRepresentation ;
+    rdfs:subClassOf sf:MultiPolygon ;
+    skos:definition "An area representation encoded as a MultiPolygon geometry."@en .
+
+:AreaByRectangle
+    a owl:Class ;
+    rdfs:subClassOf :AreaRepresentation ;
+    skos:definition "An area representation encoded as a rectangle, defined by a lower-left corner and an upper-right corner."@en .
+
+:AreaByCircle
+    a owl:Class ;
+    rdfs:subClassOf :AreaRepresentation ;
+    skos:definition "An area representation encoded as a circle."@en .
+
+:AreaByGrid
+    a owl:Class ;
+    rdfs:subClassOf :AreaRepresentation ;
+    rdfs:subClassOf :AreaByRectangle ;
+    skos:definition "An area representation encoded as a grid. The rectangle defined by lower-left and upper-right is the base cell, which is replicated eastward (columns) and northward (rows)."@en .
+
+:AreaByLinearBoundaries
+    a owl:Class ;
+    rdfs:subClassOf :AreaRepresentation ;
+    skos:definition "An area representation encoded as a set of linear boundary representations."@en .
+
+:AreaByCode
+    a owl:Class ;
+    rdfs:subClassOf :AreaRepresentation ;
+    rdfs:subClassOf :LocationCode ;
+    skos:definition "An area representation encoded as a code that references an entry in an external location referencing system."@en .
+
+#################################################################
+# Properties
+#################################################################
+
+:hasLinearBoundary
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :AreaByLinearBoundaries ;
+    schema:rangeIncludes :LinearLocation ;
+    skos:definition "Associates an area representation with linear locations that define its boundary."@en .
+
+:hasCenter
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :AreaByCircle ;
+    schema:rangeIncludes :PointLocation ;
+    skos:definition "Center point of a circle area representation."@en .
+
+:radius
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :AreaByCircle ;
+    schema:rangeIncludes cdm1:Length ;
+    skos:definition "Radius of a circle area representation."@en .
+
+:hasLowerLeft
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :AreaByRectangle ;
+    schema:rangeIncludes :PointLocation ;
+    skos:definition "Lower-left (southwestern) point of a rectangle area representation."@en .
+
+:hasUpperRight
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :AreaByRectangle ;
+    schema:rangeIncludes :PointLocation ;
+    skos:definition "Upper-right (northeastern) point of a rectangle area representation."@en .
+
+:numColumns
+    a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :LocationDataProperty ;
+    schema:domainIncludes :AreaByGrid ;
+    schema:rangeIncludes xsd:nonNegativeInteger ;
+    skos:definition "Number of times the base rectangle cell is replicated eastward in a grid area representation. The width of the area is the width of the base cell multiplied by the number of columns."@en .
+
+:numRows
+    a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :LocationDataProperty ;
+    schema:domainIncludes :AreaByGrid ;
+    schema:rangeIncludes xsd:nonNegativeInteger ;
+    skos:definition "Number of times the base rectangle cell is replicated northward in a grid area representation. The height of the area is the height of the base cell multiplied by the number of rows."@en .
+

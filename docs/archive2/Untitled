@@ -1,0 +1,75 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+
+:LocationGeometryPattern
+    a owl:Ontology ;
+    dcterms:title "ITS Location Geometry"@en ;
+    skos:definition "Reusable coordinate and geometry primitives for ITS location referencing, aligned to GeoSPARQL."@en ;
+    dcterms:creator "Kenneth Vaughn" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-04-23"^^xsd:date ;
+    dcterms:license "http://creativecommons.org/licenses/by/4.0/" ;
+    its-core:draft "true" ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <https://w3id.org/itsdata/location/v1/LocationGeometryPattern/r0.1> ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri "https://w3id.org/itsdata/location/v1/" .
+
+:PointCoordinates
+    a owl:Class ;
+    skos:definition "A pair of coordinates defining the geodetic position of a single point, with optional elevation."@en .
+
+:hasGeometry
+    a owl:ObjectProperty ;
+    rdfs:range geo:Geometry ;
+    skos:definition "Links a node to a GeoSPARQL geometry representation."@en .
+
+:latitude
+    a owl:DatatypeProperty ;
+    rdfs:domain :PointCoordinates ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Latitude of a point coordinate."@en .
+
+:longitude
+    a owl:DatatypeProperty ;
+    rdfs:domain :PointCoordinates ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Longitude of a point coordinate."@en .
+
+:elevation
+    a owl:DatatypeProperty ;
+    rdfs:domain :PointCoordinates ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Elevation of a point coordinate (units by convention or by an attached quantity node in future revisions)."@en .
+
+### Convenience alignment (non-axiomatic placeholders)
+
+:hasPointGeometry
+    a owl:ObjectProperty ;
+    rdfs:range sf:Point ;
+    skos:definition "Convenience property for point geometry values."@en .
+
+:hasLineString
+    a owl:ObjectProperty ;
+    rdfs:range sf:LineString ;
+    skos:definition "Convenience property for line string geometry values."@en .
+
+:hasPolygon
+    a owl:ObjectProperty ;
+    rdfs:range sf:Polygon ;
+    skos:definition "Convenience property for polygon geometry values."@en .
+
+:hasMultiPolygon
+    a owl:ObjectProperty ;
+    rdfs:range sf:MultiPolygon ;
+    skos:definition "Convenience property for multi-polygon geometry values."@en .
+

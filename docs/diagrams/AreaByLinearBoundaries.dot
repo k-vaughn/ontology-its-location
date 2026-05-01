@@ -1,0 +1,25 @@
+// Diagram for AreaByLinearBoundaries
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		AreaRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaRepresentation</TD></TR></TABLE>> URL="../AreaRepresentation" margin=0]
+	}
+	AreaByLinearBoundaries [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaByLinearBoundaries</TD></TR></TABLE>> URL="../AreaByLinearBoundaries" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		LinearLocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LinearLocation</TD></TR></TABLE>> URL="../LinearLocation" margin=0]
+	}
+	AreaByLinearBoundaries -> AreaRepresentation [arrowhead=onormal style=solid]
+	AreaByLinearBoundaries -> Invis [style=invis]
+	Invis -> LinearLocation [style=invis]
+	LinearLocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LinearLocation</TD></TR></TABLE>> URL="../LinearLocation" margin=0]
+	AreaByLinearBoundaries -> LinearLocation [label="hasLinearBoundary
+1..*" arrowhead=normal style=solid]
+}

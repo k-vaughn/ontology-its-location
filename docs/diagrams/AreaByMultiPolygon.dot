@@ -1,0 +1,21 @@
+// Diagram for AreaByMultiPolygon
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		AreaRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaRepresentation</TD></TR></TABLE>> URL="../AreaRepresentation" margin=0]
+		sf_MultiPolygon [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">sf:MultiPolygon</TD></TR></TABLE>> URL="https://w3id.org/citydata/imported/sf/latest/MultiPolygon" margin=0]
+	}
+	AreaByMultiPolygon [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaByMultiPolygon</TD></TR></TABLE>> URL="../AreaByMultiPolygon" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+	}
+	AreaByMultiPolygon -> AreaRepresentation [arrowhead=onormal style=solid]
+	AreaByMultiPolygon -> sf_MultiPolygon [arrowhead=onormal style=solid]
+}

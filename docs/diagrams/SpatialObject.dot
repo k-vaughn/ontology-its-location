@@ -1,0 +1,21 @@
+// Diagram for SpatialObject
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		geo_SpatialObject [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">geo:SpatialObject</TD></TR></TABLE>> URL="https://w3id.org/citydata/imported/geo/latest/SpatialObject" margin=0]
+		LocationThing [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LocationThing</TD></TR></TABLE>> URL="../LocationThing" margin=0]
+	}
+	SpatialObject [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">SpatialObject</TD></TR></TABLE>> URL="../SpatialObject" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+	}
+	SpatialObject -> geo_SpatialObject [arrowhead=onormal style=solid]
+	SpatialObject -> LocationThing [arrowhead=onormal style=solid]
+}

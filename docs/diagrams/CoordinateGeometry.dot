@@ -1,0 +1,24 @@
+// Diagram for CoordinateGeometry
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		Geometry [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Geometry</TD></TR></TABLE>> URL="../Geometry" margin=0]
+	}
+	CoordinateGeometry [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">CoordinateGeometry</TD></TR><TR><TD ALIGN="LEFT">coordinateEpoch : xsd:dateTime</TD></TR></TABLE>> URL="../CoordinateGeometry" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		CoordinateReferenceSystem [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">CoordinateReferenceSystem</TD></TR></TABLE>> URL="../CoordinateReferenceSystem" margin=0]
+	}
+	CoordinateGeometry -> Geometry [arrowhead=onormal style=solid]
+	CoordinateGeometry -> Invis [style=invis]
+	Invis -> CoordinateReferenceSystem [style=invis]
+	CoordinateReferenceSystem [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">CoordinateReferenceSystem</TD></TR></TABLE>> URL="../CoordinateReferenceSystem" margin=0]
+	CoordinateGeometry -> CoordinateReferenceSystem [label=hasCRS arrowhead=normal style=solid]
+}

@@ -1,0 +1,322 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+
+:AlertCLocationPattern
+    dcterms:created               "Draft" ;
+    dcterms:creator               "Kenneth Vaughn" ;
+    dcterms:license               "http://creativecommons.org/licenses/by/4.0/" ;
+    dcterms:modified              "2026-04-07"^^xsd:date ;
+    dcterms:source                "https://docs.datex2.eu/_static/data/v3.7/umlmodel/html/index.htm"@en ;
+    dcterms:source                "http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti" ;
+    dcterms:title                 "Alert C concepts of the Location Ontology for ITS" ;
+    its-core:draft                "true" ;
+    owl:imports                   :Core ;
+    owl:priorVersion              <https://w3id.org/itsdata/location/v1/AlertCLocationPattern/r0.2> ;
+    owl:versionIRI                <https://w3id.org/itsdata/location/v1/AlertCLocationPattern/r0.3> ;
+    owl:versionInfo               "0.0.3" ;
+    rdf:type                      owl:Ontology ;
+    skos:definition               "This ontology defines concepts related to Alert C location within Intelligent Transportation Systems (ITS)." ;
+    skos:definition               "This ontology was derived from the dtx_srti ontology, which was derived from the DATEX II v3.2 model; it has been updated to consider changes made up to DATEX II v3.7 and revised to support more generic representations, such as deriving classes from the City Data Model and other ontologies." ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri    "https://w3id.org/itsdata/location/v1/" .
+
+:AlertCArea
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :AlertCThing ;
+    skos:definition "An area defined by reference to a predefined ALERT-C location table."@en .
+
+:AlertCDirection
+    owl:disjointWith :AlertCLocation ;
+    rdf:type         owl:Class ;
+    rdfs:subClassOf  :AlertCThing ;
+    skos:definition  "The direction of traffic flow along the road to which the information relates as indicated by one of several code lists."@en .
+
+:AlertCDirectionEnum
+    owl:equivalentClass [
+        owl:oneOf ( :both :negative :positive ) ;
+        rdf:type  owl:Class ;
+    ] ;
+    rdf:type            owl:Class ;
+    rdfs:subClassOf     :AlertCThing ;
+    rdfs:subClassOf     :LocationReferencingEnumerations ;
+    skos:definition     "Direction used to reach the primary location from the secondary location in ALERT-C location table, as defined in CEN ISO 14819-1"@en ;
+    skos:example     "positive, negative"@en .
+
+:AlertCLinearByCode
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :AlertCLinear ;
+    skos:definition "A linear section along a road defined by reference to a linear section in a pre-defined ALERT-C location table."@en .
+
+:AlertCLocation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :AlertCThing ;
+    skos:definition "Identification of a specific point, linear or area location in an ALERT-C location table."@en .
+
+:AlertCMethod2Linear
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :AlertCLinear ;
+    skos:definition "A linear section along a road between two points, primary and secondary, which are pre-defined in an ALERT-C location table. Direction is FROM the secondary point TO the primary point, i.e. the primary point is downstream of the secondary point."@en .
+
+:AlertCMethod2Point
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :AlertCPoint ;
+    skos:definition "A single point on the road network defined by reference to a point in a pre-defined ALERT-C location table and which has an associated direction of traffic flow."@en .
+
+:AlertCMethod2PrimaryPointLocation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :AlertCThing ;
+    skos:definition "The point (called Primary point) which is either a single point or at the downstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table."@en .
+
+:AlertCMethod2SecondaryPointLocation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :AlertCThing ;
+    skos:definition "The point (called Secondary point) which is at the upstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table."@en .
+
+:AlertCMethod4Linear
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :AlertCLinear ;
+    skos:definition "A linear section along a road between two points, primary and secondary, which are pre-defined ALERT-C locations plus offset distance. Direction is FROM the secondary point TO the primary point, i.e. the primary point is downstream of the secondary point."@en .
+
+:AlertCMethod4Point
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :AlertCPoint ;
+    skos:definition "A single point on the road network defined by reference to a point in a pre-defined ALERT-C location table plus an offset distance and which has an associated direction of traffic flow."@en .
+
+:AlertCMethod4PrimaryPointLocation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :AlertCThing ;
+    skos:definition "The point (called Primary point) which is either a single point or at the downstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table plus a non-negative offset distance."@en .
+
+:AlertCMethod4SecondaryPointLocation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :AlertCThing ;
+    skos:definition "The point (called Secondary point) which is at the upstream end of a linear road section. The point is specified by a reference to a point in a pre-defined Alert-C location table plus a non-negative offset distance."@en .
+
+:AlertCPoint
+    owl:disjointWith :TPEGPoint ;
+    rdf:type         owl:Class ;
+    rdfs:subClassOf  :AlertCThing ;
+    skos:definition  "A single point on the road network defined by reference to a pre-defined ALERT-C location table and which has an associated direction of traffic flow."@en .
+
+:AlertCThing
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "Alert C location"@en .
+
+:LinearDirectionEnum
+    owl:equivalentClass [
+        owl:oneOf ( :aligned :both :opposite :unknown ) ;
+        rdf:type  owl:Class ;
+    ] ;
+    rdf:type            owl:Class ;
+    rdfs:subClassOf     :AlertCThing ;
+    rdfs:subClassOf     :LocationReferencingEnumerations ;
+    skos:definition     "Directions of traffic flow relative to the direction in which the linear element is defined."@en .
+
+:LocationReferencingEnumerations
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Enums ;
+    skos:definition "Only for organizational purposes"@en .
+
+:OffsetDistance
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :LocationReferencing ;
+    skos:definition "The non-negative offset distance from the ALERT-C referenced point to the actual point."@en .
+
+:TPEGPoint
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :TPEGLoc ;
+    skos:definition "A point on the road network which is either a junction point or a non junction point."@en .
+
+:AlertCObjectProperty
+    rdf:type           owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    skos:definition    "An object property to organize all object properties defined in the Alert C location pattern of the ITS Location Ontology." .
+
+:hasAlertCAffectedDirection
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :LinearDirectionEnum ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :AlertCDirection ;
+    skos:definition       "The direction(s) of traffic flow to which the situation, traffic data or information is related."@en .
+
+:hasAlertCArea
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :AlertCArea ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :AreaLocation ;
+    skos:definition       "Location defined by an area covering the surface (or near-surface) of the Earth"@en .
+
+:hasAlertCDirection
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :AlertCDirection ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :AlertCLinearByCode ;
+    schema:domainIncludes :AlertCMethod2Linear ;
+    schema:domainIncludes :AlertCMethod2Point ;
+    schema:domainIncludes :AlertCMethod4Linear ;
+    schema:domainIncludes :AlertCMethod4Point ;
+    skos:definition       "The direction of traffic flow along the road to which the information relates."@en .
+
+:hasAlertCDirectionCoded
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :AlertCDirectionEnum ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :AlertCDirection ;
+    skos:definition       "Direction of navigation with respect to secondary to primary location (RDS direction)"@en .
+
+:hasAlertCLocation
+    rdf:type              owl:ObjectProperty ;
+    rdfs:label            "ALERT-C location"@en ;
+    rdfs:range            :AlertCLocation ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :AlertCArea ;
+    schema:domainIncludes :AlertCMethod2PrimaryPointLocation ;
+    schema:domainIncludes :AlertCMethod2SecondaryPointLocation ;
+    schema:domainIncludes :AlertCMethod4PrimaryPointLocation ;
+    schema:domainIncludes :AlertCMethod4SecondaryPointLocation ;
+    skos:definition       "Identification of a specific point, linear or area location in an ALERT-C location table."@en .
+
+:hasAlertCMethod2PrimaryPointLocation
+    rdf:type              owl:ObjectProperty ;
+    rdfs:label            "ALERT-C method2 primary point location"@en ;
+    rdfs:range            :AlertCMethod2PrimaryPointLocation ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :AlertCMethod2Linear ;
+    schema:domainIncludes :AlertCMethod2Point ;
+    skos:definition       "The point (called Primary point) which is either a single point or at the downstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table."@en .
+
+:hasAlertCMethod2SecondaryPointLocation
+    rdf:type              owl:ObjectProperty ;
+    rdfs:label            "ALERT-C method2 secondary point location"@en ;
+    rdfs:range            :AlertCMethod2SecondaryPointLocation ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :AlertCMethod2Linear ;
+    schema:domainIncludes :AlertCMethod2Point ;
+    skos:definition       "The point (called Secondary point) which is at the upstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table."@en .
+
+:hasAlertCMethod4PrimaryPointLocation
+    rdf:type              owl:ObjectProperty ;
+    rdfs:label            "ALERT-C method4 primary point location"@en ;
+    rdfs:range            :AlertCMethod4PrimaryPointLocation ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :AlertCMethod4Linear ;
+    schema:domainIncludes :AlertCMethod4Point ;
+    skos:definition       "The point (called Primary point) which is either a single point or at the downstream end of a linear road section. The point is specified by a reference to a point in a pre-defined ALERT-C location table plus a non-negative offset distance."@en .
+
+:hasAlertCMethod4SecondaryPointLocation
+    rdf:type              owl:ObjectProperty ;
+    rdfs:label            "ALERT-C method4 secondary point location"@en ;
+    rdfs:range            :AlertCMethod4SecondaryPointLocation ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :AlertCMethod4Linear ;
+    skos:definition       "The point (called Secondary point) which is at the upstream end of a linear road section. The point is specified by a reference to a point in a pre-defined Alert-C location table plus a non-negative offset distance."@en .
+
+:hasLocationCodeForLinearLocation
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :AlertCLocation ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :AlertCLinearByCode ;
+    skos:definition       "Specific location. Unique code within the ALERT-C location table which identifies the specific point, linear or area location.Unique code within the ALERT-C location table which identifies the specific point, linear or area location."@en .
+
+:hasOffsetDistance
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :OffsetDistance ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :AlertCMethod4PrimaryPointLocation ;
+    schema:domainIncludes :AlertCMethod4SecondaryPointLocation ;
+    skos:definition       "The non-negative offset distance from the ALERT-C referenced point to the actual point."@en .
+
+:hasPointCoordinates
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :PointCoordinates ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :Location ;
+    schema:domainIncludes :OpenLRBaseReferencePoint ;
+    schema:domainIncludes :OpenLRPolygonCorners ;
+    schema:domainIncludes :OpenLRRectangle ;
+    schema:domainIncludes :PointByCoordinates ;
+    schema:domainIncludes :Referent ;
+    schema:domainIncludes :TPEGJunction ;
+    schema:domainIncludes :TPEGNonJunctionPoint ;
+    skos:definition       "Coordinates that may be used by clients for visual display on user interfaces."@en .
+
+:offsetDistance
+    rdf:type              owl:ObjectProperty ;
+    rdfs:range            :MetresAsNonNegativeIntegerValue ;
+    rdfs:subPropertyOf    :AlertCObjectProperty ;
+    schema:domainIncludes :OffsetDistance ;
+    skos:definition       "The non-negative offset distance from the ALERT-C referenced point to the actual point. The ALERT-C locations in the primary and secondary locations must always encompass the linear section being specified, thus offset distance is towards the other point."@en .
+
+:aligned
+    rdf:type        owl:NamedIndividual, :LinearDirectionEnum ;
+    skos:definition "The direction of traffic flow is the same as the direction in which the linear element is defined."@en .
+
+:both
+    rdf:type        owl:NamedIndividual, :AlertCDirectionEnum, :LinearDirectionEnum ;
+    skos:definition "Indicates that both directions of traffic flow are affected by the situation or relate to the traffic data."@en .
+
+:negative
+    rdf:type        owl:NamedIndividual, :AlertCDirectionEnum ;
+    skos:definition "The direction of navigation in an ALERT-C table that corresponds to the negative offset usage to go from the secondary location to the primary location within the ALERT-C location table."@en .
+
+:opposite
+    rdf:type        owl:NamedIndividual, :LinearDirectionEnum ;
+    skos:definition "The direction of traffic flow is opposite to the direction in which the linear element is defined."@en .
+
+:positive
+    rdf:type        owl:NamedIndividual, :AlertCDirectionEnum ;
+    skos:definition "The direction of navigation in an ALERT-C table that corresponds to the positive offset usage to go from the secondary location to the primary location within the ALERT-C location table."@en .
+
+:unknown
+    rdf:type        owl:NamedIndividual, :LinearDirectionEnum ;
+    skos:definition "The direction of traffic flow is unknown."@en .
+
+:AlertCDataProperty
+    rdf:type           owl:DataProperty ;
+    rdfs:subPropertyOf :LocationDataProperty ;
+    skos:definition    "A data property to organize all data properties defined in the Alert C location pattern of the ITS Location Ontology." .
+
+:alertCLocationCountryCode
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:string ;
+    rdfs:subPropertyOf    :AlertCDataProperty ;
+    schema:domainIncludes :AlertCArea ;
+    schema:domainIncludes :AlertCLinear ;
+    schema:domainIncludes :AlertCPoint ;
+    skos:definition       "ALERT-C country code as defined in IEC 62106."@en .
+
+:alertCLocationTableNumber
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:string ;
+    rdfs:subPropertyOf    :AlertCDataProperty ;
+    schema:domainIncludes :AlertCArea ;
+    schema:domainIncludes :AlertCLinear ;
+    schema:domainIncludes :AlertCPoint ;
+    skos:definition       "Number allocated to an ALERT-C table in a country. Ref. EN ISO 14819-3 for the allocation of a location table number."@en .
+
+:alertCLocationTableVersion
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:string ;
+    rdfs:subPropertyOf    :AlertCDataProperty ;
+    schema:domainIncludes :AlertCArea ;
+    schema:domainIncludes :AlertCLinear ;
+    schema:domainIncludes :AlertCPoint ;
+    skos:definition       "Version number associated with an ALERT-C table reference."@en .
+
+:specificLocation
+    rdf:type              owl:DataProperty ;
+    rdfs:range            xsd:nonNegativeInteger ;
+    rdfs:subPropertyOf    :AlertCDataProperty ;
+    schema:domainIncludes :AlertCLocation ;
+    skos:definition       "Unique code within the ALERT-C location table which identifies the specific point, linear or area location." .
+
+

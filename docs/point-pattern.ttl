@@ -1,0 +1,250 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix cdm1: <https://w3id.org/citydata/part1/v1/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+
+:PointPattern
+    a owl:Ontology ;
+    dcterms:title "ITS Point Referencing"@en ;
+    skos:definition "A module of the ITS Location Ontology that defines concepts for point-based locations and representations of those locations."@en ;
+    dcterms:creator "Kenneth Vaughn" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-04-29"^^xsd:date ;
+    dcterms:license "http://creativecommons.org/licenses/by/4.0/" ;
+    its-core:draft "true" ;
+    owl:imports :LocationCorePattern ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <https://w3id.org/itsdata/location/v1/PointPattern/r0.1> ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri "https://w3id.org/itsdata/location/v1/" .
+
+#################################################################
+# Classes
+#################################################################
+
+:PointLocation
+    a owl:Class ;
+    rdfs:subClassOf :Location ;
+    skos:definition "spatial location with no length in any of the spatial dimensions."@en .
+
+:PointRepresentation
+    a owl:Class ;
+    rdfs:subClassOf :Geometry ;
+    skos:definition "A representation of a point location using a specific method (e.g., coordinates or an external code)."@en .
+
+:PointByCoordinates
+    a owl:Class ;
+    rdfs:subClassOf :PointRepresentation ;
+    rdfs:subClassOf :CoordinateGeometry ;
+    skos:definition "A point location representation encoded as coordinates and optional elements, such as elevation and metadata."@en .
+
+:PointByGeoCoordinates
+    a owl:Class ;
+    rdfs:subClassOf :PointByCoordinates ;
+    skos:definition "A point location representation encoded as latitude/longitude and optional elements, such as elevation and metadata."@en .
+
+:PointByProjectedCoordinates
+    a owl:Class ;
+    rdfs:subClassOf :PointByCoordinates ;
+    skos:definition "A point location representation encoded as projected coordinates and optional elements, such as elevation and metadata."@en .
+
+:Elevation
+    a owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "An elevation for a point location along with metadata."@en .
+
+:ElevationHeightCode
+    a owl:Class ;
+    rdfs:subClassOf its-core:Code ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A code that identifies the height value for an elevation value  (e.g., 'ground layer 1', 'elevated layer 1', 'elevated layer 2', 'tunnel layer 1')."@en .
+
+:ElevationReferenceCode
+    a owl:Class ;
+    rdfs:subClassOf its-core:Code ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A code that identifies the reference system for an elevation value  (e.g., 'ellipsoidal', 'gravityRelated', 'ground level', 'EPSG:5701', 'coded height')."@en .
+
+:DistanceAccuracy
+    a owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A statement of distance accuracy for a point representation."@en .
+
+:ElevationAccuracy
+    a owl:Class ;
+    rdfs:subClassOf :DistanceAccuracy ;
+    skos:definition "A statement of elevation accuracy for a point representation."@en .
+
+:PositionAccuracy
+    a owl:Class ;
+    rdfs:subClassOf :DistanceAccuracy ;
+    skos:definition "A statement of positional accuracy for a point representation."@en .
+
+:PositionConfidenceEllipse
+    a owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A confidence ellipse describing uncertainty of a point position in a horizontal plane."@en .
+
+:MeasurementErrorCode
+    a owl:Class ;
+    rdfs:subClassOf its-core:Code ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A code identifying an error condition or qualification for a measurement value."@en .
+
+:PointByCode
+    a owl:Class ;
+    rdfs:subClassOf :PointRepresentation ;
+    rdfs:subClassOf :LocationCode ;
+    skos:definition "A point location representation using a code that references an entry in an external location referencing system."@en .
+
+#################################################################
+# Properties 
+#################################################################
+
+:latitude
+    a owl:DatatypeProperty ;
+    schema:domainIncludes :PointByGeoCoordinates ;
+    schema:rangeIncludes xsd:decimal ;
+    skos:definition "Latitude of a point coordinate (decimal degrees; CRS implied or supplied by the representation context)."@en .
+
+:longitude
+    a owl:DatatypeProperty ;
+    schema:domainIncludes :PointByGeoCoordinates ;
+    schema:rangeIncludes xsd:decimal ;
+    skos:definition "Longitude of a point coordinate (decimal degrees; CRS implied or supplied by the representation context)."@en .
+
+:northing
+    a owl:DatatypeProperty ;
+    schema:domainIncludes :PointByProjectedCoordinates ;
+    schema:rangeIncludes xsd:decimal ;
+    skos:definition "The northerly (y) dimension of a point coordinate expressed in some linear unit."@en .
+
+:easting
+    a owl:DatatypeProperty ;
+    schema:domainIncludes :PointByProjectedCoordinates ;
+    schema:rangeIncludes xsd:decimal ;
+    skos:definition "The easterly (x) dimension of a point coordinate expressed in some linear unit."@en .
+
+:hasElevation
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PointRepresentation ;
+    schema:rangeIncludes :Elevation ;
+    skos:definition "Associates a point representation with an elevation value."@en .
+
+:hasElevationDistance
+    a owl:ObjectProperty ;
+    schema:domainIncludes :Elevation ;
+    schema:rangeIncludes cdm1:Length ;
+    skos:definition "Elevation distance of a point location, as measured from the elevation reference system."@en .
+
+:hasElevationHeightCode
+    a owl:ObjectProperty ;
+    schema:domainIncludes :Elevation ;
+    schema:rangeIncludes :ElevationHeightCode ;
+    skos:definition "Coded elevation height value of a point location."@en .
+
+:hasElevationReference
+    a owl:ObjectProperty ;
+    schema:domainIncludes :Elevation ;
+    schema:rangeIncludes :ElevationReferenceCode ;
+    skos:definition "Reference system for the elevation value."@en .
+
+:hasElevationAccuracy
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :Elevation ;
+    schema:rangeIncludes :ElevationAccuracy ;
+    skos:definition "Associates a point representation with an elevation accuracy statement."@en .
+
+:hasPositionAccuracy
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PointRepresentation ;
+    schema:rangeIncludes :PositionAccuracy ;
+    skos:definition "Associates a point representation with a statement of positional accuracy."@en .
+
+:hasPositionConfidenceEllipse
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PointRepresentation ;
+    schema:rangeIncludes :PositionConfidenceEllipse ;
+    skos:definition "Associates a point representation with a confidence ellipse statement."@en .
+
+:hasDistanceAccuracy
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :DistanceAccuracy ;
+    schema:rangeIncludes cdm1:Length ;
+    skos:definition "The upper limit of the accuracy, expressed as a simple length value (e.g., within 10 meters)."@en .
+
+:confidencePercentage
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :DistanceAccuracy ;
+    schema:rangeIncludes cdm1:Ratio ;
+    skos:definition "Percent confidence in a reported value as defined by the percentile of the cumulative distribution of position errors (e.g., 95% confidence)."@en .
+
+:distanceAccuracyErrorCode
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :DistanceAccuracy ;
+    schema:rangeIncludes :MeasurementErrorCode ;
+    skos:definition "A code that identifies the error code for a distance accuracy value."@en .
+
+:semiMajorAxisLength
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PositionConfidenceEllipse ;
+    schema:rangeIncludes cdm1:Length ;
+    skos:definition "Semi-major axis length of the confidence ellipse."@en .
+
+:semiMinorAxisLength
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PositionConfidenceEllipse ;
+    schema:rangeIncludes cdm1:Length ;
+    skos:definition "Semi-minor axis length of the confidence ellipse."@en .
+
+:semiMajorAxisOrientation
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PositionConfidenceEllipse ;
+    schema:rangeIncludes its-core:Bearing ;
+    skos:definition "Orientation of the semi-major axis of the confidence ellipse."@en .
+
+:semiMajorAxisLengthErrorCode
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PositionConfidenceEllipse ;
+    schema:rangeIncludes :MeasurementErrorCode ;
+    skos:definition "A code qualifying the semi-major axis length measurement."@en .
+
+:semiMinorAxisLengthErrorCode
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PositionConfidenceEllipse ;
+    schema:rangeIncludes :MeasurementErrorCode ;
+    skos:definition "A code qualifying the semi-minor axis length measurement."@en .
+
+:semiMajorAxisOrientationErrorCode
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PositionConfidenceEllipse ;
+    schema:rangeIncludes :MeasurementErrorCode ;
+    skos:definition "A code qualifying the semi-major axis orientation measurement."@en .
+
+:bearing
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :PointLocation ;
+    schema:rangeIncludes its-core:Bearing ;
+    skos:definition "Bearing of a point location."@en .

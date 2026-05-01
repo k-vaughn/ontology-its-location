@@ -1,0 +1,36 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+
+:ItsLocation
+    a owl:Ontology ;
+    dcterms:title "ITS Location Referencing (methodology modules scaffold)"@en ;
+    skos:definition "Master ontology that imports the methodology-first location referencing modules under docs/location-methods/. Existing ontologies in docs/ are not modified."@en ;
+    dcterms:creator "Kenneth Vaughn" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-04-23"^^xsd:date ;
+    dcterms:license "http://creativecommons.org/licenses/by/4.0/" ;
+    its-core:draft "true" ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <https://w3id.org/itsdata/location/v1/ItsLocation/r0.1> ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri "https://w3id.org/itsdata/location/v1/" ;
+    owl:imports :LocationCorePattern ;
+    owl:imports :LocationGeometryPattern ;
+    owl:imports :LocationQualityPattern ;
+    owl:imports :CoordinateLocationPattern ;
+    owl:imports :AreaLocationPattern ;
+    owl:imports :NetworkLocationPattern ;
+    owl:imports :LinearReferencingPattern ;
+    owl:imports :OffsetLocationPattern ;
+    owl:imports :AddressLocationPattern ;
+    owl:imports :ExternalIdLocationPattern ;
+    owl:imports :AlertCAdapter ;
+    owl:imports :OpenLRAdapter ;
+    owl:imports :TPEGAdapter .
+

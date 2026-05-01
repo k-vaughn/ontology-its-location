@@ -1,0 +1,138 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <https://w3id.org/itsdata/location/v1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix its-core: <https://w3id.org/itsdata/core/v1/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix cdm1: <https://w3id.org/citydata/part1/v1/> .
+
+:LocationCorePattern
+    a owl:Ontology ;
+    dcterms:title "ITS Location Referencing Core"@en ;
+    skos:definition "Core abstractions for locations, location representations, and location collections used across multiple location-referencing methodologies."@en ;
+    dcterms:creator "Kenneth Vaughn" ;
+    dcterms:created "Draft" ;
+    dcterms:modified "2026-04-29"^^xsd:date ;
+    dcterms:license "http://creativecommons.org/licenses/by/4.0/" ;
+    its-core:draft "true" ;
+    owl:versionInfo "0.0.1" ;
+    owl:versionIRI <https://w3id.org/itsdata/location/v1/LocationCorePattern/r0.1> ;
+    vann:preferredNamespacePrefix "its-location" ;
+    vann:preferredNamespaceUri "https://w3id.org/itsdata/location/v1/" ;
+    owl:imports its-core: .
+
+#################################################################
+# Core classes
+#################################################################
+
+:LocationThing
+    a owl:Class ;
+    skos:definition "Parent class for location domain concepts."@en .
+
+:SpatialObject
+    a owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf geo:SpatialObject ;
+    skos:definition "A spatial object within the ITS domain (subclass of geo:SpatialObject)."@en .
+
+:Feature
+    a owl:Class ;
+    rdfs:subClassOf :SpatialObject ;
+    rdfs:subClassOf geo:Feature ;
+    skos:definition "An ITS-domain feature (subclass of geo:Feature) used to model real-world things that have a spatial location."@en .
+
+:Geometry
+    a owl:Class ;
+    rdfs:subClassOf :SpatialObject ;
+    rdfs:subClassOf geo:Geometry ;
+    skos:definition "An ITS-domain geometry (subclass of geo:Geometry) used to model geometric representations of features."@en .
+
+:CoordinateGeometry
+    a owl:Class ;
+    rdfs:subClassOf :Geometry ;
+    skos:definition "A geometry that is represented by a coordinate system (i.e., directly encodes coordinate tuples)."@en .
+
+:CoordinateReferenceSystem
+    a owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    skos:definition "A coordinate reference system (CRS) used to interpret coordinate tuples in a CoordinateGeometry. Typically identified using an OGC CRS IRI such as http://www.opengis.net/def/crs/EPSG/0/4326."@en .
+
+:Location
+    a owl:Class ;
+    rdfs:subClassOf :Feature ;
+    skos:definition "A singular location modelled as a feature."@en .
+
+:LocationGroup
+    a owl:Class ;
+    rdfs:subClassOf :Feature ;
+    skos:definition "An unordered set of multiple physically separate locations."@en .
+
+:LocationCode
+    a owl:Class ;
+    rdfs:subClassOf :LocationThing ;
+    rdfs:subClassOf its-core:Code ;
+    skos:definition "A code that identifies (or can be used to look up) a location in some external referencing system."@en .
+
+#################################################################
+# Core properties
+#################################################################
+
+:LocationObjectProperty
+    a owl:ObjectProperty ;
+    skos:definition "Organizational super-property for location core object properties."@en .
+
+:LocationDataProperty
+    a owl:DatatypeProperty ;
+    skos:definition "Organizational super-property for location core data properties."@en .
+
+:hasMember
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :LocationGroup ;
+    schema:rangeIncludes :SpatialObject ;
+    skos:definition "Relates a location group to a member spatial object."@en .
+
+:hasPrimaryRepresentation
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    rdfs:subPropertyOf geo:hasGeometry ;
+    schema:domainIncludes :Feature ;
+    schema:rangeIncludes :Geometry ;
+    skos:definition "Links a Location to its preferred (primary) representation node."@en .
+
+:hasAlternativeRepresentation
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    rdfs:subPropertyOf geo:hasGeometry ;
+    schema:domainIncludes :Feature ;
+    schema:rangeIncludes :Geometry ;
+    skos:definition "Links a Location to an additional representation node intended to denote the same physical location."@en .
+
+:geometryOf
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    owl:inverseOf geo:hasGeometry ;
+    schema:domainIncludes :Geometry ;
+    schema:rangeIncludes :Feature ;
+    skos:definition "Inverse of geo:hasGeometry: relates a geometry to the feature it represents."@en .
+
+:hasCRS
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf :LocationObjectProperty ;
+    schema:domainIncludes :CoordinateGeometry ;
+    schema:rangeIncludes :CoordinateReferenceSystem ;
+    skos:definition "Associates a CoordinateGeometry with the coordinate reference system used to interpret its coordinate tuples."@en .
+
+:coordinateEpoch
+    a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :LocationDataProperty ;
+    schema:domainIncludes :CoordinateGeometry ;
+    schema:rangeIncludes xsd:dateTime ;
+    skos:definition "The epoch (observation/realization time) at which the coordinate tuples of a CoordinateGeometry are valid in its CRS. Needed for dynamic reference frames."@en .
+
+

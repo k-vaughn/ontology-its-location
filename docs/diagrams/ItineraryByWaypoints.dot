@@ -1,0 +1,24 @@
+// Diagram for ItineraryByWaypoints
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		ItineraryRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">ItineraryRepresentation</TD></TR></TABLE>> URL="../ItineraryRepresentation" margin=0]
+	}
+	ItineraryByWaypoints [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">ItineraryByWaypoints</TD></TR></TABLE>> URL="../ItineraryByWaypoints" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		LocationList [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LocationList</TD></TR></TABLE>> URL="../LocationList" margin=0]
+	}
+	ItineraryByWaypoints -> ItineraryRepresentation [arrowhead=onormal style=solid]
+	ItineraryByWaypoints -> Invis [style=invis]
+	Invis -> LocationList [style=invis]
+	LocationList [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LocationList</TD></TR></TABLE>> URL="../LocationList" margin=0]
+	ItineraryByWaypoints -> LocationList [label=hasWaypointList arrowhead=normal style=solid]
+}

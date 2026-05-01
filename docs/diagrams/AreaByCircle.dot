@@ -1,0 +1,28 @@
+// Diagram for AreaByCircle
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		AreaRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaRepresentation</TD></TR></TABLE>> URL="../AreaRepresentation" margin=0]
+	}
+	AreaByCircle [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaByCircle</TD></TR></TABLE>> URL="../AreaByCircle" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		cdm1_Length [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">cdm1:Length</TD></TR></TABLE>> URL="https://w3id.org/citydata/part1/v1/Length" margin=0]
+		PointLocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointLocation</TD></TR></TABLE>> URL="../PointLocation" margin=0]
+	}
+	AreaByCircle -> AreaRepresentation [arrowhead=onormal style=solid]
+	AreaByCircle -> Invis [style=invis]
+	Invis -> cdm1_Length [style=invis]
+	cdm1_Length -> PointLocation [style=invis]
+	PointLocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointLocation</TD></TR></TABLE>> URL="../PointLocation" margin=0]
+	AreaByCircle -> PointLocation [label=hasCenter arrowhead=normal style=solid]
+	cdm1_Length [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">cdm1:Length</TD></TR></TABLE>> URL="https://w3id.org/citydata/part1/v1/Length" margin=0]
+	AreaByCircle -> cdm1_Length [label=radius arrowhead=normal style=solid]
+}

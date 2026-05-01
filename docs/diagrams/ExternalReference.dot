@@ -1,0 +1,19 @@
+// Diagram for ExternalReference
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		Location [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">Location</TD></TR></TABLE>> URL="../Location" margin=0]
+	}
+	ExternalReference [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">ExternalReference</TD></TR><TR><TD ALIGN="LEFT">externalLocationCode : xsd:string [1]</TD></TR><TR><TD ALIGN="LEFT">externalReferencingSystem : xsd:string [1]</TD></TR></TABLE>> URL="../ExternalReference" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+	}
+	ExternalReference -> Location [arrowhead=onormal style=solid]
+}

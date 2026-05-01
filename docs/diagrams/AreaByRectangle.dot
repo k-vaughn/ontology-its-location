@@ -1,0 +1,25 @@
+// Diagram for AreaByRectangle
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		AreaRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaRepresentation</TD></TR></TABLE>> URL="../AreaRepresentation" margin=0]
+	}
+	AreaByRectangle [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">AreaByRectangle</TD></TR></TABLE>> URL="../AreaByRectangle" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+		PointLocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointLocation</TD></TR></TABLE>> URL="../PointLocation" margin=0]
+	}
+	AreaByRectangle -> AreaRepresentation [arrowhead=onormal style=solid]
+	AreaByRectangle -> Invis [style=invis]
+	Invis -> PointLocation [style=invis]
+	PointLocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">PointLocation</TD></TR></TABLE>> URL="../PointLocation" margin=0]
+	AreaByRectangle -> PointLocation [label=hasLowerLeft arrowhead=normal style=solid]
+	AreaByRectangle -> PointLocation [label=hasUpperRight arrowhead=normal style=solid]
+}

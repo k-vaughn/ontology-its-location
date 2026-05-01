@@ -1,0 +1,21 @@
+// Diagram for LinearByLineString
+digraph {
+	graph [overlap=false rankdir=TB splines=true]
+	node [fontname=Arial fontsize=12 margin=0 shape=none]
+	edge [fontname=Arial fontsize=11]
+	{
+		rank=source
+		LinearRepresentation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LinearRepresentation</TD></TR></TABLE>> URL="../LinearRepresentation" margin=0]
+		sf_LineString [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">sf:LineString</TD></TR></TABLE>> URL="https://w3id.org/citydata/imported/sf/latest/LineString" margin=0]
+	}
+	LinearByLineString [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD BGCOLOR="lightgray" ALIGN="CENTER">LinearByLineString</TD></TR></TABLE>> URL="../LinearByLineString" margin=0]
+	{
+		rank=max
+	}
+	subgraph cluster_associated {
+		label="" style=invis
+		Invis [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="1"><TR><TD></TD></TR></TABLE>> margin=0 style=invis]
+	}
+	LinearByLineString -> LinearRepresentation [arrowhead=onormal style=solid]
+	LinearByLineString -> sf_LineString [arrowhead=onormal style=solid]
+}
